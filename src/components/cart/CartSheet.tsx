@@ -44,14 +44,20 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
   };
 
   const buildOrderText = () => {
-    let text = `${t.cart.waiterModalTitle} - Napoletana Nostra\n\n`;
+    // Merr përkthimet shqip për produktet
+    const sqProducts = require("@/lib/translations").translations.sq.products;
+    let text = `Porosia Jote - Napoletana Nostra\n\n`;
     cart.forEach(item => {
-      text += `${item.quantity}x ${item.name} - €${(item.price * item.quantity).toFixed(2)}\n`;
+      const prod = sqProducts[item.key] || {};
+      const title = prod.name || item.name;
+      const desc = prod.description ? ` (${prod.description})` : "";
+      text += `${item.quantity}x ${title}${desc} - €${(item.price * item.quantity).toFixed(2)}\n`;
     });
     if (note) {
-      text += `\n${t.cart.specialNotes}:\n${note}\n`;
+      text += `\nShënime speciale:\n${note}\n`;
     }
-    text += `\n${t.cart.total}: €${cartTotal.toFixed(2)}`;
+    text += `\nTotali: €${cartTotal.toFixed(2)}`;
+    text += `\n\nJu lutem, dorëzojani këtë porosi kamarierit. Faleminderit!`;
     return encodeURIComponent(text);
   };
 

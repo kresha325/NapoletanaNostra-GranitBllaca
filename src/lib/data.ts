@@ -268,7 +268,7 @@ export const menuData: Product[] = [
     key: "water-075",
     price: 2.5,
     category: "Bevande",
-    image: "/images/fresh-pizza.png",
+    image: "images/fresh-pizza.png",
   },
   {
     id: "b10",
