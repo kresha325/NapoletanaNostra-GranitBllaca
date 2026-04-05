@@ -93,6 +93,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                           <button
                             onClick={() => removeFromCart(item.id)}
                             className="text-muted-foreground hover:text-destructive transition-colors p-1"
+                            aria-label="Remove from cart"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -103,6 +104,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                             <button
                               className="p-1 hover:bg-muted transition-colors"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              aria-label="Decrease quantity"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
@@ -110,6 +112,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                             <button
                               className="p-1 hover:bg-muted transition-colors"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              aria-label="Increase quantity"
                             >
                               <Plus className="w-3 h-3" />
                             </button>
