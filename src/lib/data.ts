@@ -16,7 +16,7 @@ export const menuData: Product[] = [
     description: "Tomatoes, olives, basil",
     price: 2.9,
     category: "Antipasti",
-    image: "/images/frittura.png",
+    image: `${import.meta.env.BASE_URL}images/frittura.png`,
   },
   {
     id: "a2",
@@ -24,7 +24,7 @@ export const menuData: Product[] = [
     description: "Lettuce, onions, olives",
     price: 2.9,
     category: "Antipasti",
-    image: "/images/frittura.png",
+    image: `${import.meta.env.BASE_URL}images/frittura.png`,
   },
   {
     id: "a3",
@@ -32,7 +32,7 @@ export const menuData: Product[] = [
     description: "Arugula, cherry tomatoes, Grana Padano, walnuts, raisins",
     price: 3.5,
     category: "Antipasti",
-    image: "/images/frittura.png",
+    image: `${import.meta.env.BASE_URL}images/frittura.png`,
   },
   {
     id: "a4",
@@ -40,7 +40,7 @@ export const menuData: Product[] = [
     description: "Mozzarella cheese, tomatoes, basil",
     price: 4.8,
     category: "Antipasti",
-    image: "/images/frittura.png",
+    image: `${import.meta.env.BASE_URL}images/frittura.png`,
   },
 
   // ── PASTA ──────────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ export const menuData: Product[] = [
     description: "Garlic, olive oil, chili pepper",
     price: 4.9,
     category: "Pasta",
-    image: "/images/ragu.png",
+    image: `${import.meta.env.BASE_URL}images/ragu.png`,
   },
   {
     id: "pa2",
@@ -58,7 +58,7 @@ export const menuData: Product[] = [
     description: "Tomato sauce, chili pepper, basil",
     price: 5.5,
     category: "Pasta",
-    image: "/images/ragu.png",
+    image: `${import.meta.env.BASE_URL}images/ragu.png`,
   },
   {
     id: "pa3",
@@ -66,7 +66,7 @@ export const menuData: Product[] = [
     description: "Pesto sauce, garlic, cream",
     price: 5.9,
     category: "Pasta",
-    image: "/images/vongole.png",
+    image: `${import.meta.env.BASE_URL}images/vongole.png`,
   },
   {
     id: "pa4",
@@ -74,7 +74,7 @@ export const menuData: Product[] = [
     description: "Bolognese sauce, Grana Padano, basil",
     price: 5.9,
     category: "Pasta",
-    image: "/images/ragu.png",
+    image: `${import.meta.env.BASE_URL}images/ragu.png`,
   },
   {
     id: "pa5",
@@ -82,7 +82,7 @@ export const menuData: Product[] = [
     description: "Mozzarella, Grana Padano, Gorgonzola, white cheese",
     price: 7.8,
     category: "Pasta",
-    image: "/images/ragu.png",
+    image: `${import.meta.env.BASE_URL}images/ragu.png`,
   },
   {
     id: "pa6",

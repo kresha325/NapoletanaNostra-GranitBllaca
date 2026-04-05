@@ -64,7 +64,7 @@ export default function Home() {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src="/images/hero-oven.png"
+          src={`${import.meta.env.BASE_URL}images/hero-oven.png`}
           alt="Wood fired pizza oven"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -153,7 +153,7 @@ export default function Home() {
               className="relative"
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/images/pizzaiolo.png" alt="Pizzaiolo at work" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}images/pizzaiolo.png`} alt="Pizzaiolo at work" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-card p-6 rounded-xl shadow-xl max-w-[240px] border border-border hidden md:block">
                 <ChefHat className="w-8 h-8 text-primary mb-4" />
@@ -248,7 +248,7 @@ export default function Home() {
                 "Pizza e vërtetë napoletane! Margherita ishte e jashtëzakonshme — brumi kaq i lehtë e i ajrosur. Ambienti i ngrohtë, shërbimi i shkëlqyer. Do kthehemi me gjithë familjen! ❤️"
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
-                <img src="/images/avatar-ardita.jpg" alt="Ardita Hoxha" className="w-10 h-10 rounded-full object-cover shrink-0" />
+                <img src={`${import.meta.env.BASE_URL}images/avatar-ardita.jpg`} alt="Ardita Hoxha" className="w-10 h-10 rounded-full object-cover shrink-0" />
                 <div>
                   <p className="font-semibold text-sm">Ardita Hoxha</p>
                   <p className="text-xs text-muted-foreground">Prizren</p>
@@ -280,7 +280,7 @@ export default function Home() {
                 "Atmosfera perfekte dhe picëria e mrekullueshme 🍕 Diavola ishte pikante pikërisht si duhet! Shërbimi super i shpejtë dhe miqësor. Recommend 100% — kthehuni pa hezitim!"
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
-                <img src="/images/avatar-blerim.jpg" alt="Blerim Krasniqi" className="w-10 h-10 rounded-full object-cover shrink-0" />
+                <img src={`${import.meta.env.BASE_URL}images/avatar-blerim.jpg`} alt="Blerim Krasniqi" className="w-10 h-10 rounded-full object-cover shrink-0" />
                 <div>
                   <p className="font-semibold text-sm">@blerim.krasniqi</p>
                   <p className="text-xs text-muted-foreground">Prizren</p>
@@ -312,7 +312,7 @@ export default function Home() {
                 "Burratina 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!"
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
-                <img src="/images/avatar-genta.jpg" alt="Genta Prizren" className="w-10 h-10 rounded-full object-cover shrink-0" />
+                <img src={`${import.meta.env.BASE_URL}images/avatar-genta.jpg`} alt="Genta Prizren" className="w-10 h-10 rounded-full object-cover shrink-0" />
                 <div>
                   <p className="font-semibold text-sm">@genta_prizren</p>
                   <p className="text-xs text-muted-foreground">Prizren</p>
