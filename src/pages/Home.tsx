@@ -175,12 +175,21 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {([
-              { img: `${import.meta.env.BASE_URL}images/fresh-pizza.png` },
-              { img: `${import.meta.env.BASE_URL}images/frittura.png` },
-              { img: `${import.meta.env.BASE_URL}images/sfogliatella.png` },
-            ] as const).map((item, i) => {
-              const classic = t.home.classicItems[i];
+            {/* Merr produktet reale për klasikët: Margherita, Frittura, Sfogliatella */}
+            {[
+              { key: "marinara", fallback: "Margherita Verace" },
+              { key: "bruschetta", fallback: "Antipaste Të Shijshme" },
+              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
+            ].map((item, i) => {
+              // Gjej produktin nga menuData
+              const menuData = require("@/lib/data").menuData;
+              const product = menuData.find((p) => p.key === item.key);
+              // Merr përkthimin
+              const prodT = t.products[item.key] || {};
+              // Merr titullin dhe përshkrimin nga përkthimi ose fallback
+              const title = prodT.name || item.fallback;
+              const desc = prodT.description || t.home.classicItems[i]?.desc || "";
+              const img = product ? `${import.meta.env.BASE_URL}${product.image}` : `${import.meta.env.BASE_URL}images/margherita.png`;
               return (
                 <motion.div
                   key={i}
@@ -192,10 +201,10 @@ export default function Home() {
                   onClick={() => setLocation("/menu")}
                 >
                   <div className="aspect-square rounded-2xl overflow-hidden mb-6">
-                    <img src={item.img} alt={classic.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <img src={img} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
-                  <h3 className="font-serif text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{classic.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{classic.desc}</p>
+                  <h3 className="font-serif text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{desc}</p>
                 </motion.div>
               );
             })}
