@@ -177,9 +177,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Merr produktet reale për klasikët: Margherita, Frittura, Sfogliatella */}
             {[
-              { key: "marinara", fallback: "Margherita Verace" },
-              { key: "bruschetta", fallback: "Antipaste Të Shijshme" },
-              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
+              { key: "marinara", fallback: "Margherita Verace" }, // ka image: images/margherita.png
+              { key: "bruschetta", fallback: "Antipaste Të Shijshme" }, // ka image: images/frittura.png
+              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" }, // ka image: images/sfogliatella.png
             ].map((item, i) => {
               // Gjej produktin nga menuData
               const menuData: import("@/lib/data").Product[] = require("@/lib/data").menuData;
@@ -189,7 +189,15 @@ export default function Home() {
               // Merr titullin dhe përshkrimin nga përkthimi ose fallback
               const title = prodT.name || item.fallback;
               const desc = prodT.description || t.home.classicItems[i]?.desc || "";
-              const img = product ? `${import.meta.env.BASE_URL}${product.image}` : `${import.meta.env.BASE_URL}images/margherita.png`;
+              // fallback për imazh: përdor imazhin e produktit real, ose një imazh ekzistues të sigurt
+              let img = `${import.meta.env.BASE_URL}images/margherita.png`;
+              if (product && product.image) {
+                img = `${import.meta.env.BASE_URL}${product.image}`;
+              } else if (item.key === "bruschetta") {
+                img = `${import.meta.env.BASE_URL}images/frittura.png`;
+              } else if (item.key === "tiramisu") {
+                img = `${import.meta.env.BASE_URL}images/sfogliatella.png`;
+              }
               return (
                 <motion.div
                   key={i}
