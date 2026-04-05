@@ -46,7 +46,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
     >
       <div className="relative aspect-4/3 overflow-hidden bg-muted">
         <img
-          src={product.image || `${import.meta.env.BASE_URL}images/margherita.png`}
+          src={`${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`}
           alt={product.name}
           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
           onError={(e) => {
