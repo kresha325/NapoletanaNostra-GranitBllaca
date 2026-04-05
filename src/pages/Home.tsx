@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { menuData } from "@/lib/data";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -177,19 +178,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Merr produktet reale për klasikët: Margherita, Frittura, Sfogliatella */}
             {[
-              { key: "marinara", fallback: "Margherita Verace" }, // ka image: images/margherita.png
-              { key: "bruschetta", fallback: "Antipaste Të Shijshme" }, // ka image: images/frittura.png
-              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" }, // ka image: images/sfogliatella.png
+              { key: "marinara", fallback: "Margherita Verace" },
+              { key: "bruschetta", fallback: "Antipaste Të Shijshme" },
+              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
-              // Gjej produktin nga menuData
-              const menuData: import("@/lib/data").Product[] = require("@/lib/data").menuData;
-              const product = menuData.find((p: import("@/lib/data").Product) => p.key === item.key);
-              // Merr përkthimin me index signature
+              const product = menuData.find((p) => p.key === item.key);
               const prodT = (t.products as Record<string, { name?: string; description?: string }>)[item.key] || {};
-              // Merr titullin dhe përshkrimin nga përkthimi ose fallback
               const title = prodT.name || item.fallback;
               const desc = prodT.description || t.home.classicItems[i]?.desc || "";
-              // fallback për imazh: përdor imazhin e produktit real, ose një imazh ekzistues të sigurt
               let img = `${import.meta.env.BASE_URL}images/margherita.png`;
               if (product && product.image) {
                 img = `${import.meta.env.BASE_URL}${product.image}`;
