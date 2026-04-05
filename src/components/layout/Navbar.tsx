@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ShoppingBag, Menu as MenuIcon, X, User as UserIcon, Globe } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { useCartContext } from "@/contexts/cart-context";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { CartSheet } from "@/components/cart/CartSheet";
@@ -17,7 +17,7 @@ import {
 
 export function Navbar() {
   const [location] = useLocation();
-  const { cart } = useCart();
+  const { cart } = useCartContext();
   const { user, logout } = useAuth();
   const { lang, setLang, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
