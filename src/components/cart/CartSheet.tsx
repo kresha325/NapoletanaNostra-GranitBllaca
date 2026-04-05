@@ -91,7 +91,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                   {cart.map((item) => (
                     <div key={item.id} className="flex gap-4">
                       <div className="h-20 w-20 rounded-md overflow-hidden bg-muted flex-shrink-0">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <img src={`${import.meta.env.BASE_URL}${item.image}`} alt={item.name} className="w-full h-full object-cover" />
                       </div>
                       <div className="flex flex-col flex-1">
                         <div className="flex justify-between items-start">
