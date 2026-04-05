@@ -182,10 +182,10 @@ export default function Home() {
               { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
               // Gjej produktin nga menuData
-              const menuData = require("@/lib/data").menuData;
-              const product = menuData.find((p) => p.key === item.key);
-              // Merr përkthimin
-              const prodT = t.products[item.key] || {};
+              const menuData: import("@/lib/data").Product[] = require("@/lib/data").menuData;
+              const product = menuData.find((p: import("@/lib/data").Product) => p.key === item.key);
+              // Merr përkthimin me index signature
+              const prodT = (t.products as Record<string, { name?: string; description?: string }>)[item.key] || {};
               // Merr titullin dhe përshkrimin nga përkthimi ose fallback
               const title = prodT.name || item.fallback;
               const desc = prodT.description || t.home.classicItems[i]?.desc || "";
