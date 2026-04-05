@@ -176,9 +176,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {([
-              { img: "/images/fresh-pizza.png" },
-              { img: "/images/frittura.png" },
-              { img: "/images/sfogliatella.png" },
+              { img: `${import.meta.env.BASE_URL}images/fresh-pizza.png` },
+              { img: `${import.meta.env.BASE_URL}images/frittura.png` },
+              { img: `${import.meta.env.BASE_URL}images/sfogliatella.png` },
             ] as const).map((item, i) => {
               const classic = t.home.classicItems[i];
               return (
