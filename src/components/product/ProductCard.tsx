@@ -1,6 +1,6 @@
 import { Heart } from "lucide-react";
 import { Product } from "@/lib/data";
-import { useCart } from "@/hooks/use-cart";
+import { useCartContext } from "@/contexts/cart-context";
 import { useAuth } from "@/hooks/use-auth";
 import { useFavorites } from "@/hooks/use-favorites";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartContext();
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { t } = useLanguage();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCart } from "@/hooks/use-cart";
+import { useCartContext } from "@/contexts/cart-context";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ interface CartSheetProps {
 }
 
 export function CartSheet({ open, onOpenChange }: CartSheetProps) {
-  const { cart, note, setNote, updateQuantity, removeFromCart, clearCart, cartTotal } = useCart();
+  const { cart, note, setNote, updateQuantity, removeFromCart, clearCart, cartTotal } = useCartContext();
   const { toast } = useToast();
   const { t } = useLanguage();
   const [showWaiterModal, setShowWaiterModal] = useState(false);

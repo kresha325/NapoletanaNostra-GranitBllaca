@@ -8,6 +8,7 @@ import NotFound from "@/pages/not-found";
 import { AuthProvider } from "@/contexts/auth-context";
 import { LanguageProvider } from "@/contexts/language-context";
 import { FavoritesProvider } from "@/contexts/favorites-context";
+import { CartProvider } from "@/contexts/cart-context";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Home from "@/pages/Home";
@@ -35,19 +36,21 @@ function App() {
       <TooltipProvider>
         <AuthProvider>
           <LanguageProvider>
-            <FavoritesProvider>
-              <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-                <div className="min-h-[100dvh] flex flex-col">
-                  <Navbar />
-                  <main className="flex-1 flex flex-col">
-                    <Router />
-                  </main>
-                  <Footer />
-                </div>
-              </WouterRouter>
-              <Toaster />
-              <SonnerToaster position="top-center" />
-            </FavoritesProvider>
+            <CartProvider>
+              <FavoritesProvider>
+                <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}> 
+                  <div className="min-h-[100dvh] flex flex-col">
+                    <Navbar />
+                    <main className="flex-1 flex flex-col">
+                      <Router />
+                    </main>
+                    <Footer />
+                  </div>
+                </WouterRouter>
+                <Toaster />
+                <SonnerToaster position="top-center" />
+              </FavoritesProvider>
+            </CartProvider>
           </LanguageProvider>
         </AuthProvider>
       </TooltipProvider>
