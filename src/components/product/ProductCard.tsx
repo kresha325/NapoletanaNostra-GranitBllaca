@@ -21,9 +21,14 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
 
+  // Helper to safely get product translation
+  const getProductTranslation = (key: string) =>
+    (t.products as Record<string, { name: string; description: string }>)[key];
+
   const handleAddToCart = () => {
     addToCart(product);
-    toast.success(`${product.name} ${t.menu.addedToCart}`);
+    const prodT = getProductTranslation(product.key);
+    toast.success(`${prodT?.name || product.key} ${t.menu.addedToCart}`);
   };
 
   const handleFavorite = (e: React.MouseEvent) => {
@@ -47,7 +52,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       <div className="relative aspect-4/3 overflow-hidden bg-muted">
         <img
           src={`${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`}
-          alt={product.name}
+          alt={getProductTranslation(product.key)?.name || product.key}
           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
           onError={(e) => {
             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
@@ -78,14 +83,14 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
       <div className="flex flex-col flex-1 p-5 space-y-4">
         <div className="flex justify-between items-start gap-4">
-          <h3 className="font-serif text-xl font-bold leading-tight">{t.products[product.key]?.name || product.key}</h3>
+          <h3 className="font-serif text-xl font-bold leading-tight">{getProductTranslation(product.key)?.name || product.key}</h3>
           <span className="font-serif text-lg font-bold text-primary whitespace-nowrap">
             €{product.price.toFixed(2)}
           </span>
         </div>
 
         <p className="text-muted-foreground text-sm flex-1 leading-relaxed">
-          {t.products[product.key]?.description || ""}
+          {getProductTranslation(product.key)?.description || ""}
         </p>
 
         <Button

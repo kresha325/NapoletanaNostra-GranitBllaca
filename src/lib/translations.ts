@@ -1,3 +1,19 @@
+export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
+
+export const LANGUAGES: { code: Language; label: string; short: string }[] = [
+  { code: "sq", label: "Shqip", short: "SQ" },
+  { code: "en", label: "English", short: "EN" },
+  { code: "it", label: "Italiano", short: "IT" },
+  { code: "de", label: "Deutsch", short: "DE" },
+  { code: "tr", label: "Türkçe", short: "TR" },
+  { code: "fr", label: "Français", short: "FR" },
+  { code: "bs", label: "Bosanski", short: "BS" },
+];
+
+export type TranslationKeys = typeof translations.sq;
+
+export const translations = {
+  sq: {
     products: {
       bruschetta: {
         name: "Bruschetta Classica",
@@ -15,41 +31,8 @@
         name: "Insalata Caprese Tricolore",
         description: "Mozzarella, domate, borzilok",
       },
+      // Add all other product keys here, e.g. "mineral-water-025": { name: "Ujë Mineral 0.25L", description: "0.25L" }, ...
     },
-    products: {
-      bruschetta: {
-        name: "Bruschetta Classica",
-        description: "Tomatoes, olives, basil",
-      },
-      "insalata-verde": {
-        name: "Insalata Verde",
-        description: "Lettuce, onions, olives",
-      },
-      "insalata-rucola": {
-        name: "Insalata Rucola",
-        description: "Arugula, cherry tomatoes, Grana Padano, walnuts, raisins",
-      },
-      "insalata-caprese": {
-        name: "Insalata Caprese Tricolore",
-        description: "Mozzarella cheese, tomatoes, basil",
-      },
-    },
-export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
-
-export const LANGUAGES: { code: Language; label: string; short: string }[] = [
-  { code: "sq", label: "Shqip", short: "SQ" },
-  { code: "en", label: "English", short: "EN" },
-  { code: "it", label: "Italiano", short: "IT" },
-  { code: "de", label: "Deutsch", short: "DE" },
-  { code: "tr", label: "Türkçe", short: "TR" },
-  { code: "fr", label: "Français", short: "FR" },
-  { code: "bs", label: "Bosanski", short: "BS" },
-];
-
-export type TranslationKeys = typeof translations.it;
-
-export const translations = {
-  sq: {
     categories: {
       Pizza: "Pica",
       Pasta: "Pasta",
@@ -164,6 +147,25 @@ export const translations = {
   },
 
   en: {
+    products: {
+      bruschetta: {
+        name: "Bruschetta Classica",
+        description: "Tomatoes, olives, basil",
+      },
+      "insalata-verde": {
+        name: "Insalata Verde",
+        description: "Lettuce, onions, olives",
+      },
+      "insalata-rucola": {
+        name: "Insalata Rucola",
+        description: "Arugula, cherry tomatoes, Grana Padano, walnuts, raisins",
+      },
+      "insalata-caprese": {
+        name: "Insalata Caprese Tricolore",
+        description: "Mozzarella cheese, tomatoes, basil",
+      },
+      // Add all other product keys here, e.g. "mineral-water-025": { name: "Mineral Water 0.25L", description: "0.25L" }, ...
+    },
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
