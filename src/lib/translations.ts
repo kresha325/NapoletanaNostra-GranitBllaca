@@ -1,3 +1,39 @@
+    products: {
+      bruschetta: {
+        name: "Bruschetta Classica",
+        description: "Domate, ullinj, borzilok",
+      },
+      "insalata-verde": {
+        name: "Insalata Verde",
+        description: "Sallatë jeshile, qepë, ullinj",
+      },
+      "insalata-rucola": {
+        name: "Insalata Rucola",
+        description: "Rukola, domate qershi, Grana Padano, arra, rrush i thatë",
+      },
+      "insalata-caprese": {
+        name: "Insalata Caprese Tricolore",
+        description: "Mozzarella, domate, borzilok",
+      },
+    },
+    products: {
+      bruschetta: {
+        name: "Bruschetta Classica",
+        description: "Tomatoes, olives, basil",
+      },
+      "insalata-verde": {
+        name: "Insalata Verde",
+        description: "Lettuce, onions, olives",
+      },
+      "insalata-rucola": {
+        name: "Insalata Rucola",
+        description: "Arugula, cherry tomatoes, Grana Padano, walnuts, raisins",
+      },
+      "insalata-caprese": {
+        name: "Insalata Caprese Tricolore",
+        description: "Mozzarella cheese, tomatoes, basil",
+      },
+    },
 export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
 
 export const LANGUAGES: { code: Language; label: string; short: string }[] = [
@@ -14,6 +50,13 @@ export type TranslationKeys = typeof translations.it;
 
 export const translations = {
   sq: {
+    categories: {
+      Pizza: "Pica",
+      Pasta: "Pasta",
+      Antipasti: "Antipasta",
+      Dolci: "Ëmbëlsira",
+      Bevande: "Pije",
+    },
     nav: {
       home: "Kryefaqja",
       menu: "Menyja",
@@ -121,6 +164,13 @@ export const translations = {
   },
 
   en: {
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Pasta",
+      Antipasti: "Antipasti",
+      Dolci: "Desserts",
+      Bevande: "Drinks",
+    },
     nav: {
       home: "Home",
       menu: "Menu",

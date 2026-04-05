@@ -78,14 +78,14 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
       <div className="flex flex-col flex-1 p-5 space-y-4">
         <div className="flex justify-between items-start gap-4">
-          <h3 className="font-serif text-xl font-bold leading-tight">{product.name}</h3>
+          <h3 className="font-serif text-xl font-bold leading-tight">{t.products[product.key]?.name || product.key}</h3>
           <span className="font-serif text-lg font-bold text-primary whitespace-nowrap">
             €{product.price.toFixed(2)}
           </span>
         </div>
 
         <p className="text-muted-foreground text-sm flex-1 leading-relaxed">
-          {product.description}
+          {t.products[product.key]?.description || ""}
         </p>
 
         <Button

@@ -21,7 +21,7 @@ export default function Menu() {
 
   const getCategoryLabel = (key: string) => {
     if (key === "") return t.menu.all;
-    return key;
+    return t.categories?.[key] || key;
   };
 
   return (
