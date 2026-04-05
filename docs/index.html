@@ -24,6 +24,22 @@
       rel="stylesheet"
       href="/NapoletanaNostra-GranitBllaca/assets/index-0350b1a5.css"
     />
+    <script>
+      // GitHub Pages SPA fallback: ruaj path-in origjinal pas refresh-it
+      if (
+        location.pathname !== "/NapoletanaNostra-GranitBllaca/" &&
+        !location.pathname.startsWith("/NapoletanaNostra-GranitBllaca/assets")
+      ) {
+        window.history.replaceState(
+          {},
+          "",
+          "/NapoletanaNostra-GranitBllaca" +
+            location.pathname +
+            location.search +
+            location.hash,
+        );
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
