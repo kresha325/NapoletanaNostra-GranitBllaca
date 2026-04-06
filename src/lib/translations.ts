@@ -15,6 +15,10 @@ export type TranslationKeys = typeof translations.sq;
 export const translations = {
   sq: {
     products: {
+      marinara: {
+        name: "Marinara",
+        description: "Salcë domate, hudhër, rigon, vaj ulliri",
+      },
       bruschetta: {
         name: "Bruschetta Classica",
         description: "Domate, ullinj, borzilok",
@@ -148,6 +152,10 @@ export const translations = {
 
   en: {
     products: {
+      marinara: {
+        name: "Marinara",
+        description: "Tomato sauce, garlic, oregano, olive oil",
+      },
       bruschetta: {
         name: "Bruschetta Classica",
         description: "Tomatoes, olives, basil",
