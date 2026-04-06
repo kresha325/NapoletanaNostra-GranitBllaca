@@ -286,6 +286,13 @@ export const translations = {
   },
 
   it: {
+    products: {
+      marinara: {
+        name: "Marinara",
+        description: "Salsa di pomodoro, aglio, origano, olio d'oliva",
+      },
+      // ...existing code...
+    },
     nav: {
       home: "Home",
       menu: "Menu",
@@ -391,6 +398,13 @@ export const translations = {
   },
 
   de: {
+    products: {
+      marinara: {
+        name: "Marinara",
+        description: "Tomatensauce, Knoblauch, Oregano, Olivenöl",
+      },
+      // ...existing code...
+    },
     nav: {
       home: "Startseite",
       menu: "Speisekarte",
@@ -496,6 +510,13 @@ export const translations = {
   },
 
   tr: {
+    products: {
+      marinara: {
+        name: "Marinara",
+        description: "Domates sosu, sarımsak, kekik, zeytinyağı",
+      },
+      // ...existing code...
+    },
     nav: {
       home: "Ana Sayfa",
       menu: "Menü",
@@ -601,6 +622,13 @@ export const translations = {
   },
 
   fr: {
+    products: {
+      marinara: {
+        name: "Marinara",
+        description: "Sauce tomate, ail, origan, huile d'olive",
+      },
+      // ...existing code...
+    },
     nav: {
       home: "Accueil",
       menu: "Menu",
@@ -706,6 +734,13 @@ export const translations = {
   },
 
   bs: {
+    products: {
+      marinara: {
+        name: "Marinara",
+        description: "Sos od paradajza, bijeli luk, origano, maslinovo ulje",
+      },
+      // ...existing code...
+    },
     nav: {
       home: "Početna",
       menu: "Meni",
