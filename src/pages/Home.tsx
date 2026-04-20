@@ -183,9 +183,9 @@ export default function Home() {
               { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
               const product = menuData.find((p) => p.key === item.key);
-              const prodT = (t.products as Record<string, { name?: string; description?: string }>)[item.key] || {};
-              const title = prodT.name || item.fallback;
-              const desc = prodT.description || t.home.classicItems[i]?.desc || "";
+              const prodT = (t.products as Record<string, { name?: string; description?: string }> | undefined)?.[item.key] || {};
+              const title = prodT?.name || item.fallback;
+              const desc = prodT?.description || t.home?.classicItems?.[i]?.desc || "";
               let img = `${import.meta.env.BASE_URL}images/margherita.png`;
               if (product && product.image) {
                 img = `${import.meta.env.BASE_URL}${product.image}`;
