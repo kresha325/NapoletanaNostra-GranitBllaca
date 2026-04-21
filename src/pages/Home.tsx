@@ -182,8 +182,8 @@ export default function Home() {
               { key: "bruschetta", fallback: "Antipaste Të Shijshme" },
               { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
-              const product = menuData.find((p) => p.key === item.key);
-              const prodT = (t && t.products && typeof t.products === "object" ? t.products[item.key] : undefined) || {};
+              const product = Array.isArray(menuData) ? menuData.find((p) => p && p.key === item.key) : undefined;
+              const prodT = (t && t.products && typeof t.products === "object" && t.products[item.key]) ? t.products[item.key] : {};
               const title = prodT && prodT.name ? prodT.name : item.fallback;
               const desc = (prodT && prodT.description) ? prodT.description : (t && t.home && t.home.classicItems && t.home.classicItems[i] && t.home.classicItems[i].desc) ? t.home.classicItems[i].desc : "";
               let img = `${import.meta.env.BASE_URL}images/margherita.png`;
@@ -193,6 +193,10 @@ export default function Home() {
                 img = `${import.meta.env.BASE_URL}images/frittura.png`;
               } else if (item.key === "tiramisu") {
                 img = `${import.meta.env.BASE_URL}images/sfogliatella.png`;
+              }
+              // Fallback nëse ende mungon produkti ose përkthimi
+              if (!product && !prodT) {
+                return null;
               }
               return (
                 <motion.div
