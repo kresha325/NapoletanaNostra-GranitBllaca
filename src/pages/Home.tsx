@@ -50,7 +50,9 @@ const reserveLabels: Record<Language, { title: string; call: string; or: string 
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { t, lang } = useLanguage();
+  const { t: tRaw, lang } = useLanguage();
+  // Fallback i sigurt për t
+  const t = tRaw || { products: {}, home: {} };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -183,9 +185,9 @@ export default function Home() {
               { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
               const product = Array.isArray(menuData) ? menuData.find((p) => p && p.key === item.key) : undefined;
-              const prodT = (t && t.products && typeof t.products === "object" && t.products[item.key]) ? t.products[item.key] : {};
-              const title = prodT && prodT.name ? prodT.name : item.fallback;
-              const desc = (prodT && prodT.description) ? prodT.description : (t && t.home && t.home.classicItems && t.home.classicItems[i] && t.home.classicItems[i].desc) ? t.home.classicItems[i].desc : "";
+              const prodT = t?.products?.[item.key] || {};
+              const title = prodT?.name || item.fallback;
+              const desc = prodT?.description || (t?.home?.classicItems?.[i]?.desc || "");
               let img = `${import.meta.env.BASE_URL}images/margherita.png`;
               if (product && product.image) {
                 img = `${import.meta.env.BASE_URL}${product.image}`;
