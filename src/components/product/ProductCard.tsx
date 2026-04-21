@@ -50,14 +50,20 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       className="group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       <div className="relative aspect-4/3 overflow-hidden bg-muted">
-        <img
-          src={`${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`}
-          alt={getProductTranslation(product.key)?.name || product.key}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
-          onError={(e) => {
-            e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
-          }}
-        />
+        <div className="flex items-center justify-center w-full h-[260px] bg-white p-4">
+          <img
+            src={
+              product.image?.startsWith('http')
+                ? product.image
+                : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`
+            }
+            alt={getProductTranslation(product.key)?.name || product.key}
+            className="object-contain max-h-full max-w-full"
+            onError={(e) => {
+              e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
+            }}
+          />
+        </div>
 
         {/* Heart always visible — gri kur jo loguar, e kuqe kur preferuar */}
         <button
