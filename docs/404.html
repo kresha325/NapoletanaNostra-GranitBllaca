@@ -4,44 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Napoletana Nostra Pizzeria</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/NapoletanaNostra-GranitBllaca/favicon.png"
-    />
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script
-      type="module"
-      crossorigin
-      src="/NapoletanaNostra-GranitBllaca/assets/index-205a7e9b.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="/NapoletanaNostra-GranitBllaca/assets/index-0350b1a5.css"
-    />
     <script>
-      // GitHub Pages SPA fallback: ruaj path-in origjinal pas refresh-it
-      if (
-        location.pathname !== "/NapoletanaNostra-GranitBllaca/" &&
-        !location.pathname.startsWith("/NapoletanaNostra-GranitBllaca/assets")
-      ) {
+      // GitHub Pages SPA fallback without duplicate base-path prefixing.
+      (function () {
+        var repoBase = "/NapoletanaNostra-GranitBllaca";
+        var path = window.location.pathname;
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        if (!isGithubPages) return;
+
+        var isAssetPath = path.startsWith(repoBase + "/assets");
+        var alreadyUnderBase = path === repoBase || path.startsWith(repoBase + "/");
+        if (isAssetPath || alreadyUnderBase) return;
+
         window.history.replaceState(
           {},
           "",
-          "/NapoletanaNostra-GranitBllaca" +
-            location.pathname +
-            location.search +
-            location.hash,
+          repoBase + (path.startsWith("/") ? path : "/" + path) + window.location.search + window.location.hash,
         );
-      }
+      })();
     </script>
+    <script type="module" crossorigin src="/NapoletanaNostra-GranitBllaca/assets/index-66a6ef98.js"></script>
+    <link rel="stylesheet" href="/NapoletanaNostra-GranitBllaca/assets/index-056c5e3c.css">
   </head>
   <body>
     <div id="root"></div>
+    
   </body>
 </html>

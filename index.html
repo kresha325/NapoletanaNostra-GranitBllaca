@@ -11,6 +11,25 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // GitHub Pages SPA fallback without duplicate base-path prefixing.
+      (function () {
+        var repoBase = "/NapoletanaNostra-GranitBllaca";
+        var path = window.location.pathname;
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        if (!isGithubPages) return;
+
+        var isAssetPath = path.startsWith(repoBase + "/assets");
+        var alreadyUnderBase = path === repoBase || path.startsWith(repoBase + "/");
+        if (isAssetPath || alreadyUnderBase) return;
+
+        window.history.replaceState(
+          {},
+          "",
+          repoBase + (path.startsWith("/") ? path : "/" + path) + window.location.search + window.location.hash,
+        );
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
