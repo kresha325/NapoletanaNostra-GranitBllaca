@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCartContext } from "@/contexts/cart-context";
+import { toast } from "sonner";
 
 const CATEGORY_KEYS = ["", "Pizza", "Pasta", "Antipasti", "Dolci", "Bevande"];
 
@@ -13,6 +15,7 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("");
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
   const { t } = useLanguage();
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -146,6 +149,10 @@ export default function Menu() {
                 const imageSrc = product.image?.startsWith("http")
                   ? product.image
                   : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`;
+                const handleAddToCart = () => {
+                  addToCart(product);
+                  toast.success(`${productTranslation?.name || product.key} ${t.menu.addedToCart}`);
+                };
 
                 return (
                   <section
@@ -153,32 +160,44 @@ export default function Menu() {
                     id={`fullscreen-product-${product.id}`}
                     className="min-h-dvh w-screen snap-start"
                   >
-                    <div className="w-full min-h-dvh bg-card grid grid-cols-1 lg:grid-cols-2 items-center p-5 md:p-10 lg:p-14 gap-6 md:gap-10">
-                      <div className="bg-muted rounded-2xl p-4 md:p-8 flex items-center justify-center h-[38svh] min-h-[260px] lg:h-[72dvh]">
+                    <div className="w-full min-h-dvh bg-card grid grid-cols-1 lg:grid-cols-2 items-stretch p-3 md:p-6 lg:p-10 gap-4 md:gap-8">
+                      <div className="bg-muted rounded-2xl overflow-hidden p-3 md:p-8 flex items-center justify-center h-[42svh] min-h-[250px] lg:h-[72dvh]">
                         <img
                           src={imageSrc}
                           alt={productTranslation?.name || product.key}
-                          className="max-w-full max-h-[62dvh] object-contain"
+                          className="max-w-full max-h-full w-auto h-auto object-contain"
                           onError={(e) => {
                             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
                           }}
                         />
                       </div>
 
-                      <div className="space-y-4 md:space-y-6 self-center">
-                        <p className="text-sm uppercase tracking-widest text-primary/80">{t.categories?.[product.category] || product.category}</p>
-                        <h2 className="font-serif text-3xl md:text-5xl font-bold leading-tight">
-                          {productTranslation?.name || product.key}
-                        </h2>
-                        <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-                          {productTranslation?.description || ""}
-                        </p>
-                        <p className="font-serif text-2xl md:text-4xl font-bold text-primary">
-                          €{product.price.toFixed(2)}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          Scroll lart/poshte per produktin tjeter.
-                        </p>
+                      <div className="rounded-2xl border border-border p-5 md:p-8 flex flex-col gap-5 bg-background/70 min-h-[42svh]">
+                        <div className="space-y-3 md:space-y-5">
+                          <p className="text-xs md:text-sm uppercase tracking-widest text-primary/80">{t.categories?.[product.category] || product.category}</p>
+                          <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight">
+                            {productTranslation?.name || product.key}
+                          </h2>
+                          <p className="text-muted-foreground text-sm md:text-lg leading-relaxed line-clamp-4 md:line-clamp-none">
+                            {productTranslation?.description || ""}
+                          </p>
+                        </div>
+                        <div className="space-y-4 mt-auto">
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="font-serif text-4xl md:text-4xl font-bold text-primary">
+                              €{product.price.toFixed(2)}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={handleAddToCart}
+                            className="w-full h-12 text-base bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/20"
+                          >
+                            {t.menu.addToOrder}
+                          </Button>
+                          <p className="text-sm text-muted-foreground">
+                            Scroll lart/poshte per produktin tjeter.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </section>
