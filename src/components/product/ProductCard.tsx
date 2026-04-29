@@ -12,9 +12,10 @@ import { useLocation } from "wouter";
 interface ProductCardProps {
   product: Product;
   index?: number;
+  onClick?: () => void;
 }
 
-export function ProductCard({ product, index = 0 }: ProductCardProps) {
+export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
   const { addToCart } = useCartContext();
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -47,7 +48,8 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+      onClick={onClick}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-muted flex items-center justify-center">
         <img
@@ -98,7 +100,10 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </p>
 
         <Button
-          onClick={handleAddToCart}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleAddToCart();
+          }}
           className="w-full mt-auto bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/20 transition-colors"
         >
           {t.menu.addToOrder}

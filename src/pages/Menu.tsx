@@ -4,11 +4,14 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const CATEGORY_KEYS = ["", "Pizza", "Pasta", "Antipasti", "Dolci", "Bevande"];
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("");
+  const [activeProductId, setActiveProductId] = useState<string | null>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -23,6 +26,35 @@ export default function Menu() {
     if (key === "") return t.menu.all;
     return t.categories?.[key] || key;
   };
+
+  useEffect(() => {
+    if (!activeProductId) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeProductId]);
+
+  useEffect(() => {
+    if (!activeProductId) return;
+    const productStillVisible = filteredProducts.some((product) => product.id === activeProductId);
+    if (!productStillVisible) {
+      setActiveProductId(null);
+    }
+  }, [activeProductId, filteredProducts]);
+
+  useEffect(() => {
+    if (!activeProductId) return;
+
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById(`fullscreen-product-${activeProductId}`);
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+
+    return () => window.clearTimeout(timer);
+  }, [activeProductId]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -73,7 +105,12 @@ export default function Menu() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                index={index}
+                onClick={() => setActiveProductId(product.id)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -84,6 +121,73 @@ export default function Menu() {
           </div>
         )}
       </div>
+
+      <AnimatePresence>
+        {activeProductId && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm"
+          >
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-4 right-4 z-20 bg-background"
+              onClick={() => setActiveProductId(null)}
+              aria-label="Close fullscreen products"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+
+            <div className="h-full overflow-y-auto snap-y snap-mandatory">
+              {filteredProducts.map((product) => {
+                const productTranslation = (t.products as Record<string, { name: string; description: string }>)?.[product.key];
+                const imageSrc = product.image?.startsWith("http")
+                  ? product.image
+                  : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`;
+
+                return (
+                  <section
+                    key={product.id}
+                    id={`fullscreen-product-${product.id}`}
+                    className="h-screen snap-start"
+                  >
+                    <div className="w-full h-full bg-card grid grid-cols-1 lg:grid-cols-2 items-center p-5 md:p-10 lg:p-14 gap-6 md:gap-10">
+                      <div className="bg-muted rounded-2xl p-4 md:p-8 flex items-center justify-center h-[42vh] lg:h-full min-h-[300px]">
+                        <img
+                          src={imageSrc}
+                          alt={productTranslation?.name || product.key}
+                          className="max-w-full max-h-[70vh] object-contain"
+                          onError={(e) => {
+                            e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
+                          }}
+                        />
+                      </div>
+
+                      <div className="space-y-4 md:space-y-6 self-center">
+                        <p className="text-sm uppercase tracking-widest text-primary/80">{t.categories?.[product.category] || product.category}</p>
+                        <h2 className="font-serif text-3xl md:text-5xl font-bold leading-tight">
+                          {productTranslation?.name || product.key}
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                          {productTranslation?.description || ""}
+                        </p>
+                        <p className="font-serif text-2xl md:text-4xl font-bold text-primary">
+                          €{product.price.toFixed(2)}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Scroll lart/poshte per produktin tjeter.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
