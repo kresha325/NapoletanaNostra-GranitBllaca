@@ -8,6 +8,7 @@ import { Trash2, Plus, Minus, MessageCircle, ShoppingBag, UtensilsCrossed, Check
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 
 interface CartSheetProps {
   open: boolean;
@@ -19,6 +20,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
   const { toast } = useToast();
   const { t } = useLanguage();
   const [showWaiterModal, setShowWaiterModal] = useState(false);
+  const ORDER_PHONE = "+38349976100";
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const cartDescription =
@@ -43,34 +45,59 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
     });
   };
 
+  const buildAlbanianFallbackName = (key: string) =>
+    key
+      .split("-")
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
+
+  const getCartItemTitle = (key: string) => {
+    const localizedProducts = (t.products as Record<string, { name?: string }> | undefined) || {};
+    return localizedProducts[key]?.name || buildAlbanianFallbackName(key);
+  };
+
   const buildOrderText = () => {
-    // Merr përkthimet shqip për produktet
-    const sqProducts = require("@/lib/translations").translations.sq.products;
-    let text = `Porosia Jote - Napoletana Nostra\n\n`;
-    cart.forEach(item => {
+    const sqProducts = translations.sq.products as Record<string, { name?: string; description?: string }>;
+    const lines: string[] = [];
+
+    lines.push("Pershendetje Napoletana Nostra,");
+    lines.push("Dua te bej kete porosi:");
+    lines.push("");
+
+    cart.forEach((item, index) => {
       const prod = sqProducts[item.key] || {};
-      const title = prod.name || item.name;
+      const title = prod.name || buildAlbanianFallbackName(item.key);
       const desc = prod.description ? ` (${prod.description})` : "";
-      text += `${item.quantity}x ${title}${desc} - €${(item.price * item.quantity).toFixed(2)}\n`;
+      lines.push(`${index + 1}. ${item.quantity}x ${title}${desc} - €${(item.price * item.quantity).toFixed(2)}`);
     });
-    if (note) {
-      text += `\nShënime speciale:\n${note}\n`;
+
+    if (note.trim()) {
+      lines.push("");
+      lines.push(`Shenime speciale: ${note.trim()}`);
     }
-    text += `\nTotali: €${cartTotal.toFixed(2)}`;
-    text += `\n\nJu lutem, dorëzojani këtë porosi kamarierit. Faleminderit!`;
-    return encodeURIComponent(text);
+
+    lines.push("");
+    lines.push(`Totali: €${cartTotal.toFixed(2)}`);
+    lines.push("");
+    lines.push("Faleminderit!");
+
+    return encodeURIComponent(lines.join("\n"));
   };
 
   const handleWhatsApp = () => {
     if (cart.length === 0) return;
-    window.open(`https://wa.me/38349976100?text=${buildOrderText()}`, "_blank");
+    const phoneDigits = ORDER_PHONE.replace(/[^\d]/g, "");
+    window.open(`https://wa.me/${phoneDigits}?text=${buildOrderText()}`, "_blank");
     clearCart();
     onOpenChange(false);
   };
 
   const handleSMS = () => {
     if (cart.length === 0) return;
-    window.open(`sms:+38349976100?body=${buildOrderText()}`, "_self");
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const separator = isIOS ? "&" : "?";
+    window.open(`sms:${ORDER_PHONE}${separator}body=${buildOrderText()}`, "_self");
     clearCart();
     onOpenChange(false);
   };
@@ -91,11 +118,11 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                   {cart.map((item) => (
                     <div key={item.id} className="flex gap-4">
                       <div className="h-20 w-20 rounded-md overflow-hidden bg-muted flex-shrink-0">
-                        <img src={`${import.meta.env.BASE_URL}${item.image}`} alt={item.name} className="w-full h-full object-cover" />
+                        <img src={`${import.meta.env.BASE_URL}${item.image}`} alt={getCartItemTitle(item.key)} className="w-full h-full object-cover" />
                       </div>
                       <div className="flex flex-col flex-1">
                         <div className="flex justify-between items-start">
-                          <h4 className="font-medium text-sm leading-tight">{item.name}</h4>
+                          <h4 className="font-medium text-sm leading-tight">{getCartItemTitle(item.key)}</h4>
                           <button
                             onClick={() => removeFromCart(item.id)}
                             className="text-muted-foreground hover:text-destructive transition-colors p-1"
@@ -214,7 +241,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
               <div key={item.id} className="flex items-center justify-between text-sm gap-2">
                 <span className="font-medium text-foreground">
                   <span className="text-primary font-bold mr-1">{item.quantity}x</span>
-                  {item.name}
+                  {getCartItemTitle(item.key)}
                 </span>
                 <span className="text-muted-foreground whitespace-nowrap font-medium">
                   €{(item.price * item.quantity).toFixed(2)}
