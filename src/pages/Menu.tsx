@@ -128,19 +128,19 @@ export default function Menu() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm"
+            className="fixed inset-0 z-50 h-dvh w-screen bg-background/95 backdrop-blur-sm"
           >
             <Button
               variant="outline"
               size="icon"
-              className="absolute top-4 right-4 z-20 bg-background"
+              className="absolute right-4 z-20 bg-background top-[max(1rem,env(safe-area-inset-top))]"
               onClick={() => setActiveProductId(null)}
               aria-label="Close fullscreen products"
             >
               <X className="h-5 w-5" />
             </Button>
 
-            <div className="h-full overflow-y-auto snap-y snap-mandatory">
+            <div className="h-dvh w-screen overflow-y-auto snap-y snap-mandatory overscroll-contain">
               {filteredProducts.map((product) => {
                 const productTranslation = (t.products as Record<string, { name: string; description: string }>)?.[product.key];
                 const imageSrc = product.image?.startsWith("http")
@@ -151,14 +151,14 @@ export default function Menu() {
                   <section
                     key={product.id}
                     id={`fullscreen-product-${product.id}`}
-                    className="h-screen snap-start"
+                    className="min-h-dvh w-screen snap-start"
                   >
-                    <div className="w-full h-full bg-card grid grid-cols-1 lg:grid-cols-2 items-center p-5 md:p-10 lg:p-14 gap-6 md:gap-10">
-                      <div className="bg-muted rounded-2xl p-4 md:p-8 flex items-center justify-center h-[42vh] lg:h-full min-h-[300px]">
+                    <div className="w-full min-h-dvh bg-card grid grid-cols-1 lg:grid-cols-2 items-center p-5 md:p-10 lg:p-14 gap-6 md:gap-10">
+                      <div className="bg-muted rounded-2xl p-4 md:p-8 flex items-center justify-center h-[38svh] min-h-[260px] lg:h-[72dvh]">
                         <img
                           src={imageSrc}
                           alt={productTranslation?.name || product.key}
-                          className="max-w-full max-h-[70vh] object-contain"
+                          className="max-w-full max-h-[62dvh] object-contain"
                           onError={(e) => {
                             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
                           }}
