@@ -86,14 +86,16 @@ const Carousel = React.forwardRef<
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === "ArrowLeft") {
+          if (!canScrollPrev) return
           event.preventDefault()
           scrollPrev()
         } else if (event.key === "ArrowRight") {
+          if (!canScrollNext) return
           event.preventDefault()
           scrollNext()
         }
       },
-      [scrollPrev, scrollNext]
+      [scrollPrev, scrollNext, canScrollPrev, canScrollNext]
     )
 
     React.useEffect(() => {
@@ -115,6 +117,7 @@ const Carousel = React.forwardRef<
 
       return () => {
         api?.off("select", onSelect)
+        api?.off("reInit", onSelect)
       }
     }, [api, onSelect])
 
@@ -148,26 +151,30 @@ const Carousel = React.forwardRef<
 )
 Carousel.displayName = "Carousel"
 
-const CarouselContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { carouselRef, orientation } = useCarousel()
+type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  /** Classes for the Embla viewport (outer overflow wrapper), e.g. padding for 3D transforms */
+  viewportClassName?: string;
+};
 
-  return (
-    <div ref={carouselRef} className="overflow-hidden">
-      <div
-        ref={ref}
-        className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          className
-        )}
-        {...props}
-      />
-    </div>
-  )
-})
+const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
+  ({ className, viewportClassName, ...props }, ref) => {
+    const { carouselRef, orientation } = useCarousel();
+
+    return (
+      <div ref={carouselRef} className={cn("overflow-hidden", viewportClassName)}>
+        <div
+          ref={ref}
+          className={cn(
+            "flex",
+            orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+            className
+          )}
+          {...props}
+        />
+      </div>
+    );
+  }
+);
 CarouselContent.displayName = "CarouselContent"
 
 const CarouselItem = React.forwardRef<
@@ -192,10 +199,15 @@ const CarouselItem = React.forwardRef<
 })
 CarouselItem.displayName = "CarouselItem"
 
+type CarouselNavButtonProps = React.ComponentProps<typeof Button> & {
+  /** Fsheh butonin kur nuk ka më slide në atë drejtim (jo vetëm disabled). */
+  hideWhenDisabled?: boolean
+}
+
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  CarouselNavButtonProps
+>(({ className, variant = "outline", size = "icon", hideWhenDisabled, ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
@@ -208,6 +220,7 @@ const CarouselPrevious = React.forwardRef<
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        hideWhenDisabled && !canScrollPrev && "hidden",
         className
       )}
       disabled={!canScrollPrev}
@@ -223,8 +236,8 @@ CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  CarouselNavButtonProps
+>(({ className, variant = "outline", size = "icon", hideWhenDisabled, ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
@@ -237,6 +250,7 @@ const CarouselNext = React.forwardRef<
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        hideWhenDisabled && !canScrollNext && "hidden",
         className
       )}
       disabled={!canScrollNext}

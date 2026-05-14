@@ -23,6 +23,13 @@ function copyImages() {
     console.log(`Copied ${file}`);
   });
   console.log('All images copied to docs/images.');
+
+  const docsIndex = path.join(__dirname, '../docs/index.html');
+  const docs404 = path.join(__dirname, '../docs/404.html');
+  if (fs.existsSync(docsIndex)) {
+    fs.copyFileSync(docsIndex, docs404);
+    console.log('Copied docs/index.html to docs/404.html (GitHub Pages SPA fallback).');
+  }
 }
 
 copyImages();

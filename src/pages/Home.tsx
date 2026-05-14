@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { InstagramReelsCarousel } from "@/components/social/InstagramReelsCarousel";
+import { InstagramReelsCarousel, type InstagramReel } from "@/components/social/InstagramReelsCarousel";
 import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
@@ -14,7 +14,8 @@ const PHONE_DISPLAY = "+383 49 976 100";
 const OPEN_HOUR = 11;
 const CLOSE_HOUR = 24;
 
-const INSTAGRAM_REELS = [
+/** Shembull me video lokale (pa UI Instagram): shto videoSrc: "videos/emri.mp4" dhe opsionale posterSrc. */
+const INSTAGRAM_REELS: InstagramReel[] = [
   {
     id: "deil6troq2s",
     permalink: "https://www.instagram.com/reel/DEIL6troQ2s/",
@@ -148,9 +149,9 @@ export default function Home() {
       </section>
 
       {/* Story Section */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-14 md:py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -183,15 +184,15 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative mb-16 md:mb-0"
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
                 <img src={`${import.meta.env.BASE_URL}images/pizzaiolo.png`} alt="Pizzaiolo at work" className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-8 -left-8 bg-card p-6 rounded-xl shadow-xl max-w-[240px] border border-border hidden md:block">
-                <ChefHat className="w-8 h-8 text-primary mb-4" />
-                <p className="font-serif font-medium text-lg leading-tight">
-                  "{t.home.storyQuote}"
+              <div className="absolute z-10 max-w-[min(280px,calc(100%-1.5rem))] rounded-xl border border-border bg-card/95 p-4 shadow-xl backdrop-blur-sm sm:p-6 md:max-w-[240px] bottom-0 left-3 translate-y-12 sm:left-4 md:translate-y-0 md:-bottom-8 md:-left-8">
+                <ChefHat className="mb-3 h-7 w-7 text-primary sm:mb-4 sm:h-8 sm:w-8" />
+                <p className="font-serif text-base font-medium leading-snug sm:text-lg sm:leading-tight">
+                  &ldquo;{t.home.storyQuote}&rdquo;
                 </p>
               </div>
             </motion.div>
@@ -200,7 +201,7 @@ export default function Home() {
       </section>
 
       {/* Atmosfera/Instagram Carousel Section */}
-      <section className="py-24 bg-background border-y border-border/50">
+      <section className="bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <InstagramReelsCarousel
             reels={INSTAGRAM_REELS}
@@ -211,9 +212,9 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-12 md:py-36 bg-muted/10 border-b border-border/50">
+      <section className="py-10 md:py-16 bg-muted/10 border-b border-border/50">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-12">{t.home.galleryTitle || "Galeria"}</h2>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-8">{t.home.galleryTitle || "Galeria"}</h2>
           <div className="flex gap-6 overflow-x-auto pb-2 no-scrollbar hide-scrollbar">
             {[
               "galleri-1.jpg",
@@ -240,20 +241,20 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-14 md:py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto mb-16 space-y-4"
+            className="text-center max-w-2xl mx-auto mb-10 space-y-3"
           >
             <h2 className="font-serif text-4xl md:text-5xl font-bold">{t.home.testimonialsTitle}</h2>
             <p className="text-lg text-muted-foreground">{t.home.testimonialsSubtitle}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Facebook */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -275,7 +276,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-foreground/80 leading-relaxed flex-1">
-                "Pizza e vërtetë napoletane! Margherita ishte e jashtëzakonshme — brumi kaq i lehtë e i ajrosur. Ambienti i ngrohtë, shërbimi i shkëlqyer. Do kthehemi me gjithë familjen! ❤️"
+                &ldquo;{t.home.reviewFacebook}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
                 <img src={`${import.meta.env.BASE_URL}images/avatar-ardita.jpg`} alt="Ardita Hoxha" className="w-10 h-10 rounded-full object-cover shrink-0" />
@@ -307,7 +308,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-foreground/80 leading-relaxed flex-1">
-                "Atmosfera perfekte dhe picëria e mrekullueshme 🍕 Diavola ishte pikante pikërisht si duhet! Shërbimi super i shpejtë dhe miqësor. Recommend 100% — kthehuni pa hezitim!"
+                &ldquo;{t.home.reviewInstagram}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
                 <img src={`${import.meta.env.BASE_URL}images/avatar-blerim.jpg`} alt="Blerim Krasniqi" className="w-10 h-10 rounded-full object-cover shrink-0" />
@@ -339,7 +340,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-foreground/80 leading-relaxed flex-1">
-                "Burratina 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!"
+                &ldquo;{t.home.reviewTikTok}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
                 <img src={`${import.meta.env.BASE_URL}images/avatar-genta.jpg`} alt="Genta Prizren" className="w-10 h-10 rounded-full object-cover shrink-0" />
@@ -356,11 +357,11 @@ export default function Home() {
       {/* Removed duplicate InstagramReelsCarousel at the end */}
 
       {/* Info Section */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
+      <section className="py-14 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 z-0" />
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="bg-card border border-border shadow-xl rounded-3xl p-8 md:p-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-border">
+          <div className="bg-card border border-border shadow-xl rounded-3xl p-8 md:p-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-border">
               <a
                 href="https://maps.app.goo.gl/UnXT5EhxT7uk8Y6L6?g_st=ic"
                 target="_blank"

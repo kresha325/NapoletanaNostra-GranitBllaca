@@ -86,6 +86,12 @@ export const translations = {
       infoReservationsVal: "Rekomandojmë rezervim\ngjatë fundjavës.",
       testimonialsTitle: "Çfarë thonë klientët tanë",
       testimonialsSubtitle: "Komente reale nga rrjetet sociale",
+      reviewFacebook:
+        "Pizza e vërtetë napoletane! Margherita ishte e jashtëzakonshme — brumi kaq i lehtë e i ajrosur. Ambienti i ngrohtë, shërbimi i shkëlqyer. Do kthehemi me gjithë familjen! ❤️",
+      reviewInstagram:
+        "Atmosfera perfekte dhe picëria e mrekullueshme 🍕 Diavola ishte pikante pikërisht si duhet! Shërbimi super i shpejtë dhe miqësor. E rekomandojmë 100% — kthehuni pa hezitim!",
+      reviewTikTok:
+        "Burratina 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!",
     },
     menu: {
       title: "Menyja Jonë",
@@ -226,6 +232,12 @@ export const translations = {
       infoReservationsVal: "We recommend reserving\nahead on weekends.",
       testimonialsTitle: "What our guests say",
       testimonialsSubtitle: "Real reviews from our social media",
+      reviewFacebook:
+        "True Neapolitan pizza! The Margherita was amazing — such a light, airy dough. A warm atmosphere and excellent service. We'll be back with the whole family! ❤️",
+      reviewInstagram:
+        "Perfect atmosphere and amazing pizza 🍕 The Diavola was spicy just the way we like it! Super quick, friendly service. 100% recommend — go back without hesitation!",
+      reviewTikTok:
+        "The burrata 😍 I've never tasted anything so wonderful! Napoletana Nostra has a new fan! Every pizza made with real love. You have to try it as soon as you can!",
     },
     menu: {
       title: "Our Menu",
@@ -341,6 +353,12 @@ export const translations = {
       infoReservationsVal: "Consigliamo la prenotazione\nnei fine settimana.",
       testimonialsTitle: "Cosa dicono i nostri ospiti",
       testimonialsSubtitle: "Recensioni reali dai nostri social",
+      reviewFacebook:
+        "Vera pizza napoletana! La Margherita era straordinaria — impasto così leggero e arioso. Atmosfera calda, servizio eccellente. Torneremo con tutta la famiglia! ❤️",
+      reviewInstagram:
+        "Atmosfera perfetta e pizza favolosa 🍕 La Diavola era piccante proprio come deve essere! Servizio super veloce e cordiale. Consiglio al 100% — tornate senza esitare!",
+      reviewTikTok:
+        "La burrata 😍 non avevo mai mangiato qualcosa di così meraviglioso! Napoletana Nostra mi ha conquistato! Ogni pizza fatta con vero amore. Dovete provarla al più presto!",
     },
     menu: {
       title: "Il Nostro Menù",
@@ -456,6 +474,12 @@ export const translations = {
       infoReservationsVal: "Wir empfehlen eine Reservierung\nan Wochenenden.",
       testimonialsTitle: "Was unsere Gäste sagen",
       testimonialsSubtitle: "Echte Bewertungen aus unseren sozialen Netzwerken",
+      reviewFacebook:
+        "Echte neapolitanische Pizza! Die Margherita war großartig — so leichter, luftiger Teig. Warme Atmosphäre, hervorragender Service. Wir kommen mit der ganzen Familie wieder! ❤️",
+      reviewInstagram:
+        "Perfekte Atmosphäre und fantastische Pizza 🍕 Die Diavola war genau richtig scharf! Super schneller, freundlicher Service. 100 % empfehlenswert — unbedingt wieder hingehen!",
+      reviewTikTok:
+        "Die Burrata 😍 ich hatte noch nie etwas so Wunderbares gegessen! Napoletana Nostra hat mich überzeugt! Jede Pizza mit echter Liebe gemacht. Muss man so schnell wie möglich probieren!",
     },
     menu: {
       title: "Unsere Speisekarte",
@@ -571,6 +595,12 @@ export const translations = {
       infoReservationsVal: "Hafta sonları önceden\nrezervasyonu tavsiye ederiz.",
       testimonialsTitle: "Misafirlerimiz ne diyor",
       testimonialsSubtitle: "Sosyal medyadan gerçek yorumlar",
+      reviewFacebook:
+        "Gerçek Napoli pizzası! Margherita muhteşemdi — hamur çok hafif ve havalı. Sıcak ortam, mükemmel hizmet. Tüm aileyle döneceğiz! ❤️",
+      reviewInstagram:
+        "Mükemmel ortam ve harika pizza 🍕 Diavola tam olması gerektiği gibi acıydı! Süper hızlı, samimi hizmet. %100 tavsiye — tereddüt etmeden gidin!",
+      reviewTikTok:
+        "Burrata 😍 hiç bu kadar muhteşem bir şey yememiştim! Napoletana Nostra yeni bir hayran kazandı! Her pizza gerçek sevgiyle. En kısa sürede denemelisiniz!",
     },
     menu: {
       title: "Menümüz",
@@ -686,6 +716,12 @@ export const translations = {
       infoReservationsVal: "Nous recommandons de réserver\nle week-end.",
       testimonialsTitle: "Ce que disent nos clients",
       testimonialsSubtitle: "Vrais avis de nos réseaux sociaux",
+      reviewFacebook:
+        "Vraie pizza napolitaine ! La Margherita était exceptionnelle — pâte si légère et aérée. Ambiance chaleureuse, service excellent. Nous reviendrons en famille ! ❤️",
+      reviewInstagram:
+        "Ambiance parfaite et pizza formidable 🍕 La Diavola était épicée comme il faut ! Service super rapide et sympathique. Je recommande à 100 % — n'hésitez pas à y retourner !",
+      reviewTikTok:
+        "La burrata 😍 je n'avais jamais mangé quelque chose d'aussi merveilleux ! Napoletana Nostra m'a conquise ! Chaque pizza faite avec du vrai amour. Il faut la goûter au plus vite !",
     },
     menu: {
       title: "Notre Menu",
@@ -801,6 +837,12 @@ export const translations = {
       infoReservationsVal: "Preporučujemo rezervaciju\nvikendom.",
       testimonialsTitle: "Što kažu naši gosti",
       testimonialsSubtitle: "Pravi komentari s društvenih mreža",
+      reviewFacebook:
+        "Prava napolitanska pizza! Margherita je bila nevjerojatna — tijesto tako lahko i zračno. Topla atmosfera, odlična usluga. Vratit ćemo se cijelom porodicom! ❤️",
+      reviewInstagram:
+        "Savršena atmosfera i fenomenalna pizza 🍕 Diavola je bila ljuta tačno kako treba! Super brza, ljubazna usluga. Preporuka 100 % — vratite se bez oklijevanja!",
+      reviewTikTok:
+        "Burrata 😍 nikad nisam jela nešto tako divno! Napoletana Nostra ima novog obožavatelja! Svaka pizza s pravom ljubavlju. Morate probati što prije!",
     },
     menu: {
       title: "Naš Meni",
