@@ -94,7 +94,7 @@ const DRINK_MODAL_TITLES: Record<Language, string> = {
 };
 
 const DRINK_SECTION_KEYS: Record<DrinkSectionKey, string[]> = {
-  "soft-drinks": ["coca-cola", "coca-cola-zero", "fanta", "sprite", "schweppes", "ice-tea", "juices"],
+  "soft-drinks": ["coca-cola", "coca-cola-zero", "fanta", "sprite", "schweppes", "tonic", "ice-tea", "juices"],
   waters: ["water-025", "water-075", "mineral-water-025", "mineral-water-075"],
   beers: [
     "peja-draught-03",
@@ -108,6 +108,7 @@ const DRINK_SECTION_KEYS: Record<DrinkSectionKey, string[]> = {
   "vino-bianco": [
     "vino-bianco",
     "stone-chardonnay-0187",
+    "tarani-0187",
     "theranda-alba-0187",
     "stone-chardonnay-075",
     "pinot-grigio-075",

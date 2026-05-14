@@ -242,6 +242,13 @@ export const menuData: Product[] = [
     image: "images/schweppes.jpg",
   },
   {
+    id: "b38",
+    key: "tonic",
+    price: 1.8,
+    category: "Bevande",
+    image: "images/tonic.webp",
+  },
+  {
     id: "b6",
     key: "ice-tea",
     price: 1.8,
@@ -356,6 +363,13 @@ export const menuData: Product[] = [
     price: 4.5,
     category: "Bevande",
     image: "images/stonecastle-187.png",
+  },
+  {
+    id: "b39",
+    key: "tarani-0187",
+    price: 4.5,
+    category: "Bevande",
+    image: "images/tarani-187.png",
   },
   {
     id: "b22",

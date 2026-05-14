@@ -1,4 +1,6 @@
 
+import { menuProductLabels } from "./product-menu";
+
 export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
 
 export const LANGUAGES: { code: Language; label: string; short: string }[] = [
@@ -15,29 +17,7 @@ export type TranslationKeys = typeof translations.sq;
 
 export const translations = {
   sq: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Salcë domate, hudhër, rigon, vaj ulliri",
-      },
-      bruschetta: {
-        name: "Bruschetta Classica",
-        description: "Domate, ullinj, borzilok",
-      },
-      "insalata-verde": {
-        name: "Insalata Verde",
-        description: "Sallatë jeshile, qepë, ullinj",
-      },
-      "insalata-rucola": {
-        name: "Insalata Rucola",
-        description: "Rukola, domate qershi, Grana Padano, arra, rrush i thatë",
-      },
-      "insalata-caprese": {
-        name: "Insalata Caprese Tricolore",
-        description: "Mozzarella, domate, borzilok",
-      },
-      // Add all other product keys here, e.g. "mineral-water-025": { name: "Ujë Mineral 0.25L", description: "0.25L" }, ...
-    },
+    products: menuProductLabels,
     categories: {
       Pizza: "Pica",
       Pasta: "Pasta",
@@ -56,13 +36,13 @@ export const translations = {
     },
     home: {
       galleryTitle: "Galeria",
-      atmosphereTitle: "Atmosfera që sjellim ne",
+      atmosphereTitle: "Atmosfera që ne sjellim",
       atmosphereSubtitle: "Përjetoni magjinë e vërtetë të Napolit në Prizren.",
       storyFerment: "Fermentim",
       heroBadge: "Tradita e Vërtetë Napoletane",
       heroTitle: "Arti i Picës, Bërë me Zemër.",
       heroSubtitle:
-        "Une expérience italienne authentique,\ncréée avec passion et tradition",
+        "Një përvojë italiane autentike,\ne krijuar me pasion dhe traditë.",
       heroCta: "Shiko Menynë",
       storyTitle: "Një Histori Familjare që nga 1989",
       storyP1:
@@ -91,7 +71,7 @@ export const translations = {
       reviewInstagram:
         "Atmosfera perfekte dhe picëria e mrekullueshme 🍕 Diavola ishte pikante pikërisht si duhet! Shërbimi super i shpejtë dhe miqësor. E rekomandojmë 100% — kthehuni pa hezitim!",
       reviewTikTok:
-        "Burratina 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!",
+        "Burrata 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!",
     },
     menu: {
       title: "Menyja Jonë",
@@ -104,7 +84,7 @@ export const translations = {
     },
     login: {
       titleRegister: "Krijo Llogari",
-      titleLogin: "Mirë se u kthye",
+      titleLogin: "Mirë se erdhe",
       subtitleRegister: "Regjistrohu për të ruajtur të preferuarat",
       subtitleLogin: "Hyr për të porositur picën tënde të preferuar",
       name: "Emri",
@@ -160,29 +140,7 @@ export const translations = {
   },
 
   en: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Tomato sauce, garlic, oregano, olive oil",
-      },
-      bruschetta: {
-        name: "Bruschetta Classica",
-        description: "Tomatoes, olives, basil",
-      },
-      "insalata-verde": {
-        name: "Insalata Verde",
-        description: "Lettuce, onions, olives",
-      },
-      "insalata-rucola": {
-        name: "Insalata Rucola",
-        description: "Arugula, cherry tomatoes, Grana Padano, walnuts, raisins",
-      },
-      "insalata-caprese": {
-        name: "Insalata Caprese Tricolore",
-        description: "Mozzarella cheese, tomatoes, basil",
-      },
-      // Add all other product keys here, e.g. "mineral-water-025": { name: "Mineral Water 0.25L", description: "0.25L" }, ...
-    },
+    products: menuProductLabels,
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
@@ -304,13 +262,7 @@ export const translations = {
   },
 
   it: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Salsa di pomodoro, aglio, origano, olio d'oliva",
-      },
-      // ...existing code...
-    },
+    products: menuProductLabels,
     nav: {
       home: "Home",
       menu: "Menu",
@@ -418,20 +370,14 @@ export const translations = {
       contacts: "Contatti",
       openHours: "Aperti tutti i giorni\n11:00 - 24:00",
       rights: "Tutti i diritti riservati.",
-      madeWith: "Fatto con amore a Napoli",
+      madeWith: "Fatto con amore a Prizren",
       desc: "La vera pizza napoletana, preparata con amore e tradizione. Farina, acqua, sale, lievito e tanta passione nel cuore del Vecchio Shadërvani, ora a Prizren.",
       followUs: "Seguici",
     },
   },
 
   de: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Tomatensauce, Knoblauch, Oregano, Olivenöl",
-      },
-      // ...existing code...
-    },
+    products: menuProductLabels,
     nav: {
       home: "Startseite",
       menu: "Speisekarte",
@@ -463,7 +409,7 @@ export const translations = {
         "Genießen Sie die wahren Ikonen der neapolitanischen Tradition, zubereitet genau wie früher.",
       classicItems: [
         { title: "Margherita Verace", desc: "Die unangefochtene Königin. Einfachheit wird zur Perfektion." },
-        { title: "Köstliche Antipasti", desc: "Goldene und leichte Frittiertes zum Vorbereiten des Gaumens." },
+        { title: "Köstliche Antipasti", desc: "Goldgelbe, leichte frittierte Häppchen, die den Gaumen einstimmen." },
         { title: "Hausgemachte Desserts", desc: "Frische Sfogliatelle und warme Pastiera jeden Morgen." },
       ],
       classicsCta: "Die ganze Speisekarte ansehen",
@@ -539,20 +485,14 @@ export const translations = {
       contacts: "Kontakt",
       openHours: "Täglich geöffnet\n11:00 - 24:00",
       rights: "Alle Rechte vorbehalten.",
-      madeWith: "Mit Liebe in Neapel gemacht",
+      madeWith: "Mit Liebe in Prizren gemacht",
       desc: "Die echte neapolitanische Pizza, mit Liebe und Tradition zubereitet. Mehl, Wasser, Salz, Hefe und viel Leidenschaft im Herzen des alten Shadërvani, jetzt in Prizren.",
       followUs: "Folgt uns",
     },
   },
 
   tr: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Domates sosu, sarımsak, kekik, zeytinyağı",
-      },
-      // ...existing code...
-    },
+    products: menuProductLabels,
     nav: {
       home: "Ana Sayfa",
       menu: "Menü",
@@ -576,7 +516,7 @@ export const translations = {
           "Geleneğimiz, İtalyan mutfağına olan tutkumuzla başlar ve bugün de her misafir için kaliteye, özgünlüğe ve özel bir deneyime aynı bağlılıkla devam eder.",
       storyP2:
           "Bize her ziyaretiniz, gururla Prizren’e taşınan küçük bir Napoli parçasıdır.",
-      storyYears: "Yıllık Tarih",
+      storyYears: "Yılların hikâyesi",
       storyFerment: "Mayalama",
       storyQuote: "Sır ellerde, zamanda ve yürekte saklıdır.",
       classicsTitle: "Klasiklerimiz",
@@ -660,20 +600,14 @@ export const translations = {
       contacts: "İletişim",
       openHours: "Her gün açık\n11:00 - 24:00",
       rights: "Tüm hakları saklıdır.",
-      madeWith: "Napoli'de sevgiyle yapılmıştır",
+      madeWith: "Prizren'de sevgiyle yapılmıştır",
       desc: "Gerçek Napoliten pizza, sevgi ve gelenekle hazırlanmış. Un, su, tuz, maya ve Eski Shadërvani'nin kalbinde çok tutku, şimdi Prizren'de.",
       followUs: "Bizi takip edin",
     },
   },
 
   fr: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Sauce tomate, ail, origan, huile d'olive",
-      },
-      // ...existing code...
-    },
+    products: menuProductLabels,
     nav: {
       home: "Accueil",
       menu: "Menu",
@@ -688,7 +622,7 @@ export const translations = {
       atmosphereTitle: "L'atmosphère que nous apportons",
       atmosphereSubtitle: "Vivez la véritable magie de Naples à Prizren.",
       heroBadge: "La Vraie Tradition Napolitaine",
-      heroTitle: "L'Art de la Pizza, Fait avec le Coeur.",
+      heroTitle: "L'Art de la Pizza, Fait avec le cœur.",
       heroSubtitle:
         "Une expérience italienne authentique,\ncréée avec passion et tradition",
       heroCta: "Découvrir le Menu",
@@ -699,7 +633,7 @@ export const translations = {
         "Chaque visite chez nous est un petit morceau de Naples, apporté à Prizren avec fierté.",
       storyYears: "Ans d'Histoire",
       storyFerment: "Fermentation",
-      storyQuote: "Le secret est dans les mains, le temps et le coeur.",
+      storyQuote: "Le secret est dans les mains, le temps et le cœur.",
       classicsTitle: "Nos Classiques",
       classicsSubtitle:
         "Savourez les vraies icônes de la tradition napolitaine, préparées exactement comme autrefois.",
@@ -781,20 +715,14 @@ export const translations = {
       contacts: "Contacts",
       openHours: "Ouverts tous les jours\n11:00 - 24:00",
       rights: "Tous droits réservés.",
-      madeWith: "Fait avec amour à Naples",
+      madeWith: "Fait avec amour à Prizren",
       desc: "La vraie pizza napolitaine, préparée avec amour et tradition. Farine, eau, sel, levure et beaucoup de passion au cœur du Vieux Shadërvani, maintenant à Prizren.",
       followUs: "Suivez-nous",
     },
   },
 
   bs: {
-    products: {
-      marinara: {
-        name: "Marinara",
-        description: "Sos od paradajza, bijeli luk, origano, maslinovo ulje",
-      },
-      // ...existing code...
-    },
+    products: menuProductLabels,
     nav: {
       home: "Početna",
       menu: "Meni",
@@ -810,14 +738,14 @@ export const translations = {
       atmosphereSubtitle: "Doživite pravu magiju Napulja u Prizrenu.",
       heroBadge: "Prava Napuljska Tradicija",
       heroTitle: "Umijeće Pizze, Napravljene s Ljubavlju.",
-        heroSubtitle:
-          "Autentično talijansko iskustvo,\nstvoreno sa strašću i tradicijom",
+      heroSubtitle:
+        "Autentično talijansko iskustvo,\nstvoreno sa strašću i tradicijom",
       heroCta: "Istraži Meni",
       storyTitle: "Porodična Priča od 1989",
       storyP1:
-        "Sve je počelo sa Bakom Marijom i njenom malom drvenom furnom u uličici Napulja. Njena tajna receptura tijesta, prenošena s generacije na generaciju, i danas je srce naše pizzerije.",
+        "Naša tradicija počinje ljubavlju prema italijanskoj kuhinji i nastavlja se i danas s istom posvećenošću kvalitetu, autentičnosti i posebnom iskustvu za svakog gosta.",
       storyP2:
-        "Ne koristimo prečice. Samo brašno mljeveno kamenom, San Marzano DOP paradajz, svježi fior di latte i fermentacija od najmanje 48 sati.",
+        "Svaka posjeta nama je mali komadić Napulja, donesen u Prizren s ponosom.",
       storyYears: "Godina Istorije",
       storyFerment: "Fermentacija",
       storyQuote: "Tajna je u rukama, vremenu i srcu.",
@@ -902,7 +830,7 @@ export const translations = {
       contacts: "Kontakti",
       openHours: "Otvoreni svaki dan\n11:00 - 24:00",
       rights: "Sva prava zadržana.",
-      madeWith: "Napravljeno s ljubavlju u Napulju",
+      madeWith: "Napravljeno s ljubavlju u Prizrenu",
       desc: "Prava napuljska pizza, pripremljena s ljubavlju i tradicijom. Brašno, voda, so, kvasac i puno strasti u srcu Starog Shadërvana, sada u Prizrenu.",
       followUs: "Pratite nas",
     },
