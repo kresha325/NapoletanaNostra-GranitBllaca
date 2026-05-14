@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
-import { menuData } from "@/lib/data";
+import { menuData, type Product } from "@/lib/data";
 import { ProductCard } from "@/components/product/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useCartContext } from "@/contexts/cart-context";
 import { toast } from "sonner";
 
-const CATEGORY_KEYS = ["", "Pizza", "Pasta", "Antipasti", "Dolci", "Bevande"];
+type CategoryKey = "" | Product["category"];
+
+const CATEGORY_KEYS: CategoryKey[] = ["", "Pizza", "Pasta", "Antipasti", "Dolci", "Bevande"];
 
 export default function Menu() {
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>("");
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
   const { t } = useLanguage();
   const { addToCart } = useCartContext();
+  const localizedProducts = (t.products as Record<string, { name: string; description: string }> | undefined) || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,20 +29,15 @@ export default function Menu() {
     activeCategory === "" ? true : product.category === activeCategory
   );
 
-  const getCategoryLabel = (key: string) => {
+  const getCategoryLabel = (key: CategoryKey) => {
     if (key === "") return t.menu.all;
     return t.categories?.[key] || key;
   };
 
-  useEffect(() => {
-    if (!activeProductId) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [activeProductId]);
+  const activeProductIndex = activeProductId
+    ? filteredProducts.findIndex((product) => product.id === activeProductId)
+    : -1;
+  const activeProduct = activeProductIndex >= 0 ? filteredProducts[activeProductIndex] : null;
 
   useEffect(() => {
     if (!activeProductId) return;
@@ -48,26 +47,32 @@ export default function Menu() {
     }
   }, [activeProductId, filteredProducts]);
 
-  useEffect(() => {
-    if (!activeProductId) return;
+  const showAdjacentProduct = (direction: 1 | -1) => {
+    if (filteredProducts.length === 0 || activeProductIndex === -1) return;
 
-    const timer = window.setTimeout(() => {
-      const target = document.getElementById(`fullscreen-product-${activeProductId}`);
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-
-    return () => window.clearTimeout(timer);
-  }, [activeProductId]);
+    const nextIndex =
+      (activeProductIndex + direction + filteredProducts.length) % filteredProducts.length;
+    setActiveProductId(filteredProducts[nextIndex].id);
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <div className="bg-muted py-16 md:py-24 border-b">
-        <div className="container mx-auto px-4 md:px-6 text-center space-y-6">
+      <div className="relative overflow-hidden border-b py-16 md:py-24">
+        <div className="absolute inset-0">
+          <img
+            src={`${import.meta.env.BASE_URL}images/menu-hero.jpg`}
+            alt="Menu hero"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/45" />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 text-center space-y-6 md:px-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-4xl md:text-6xl font-bold text-foreground"
+            className="font-serif text-4xl font-bold text-white md:text-6xl"
           >
             {t.menu.title}
           </motion.h1>
@@ -75,7 +80,7 @@ export default function Menu() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="mx-auto max-w-2xl text-lg text-white/85 md:text-xl"
           >
             {t.menu.subtitle}
           </motion.p>
@@ -125,88 +130,91 @@ export default function Menu() {
         )}
       </div>
 
-      <AnimatePresence>
-        {activeProductId && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 h-dvh w-screen bg-background/95 backdrop-blur-sm"
-          >
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute right-4 z-20 bg-background top-[max(1rem,env(safe-area-inset-top))]"
-              onClick={() => setActiveProductId(null)}
-              aria-label="Close fullscreen products"
-            >
-              <X className="h-5 w-5" />
-            </Button>
+      <Dialog open={Boolean(activeProduct)} onOpenChange={(open) => !open && setActiveProductId(null)}>
+        {activeProduct && (
+          <DialogContent className="h-dvh w-screen max-w-none rounded-none border-0 bg-background/95 p-0 backdrop-blur-sm sm:rounded-none">
+            <DialogTitle className="sr-only">
+              {localizedProducts[activeProduct.key]?.name || activeProduct.key}
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              {localizedProducts[activeProduct.key]?.description || "Product details"}
+            </DialogDescription>
 
-            <div className="h-dvh w-screen overflow-y-auto snap-y snap-mandatory overscroll-contain">
-              {filteredProducts.map((product) => {
-                const productTranslation = (t.products as Record<string, { name: string; description: string }>)?.[product.key];
-                const imageSrc = product.image?.startsWith("http")
-                  ? product.image
-                  : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`;
-                const handleAddToCart = () => {
-                  addToCart(product);
-                  toast.success(`${productTranslation?.name || product.key} ${t.menu.addedToCart}`);
-                };
+            <div className="grid h-full grid-cols-1 lg:grid-cols-2">
+              <div className="relative flex min-h-[40vh] items-center justify-center bg-muted px-6 py-16 lg:min-h-full lg:px-10">
+                <img
+                  src={activeProduct.image?.startsWith("http")
+                    ? activeProduct.image
+                    : `${import.meta.env.BASE_URL}${activeProduct.image || "images/margherita.png"}`}
+                  alt={localizedProducts[activeProduct.key]?.name || activeProduct.key}
+                  className="max-h-[55vh] w-auto max-w-full object-contain lg:max-h-[72vh]"
+                  onError={(e) => {
+                    e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
+                  }}
+                />
+              </div>
 
-                return (
-                  <section
-                    key={product.id}
-                    id={`fullscreen-product-${product.id}`}
-                    className="min-h-dvh w-screen snap-start"
-                  >
-                    <div className="w-full min-h-dvh bg-card grid grid-cols-1 lg:grid-cols-2 items-stretch p-3 md:p-6 lg:p-10 gap-4 md:gap-8">
-                      <div className="bg-muted rounded-2xl overflow-hidden p-3 md:p-8 flex items-center justify-center h-[42svh] min-h-[250px] lg:h-[72dvh]">
-                        <img
-                          src={imageSrc}
-                          alt={productTranslation?.name || product.key}
-                          className="max-w-full max-h-full w-auto h-auto object-contain"
-                          onError={(e) => {
-                            e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
-                          }}
-                        />
-                      </div>
+              <div className="flex h-full flex-col border-l border-border/60 bg-background px-6 py-16 md:px-8 lg:px-10">
+                <div className="space-y-4">
+                  <p className="text-xs uppercase tracking-[0.28em] text-primary/80">
+                    {t.categories?.[activeProduct.category] || activeProduct.category}
+                  </p>
+                  <h2 className="font-serif text-4xl font-bold leading-tight md:text-5xl">
+                    {localizedProducts[activeProduct.key]?.name || activeProduct.key}
+                  </h2>
+                  <p className="text-sm leading-relaxed text-muted-foreground md:text-lg">
+                    {localizedProducts[activeProduct.key]?.description || ""}
+                  </p>
+                </div>
 
-                      <div className="rounded-2xl border border-border p-5 md:p-8 flex flex-col gap-5 bg-background/70 min-h-[42svh]">
-                        <div className="space-y-3 md:space-y-5">
-                          <p className="text-xs md:text-sm uppercase tracking-widest text-primary/80">{t.categories?.[product.category] || product.category}</p>
-                          <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight">
-                            {productTranslation?.name || product.key}
-                          </h2>
-                          <p className="text-muted-foreground text-sm md:text-lg leading-relaxed line-clamp-4 md:line-clamp-none">
-                            {productTranslation?.description || ""}
-                          </p>
-                        </div>
-                        <div className="space-y-4 mt-auto">
-                          <div className="flex items-center justify-between gap-3">
-                            <p className="font-serif text-4xl md:text-4xl font-bold text-primary">
-                              €{product.price.toFixed(2)}
-                            </p>
-                          </div>
-                          <Button
-                            onClick={handleAddToCart}
-                            className="w-full h-12 text-base bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/20"
-                          >
-                            {t.menu.addToOrder}
-                          </Button>
-                          <p className="text-sm text-muted-foreground">
-                            Scroll lart/poshte per produktin tjeter.
-                          </p>
-                        </div>
-                      </div>
+                <div className="mt-auto space-y-5">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="font-serif text-4xl font-bold text-primary md:text-5xl">
+                      €{activeProduct.price.toFixed(2)}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => showAdjacentProduct(-1)}
+                        aria-label="Show previous product"
+                        disabled={filteredProducts.length <= 1}
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => showAdjacentProduct(1)}
+                        aria-label="Show next product"
+                        disabled={filteredProducts.length <= 1}
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </Button>
                     </div>
-                  </section>
-                );
-              })}
+                  </div>
+
+                  <Button
+                    onClick={() => {
+                      addToCart(activeProduct);
+                      toast.success(
+                        `${localizedProducts[activeProduct.key]?.name || activeProduct.key} ${t.menu.addedToCart}`
+                      );
+                    }}
+                    className="h-12 w-full border border-primary/20 bg-primary/10 text-base text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {t.menu.addToOrder}
+                  </Button>
+
+                  <p className="text-sm text-muted-foreground">
+                    Përdor shigjetat për të kaluar te produkti tjetër në këtë kategori.
+                  </p>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </DialogContent>
         )}
-      </AnimatePresence>
+      </Dialog>
     </div>
   );
 }

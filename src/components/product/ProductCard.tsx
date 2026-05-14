@@ -51,7 +51,7 @@ export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
       className="group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
       onClick={onClick}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted flex items-center justify-center">
+      <div className="relative aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
         <img
           src={
             product.image?.startsWith('http')

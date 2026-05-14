@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { InstagramReelsCarousel } from "@/components/social/InstagramReelsCarousel";
 import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
@@ -12,6 +13,29 @@ const PHONE = "+38349976100";
 const PHONE_DISPLAY = "+383 49 976 100";
 const OPEN_HOUR = 11;
 const CLOSE_HOUR = 24;
+
+const INSTAGRAM_REELS = [
+  {
+    id: "deil6troq2s",
+    permalink: "https://www.instagram.com/reel/DEIL6troQ2s/",
+    label: "Reel i zgjedhur",
+  },
+  {
+    id: "c_pqkqoin38",
+    permalink: "https://www.instagram.com/reel/C_pqkqoIn38/",
+    label: "Reel i dyte",
+  },
+  {
+    id: "c_tg7hlo5l4",
+    permalink: "https://www.instagram.com/reel/C_TG7hlo5L4/",
+    label: "Reel i trete",
+  },
+  {
+    id: "c59bzcklco4",
+    permalink: "https://www.instagram.com/reel/C59BZcKLCo4/",
+    label: "Reel i katert",
+  },
+];
 
 function getHoursStatus(lang: Language) {
   const now = new Date();
@@ -53,6 +77,7 @@ export default function Home() {
   const { t: tRaw, lang } = useLanguage();
   // Fallback i sigurt për t
   const t = tRaw || { products: {}, home: {} };
+  const localizedProducts = (t.products as Record<string, { name?: string; description?: string }> | undefined) || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -185,7 +210,7 @@ export default function Home() {
               { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
             ].map((item, i) => {
               const product = Array.isArray(menuData) ? menuData.find((p) => p && p.key === item.key) : undefined;
-              const prodT = t?.products?.[item.key] || {};
+              const prodT = localizedProducts[item.key] || {};
               const title = prodT?.name || item.fallback;
               const desc = prodT?.description || (t?.home?.classicItems?.[i]?.desc || "");
               let img = `${import.meta.env.BASE_URL}images/margherita.png`;
@@ -341,6 +366,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <InstagramReelsCarousel
+        reels={INSTAGRAM_REELS}
+        heading="Atmosfera qe ne sjellim"
+        subheading="Momente reale nga ambienti, furra dhe pjatat tona."
+      />
 
       {/* Info Section */}
       <section className="py-24 md:py-32 relative overflow-hidden">
