@@ -1,9 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+import { Spinner } from "@/components/ui/spinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
 
 import { AuthProvider } from "@/contexts/auth-context";
 import { LanguageProvider } from "@/contexts/language-context";
@@ -11,22 +12,34 @@ import { FavoritesProvider } from "@/contexts/favorites-context";
 import { CartProvider } from "@/contexts/cart-context";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import Home from "@/pages/Home";
-import Menu from "@/pages/Menu";
-import Login from "@/pages/Login";
-import Favorites from "@/pages/Favorites";
+
+const Home = lazy(() => import("@/pages/Home"));
+const Menu = lazy(() => import("@/pages/Menu"));
+const Login = lazy(() => import("@/pages/Login"));
+const Favorites = lazy(() => import("@/pages/Favorites"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient();
 
+function RouteFallback() {
+  return (
+    <div className="flex min-h-[40vh] items-center justify-center">
+      <Spinner className="size-6 text-primary" />
+    </div>
+  );
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/menu" component={Menu} />
-      <Route path="/login" component={Login} />
-      <Route path="/favorites" component={Favorites} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<RouteFallback />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/menu" component={Menu} />
+        <Route path="/login" component={Login} />
+        <Route path="/favorites" component={Favorites} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 

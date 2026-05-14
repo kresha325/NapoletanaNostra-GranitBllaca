@@ -24,11 +24,11 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const cartDescription =
-    cart.length === 0
+    cartCount === 0
       ? t.cart.empty
-      : cart.length === 1
+      : cartCount === 1
       ? t.cart.count_one
-      : t.cart.count_other(cart.length);
+      : t.cart.count_other(cartCount);
 
   const handleShowWaiter = () => {
     if (cart.length === 0) return;
@@ -89,8 +89,6 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
     if (cart.length === 0) return;
     const phoneDigits = ORDER_PHONE.replace(/[^\d]/g, "");
     window.open(`https://wa.me/${phoneDigits}?text=${buildOrderText()}`, "_blank");
-    clearCart();
-    onOpenChange(false);
   };
 
   const handleSMS = () => {
@@ -98,8 +96,6 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     const separator = isIOS ? "&" : "?";
     window.open(`sms:${ORDER_PHONE}${separator}body=${buildOrderText()}`, "_self");
-    clearCart();
-    onOpenChange(false);
   };
 
   return (
