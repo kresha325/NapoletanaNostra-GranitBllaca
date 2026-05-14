@@ -58,19 +58,17 @@ export const translations = {
       galleryTitle: "Galeria",
       atmosphereTitle: "Atmosfera që sjellim ne",
       atmosphereSubtitle: "Përjetoni magjinë e vërtetë të Napolit në Prizren.",
-          storyFerment: "Fermentim",
+      storyFerment: "Fermentim",
       heroBadge: "Tradita e Vërtetë Napoletane",
       heroTitle: "Arti i Picës, Bërë me Zemër.",
-        heroSubtitle:
-          "Une expérience italienne authentique,\ncréée avec passion et tradition",
+      heroSubtitle:
+        "Une expérience italienne authentique,\ncréée avec passion et tradition",
       heroCta: "Shiko Menynë",
       storyTitle: "Një Histori Familjare që nga 1989",
       storyP1:
         "Tradita jonë fillon me pasionin për kuzhinën italiane dhe vazhdon edhe sot me të njëjtin përkushtim ndaj cilësisë, autenticitetit dhe përvojës së veçantë për çdo mysafir.",
-      storyP2:
-          "Tradita jonë fillon me pasionin për kuzhinën italiane dhe vazhdon edhe sot me të njëjtin përkushtim ndaj cilësisë, autenticitetit dhe përvojës së veçantë për çdo mysafir.",
-        storyYears: "Vite Histori",
-        storyP2: "Çdo vizitë tek ne është një copëz e vogël e Napolit, e sjellë në Prizren me krenari.",
+      storyYears: "Vite Histori",
+      storyP2: "Çdo vizitë tek ne është një copëz e vogël e Napolit, e sjellë në Prizren me krenari.",
       storyQuote: "Sekreti është në duar, në kohë dhe në zemër.",
       classicsTitle: "Klasikët Tanë",
       classicsSubtitle:
