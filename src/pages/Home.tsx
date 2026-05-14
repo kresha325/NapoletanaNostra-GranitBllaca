@@ -35,6 +35,11 @@ const INSTAGRAM_REELS = [
     permalink: "https://www.instagram.com/reel/C59BZcKLCo4/",
     label: "Reel i katert",
   },
+  {
+    id: "du_vjjvdb2m",
+    permalink: "https://www.instagram.com/reel/DU_vjjVDB2M/",
+    label: "Reel i peste",
+  },
 ];
 
 function getHoursStatus(lang: Language) {
@@ -162,7 +167,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-6 pt-4">
                 <div className="flex flex-col">
-                  <span className="font-serif text-4xl font-bold text-primary">70+</span>
+                  <span className="font-serif text-4xl font-bold text-primary">{`${new Date().getFullYear() - 1989}+`}</span>
                   <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground mt-1">{t.home.storyYears}</span>
                 </div>
                 <div className="w-px h-12 bg-border" />
@@ -194,61 +199,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Section */}
-      <section className="py-24 bg-muted/30 border-y border-border/50">
+      {/* Atmosfera/Instagram Carousel Section */}
+      <section className="py-24 bg-background border-y border-border/50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold">{t.home.classicsTitle}</h2>
-            <p className="text-lg text-muted-foreground">{t.home.classicsSubtitle}</p>
-          </div>
+          <InstagramReelsCarousel
+            reels={INSTAGRAM_REELS}
+            heading={t.home.atmosphereTitle || "Atmosfera që sjellim ne"}
+            subheading={t.home.atmosphereSubtitle || "Përjetoni magjinë e vërtetë të Napolit në Prizren."}
+          />
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Merr produktet reale për klasikët: Margherita, Frittura, Sfogliatella */}
+      {/* Gallery Section */}
+      <section className="py-12 md:py-36 bg-muted/10 border-b border-border/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-12">{t.home.galleryTitle || "Galeria"}</h2>
+          <div className="flex gap-6 overflow-x-auto pb-2 no-scrollbar hide-scrollbar">
             {[
-              { key: "marinara", fallback: "Margherita Verace" },
-              { key: "bruschetta", fallback: "Antipaste Të Shijshme" },
-              { key: "tiramisu", fallback: "Ëmbëlsira Shtëpie" },
-            ].map((item, i) => {
-              const product = Array.isArray(menuData) ? menuData.find((p) => p && p.key === item.key) : undefined;
-              const prodT = localizedProducts[item.key] || {};
-              const title = prodT?.name || item.fallback;
-              const desc = prodT?.description || (t?.home?.classicItems?.[i]?.desc || "");
-              let img = `${import.meta.env.BASE_URL}images/margherita.png`;
-              if (product && product.image) {
-                img = `${import.meta.env.BASE_URL}${product.image}`;
-              } else if (item.key === "bruschetta") {
-                img = `${import.meta.env.BASE_URL}images/frittura.png`;
-              } else if (item.key === "tiramisu") {
-                img = `${import.meta.env.BASE_URL}images/sfogliatella.png`;
-              }
-              // Fallback nëse ende mungon produkti ose përkthimi
-              if (!product && !prodT) {
-                return null;
-              }
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="group cursor-pointer"
-                  onClick={() => setLocation("/menu")}
-                >
-                  <div className="aspect-square rounded-2xl overflow-hidden mb-6">
-                    <img src={img} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  </div>
-                  <h3 className="font-serif text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Button variant="outline" size="lg" className="rounded-full px-8" onClick={() => setLocation("/menu")}>
-              {t.home.classicsCta}
-            </Button>
+              "galleri-1.jpg",
+              "galleri-2.jpg",
+              "galleri-3.jpg",
+              "galleri-4.jpg",
+              "galleri-5.jpg",
+              "galleri-6.jpg",
+              "galleri-7.jpg",
+              "galleri-8.jpg",
+              "galleri-9.jpg",
+            ].map((img, i) => (
+              <div key={img} className="rounded-xl overflow-hidden shadow-lg min-w-[260px] max-w-[320px] flex-shrink-0">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/${img}`}
+                  alt={`Galeria ${i + 1}`}
+                  className="w-full h-96 object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -367,11 +353,7 @@ export default function Home() {
         </div>
       </section>
 
-      <InstagramReelsCarousel
-        reels={INSTAGRAM_REELS}
-        heading="Atmosfera qe ne sjellim"
-        subheading="Momente reale nga ambienti, furra dhe pjatat tona."
-      />
+      {/* Removed duplicate InstagramReelsCarousel at the end */}
 
       {/* Info Section */}
       <section className="py-24 md:py-32 relative overflow-hidden">

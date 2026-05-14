@@ -225,21 +225,21 @@ export const menuData: Product[] = [
     key: "fanta",
     price: 1.8,
     category: "Bevande",
-    image: "images/fanta.jpg",
+      image: "images/fanta.jpeg",
   },
   {
     id: "b4",
     key: "sprite",
     price: 1.8,
     category: "Bevande",
-    image: "images/sprite.png",
+      image: "images/sprite.webp",
   },
   {
     id: "b5",
     key: "schweppes",
     price: 1.8,
     category: "Bevande",
-    image: "images/schwepper.jpg",
+    image: "images/schweppes.jpg",
   },
   {
     id: "b6",
@@ -250,7 +250,7 @@ export const menuData: Product[] = [
   },
   {
     id: "b7",
-    key: "juice",
+    key: "juices",
     price: 1.8,
     category: "Bevande",
     image: "images/juices.png",
@@ -304,7 +304,7 @@ export const menuData: Product[] = [
     key: "heineken",
     price: 3.0,
     category: "Bevande",
-    image: "images/heineken.jpg",
+    image: "images/heineken.png",
   },
   {
     id: "b15",

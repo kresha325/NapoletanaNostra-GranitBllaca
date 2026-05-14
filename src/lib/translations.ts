@@ -1,3 +1,4 @@
+
 export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
 
 export const LANGUAGES: { code: Language; label: string; short: string }[] = [
@@ -54,18 +55,22 @@ export const translations = {
       hello: "Mirë se vjen",
     },
     home: {
+      galleryTitle: "Galeria",
+      atmosphereTitle: "Atmosfera që sjellim ne",
+      atmosphereSubtitle: "Përjetoni magjinë e vërtetë të Napolit në Prizren.",
+          storyFerment: "Fermentim",
       heroBadge: "Tradita e Vërtetë Napoletane",
       heroTitle: "Arti i Picës, Bërë me Zemër.",
-      heroSubtitle:
-        "Prej tre brezash sjellim në Shadërvanin e Vjetër në Prizren shijat autentike të Napolit. Fermentim i ngadalshëm, përbërës DOP dhe zjarri i pasionit tonë.",
+        heroSubtitle:
+          "Une expérience italienne authentique,\ncréée avec passion et tradition",
       heroCta: "Shiko Menynë",
-      storyTitle: "Një Histori Familjare që nga 1954",
+      storyTitle: "Një Histori Familjare që nga 1989",
       storyP1:
-        "Gjithçka filloi me Gjyshen Maria dhe furrën e saj të vogël me dru në një rrugicë të Napolit. Receta e brumit të saj, sekrete dhe e trashëguar nga brezi në brez, është ende sot zemra e picërisë sonë.",
+        "Tradita jonë fillon me pasionin për kuzhinën italiane dhe vazhdon edhe sot me të njëjtin përkushtim ndaj cilësisë, autenticitetit dhe përvojës së veçantë për çdo mysafir.",
       storyP2:
-        "Nuk përdorim rrugë të shkurtra. Vetëm miell i bluar me gur, domate San Marzano DOP, fior di latte i freskët dhe fermentim të paktën 48 orë.",
-      storyYears: "Vite Histori",
-      storyFerment: "Fermentim",
+          "Tradita jonë fillon me pasionin për kuzhinën italiane dhe vazhdon edhe sot me të njëjtin përkushtim ndaj cilësisë, autenticitetit dhe përvojës së veçantë për çdo mysafir.",
+        storyYears: "Vite Histori",
+        storyP2: "Çdo vizitë tek ne është një copëz e vogël e Napolit, e sjellë në Prizren me krenari.",
       storyQuote: "Sekreti është në duar, në kohë dhe në zemër.",
       classicsTitle: "Klasikët Tanë",
       classicsSubtitle:
@@ -191,16 +196,19 @@ export const translations = {
       hello: "Hello",
     },
     home: {
+      galleryTitle: "Gallery",
+      atmosphereTitle: "The atmosphere we bring",
+      atmosphereSubtitle: "Experience the true magic of Naples in Prizren.",
       heroBadge: "The True Neapolitan Tradition",
       heroTitle: "The Art of Pizza, Made with Heart.",
       heroSubtitle:
-        "For three generations we bring to Old Shadërvani the authentic flavors of Naples. Slow fermentation, DOP ingredients and the fire of our passion.",
+        "An authentic Italian experience,\ncrafted with passion and tradition.",
       heroCta: "Discover the Menu",
-      storyTitle: "A Family Story Since 1954",
+      storyTitle: "A Family Story Since 1989",
       storyP1:
-        "It all started with Grandma Maria and her small wood-fired oven in a Neapolitan alley. Her dough recipe, secret and passed down from generation to generation, is still today the heart of our pizzeria.",
+          "Our tradition begins with a passion for Italian cuisine and continues today with the same dedication to quality, authenticity, and a unique experience for every guest.",
       storyP2:
-        "We don't cut corners. Only stone-ground flour, San Marzano DOP tomatoes, fresh fior di latte and a fermentation of at least 48 hours.",
+          "Every visit with us is a small piece of Naples, brought to Prizren with pride.",
       storyYears: "Years of History",
       storyFerment: "Fermentation",
       storyQuote: "The secret is in the hands, time and heart.",
@@ -303,16 +311,19 @@ export const translations = {
       hello: "Ciao",
     },
     home: {
+      galleryTitle: "Galleria",
+      atmosphereTitle: "L'atmosfera che portiamo",
+      atmosphereSubtitle: "Vivi la vera magia di Napoli a Prizren.",
       heroBadge: "La Vera Tradizione Napoletana",
       heroTitle: "L'Arte della Pizza, Fatta col Cuore.",
       heroSubtitle:
-        "Da tre generazioni portiamo al Vecchio Shadërvani i sapori autentici di Napoli. Lievitazione lenta, ingredienti DOP e il fuoco della nostra passione.",
+        "Un'autentica esperienza italiana,\ncreata con passione e tradizione.",
       heroCta: "Scopri il Menù",
-      storyTitle: "Una Storia di Famiglia dal 1954",
+      storyTitle: "Una Storia di Famiglia dal 1989",
       storyP1:
-        "Tutto è iniziato con Nonna Maria e il suo piccolo forno a legna in un vicolo di Napoli. La ricetta del suo impasto, segreta e tramandata di generazione in generazione, è ancora oggi il cuore della nostra pizzeria.",
+          "La nostra tradizione nasce dalla passione per la cucina italiana e continua ancora oggi con la stessa dedizione alla qualità, all’autenticità e all’esperienza unica per ogni ospite.",
       storyP2:
-        "Non usiamo scorciatoie. Solo farina macinata a pietra, pomodoro San Marzano DOP, fior di latte fresco dei Monti Lattari e una lievitazione di almeno 48 ore.",
+          "Ogni visita da noi è un piccolo pezzo di Napoli, portato a Prizren con orgoglio.",
       storyYears: "Anni di Storia",
       storyFerment: "Lievitazione",
       storyQuote: "Il segreto è nelle mani, nel tempo e nel cuore.",
@@ -415,16 +426,19 @@ export const translations = {
       hello: "Hallo",
     },
     home: {
+      galleryTitle: "Galerie",
+      atmosphereTitle: "Die Atmosphäre, die wir bringen",
+      atmosphereSubtitle: "Erleben Sie den wahren Zauber Neapels in Prizren.",
       heroBadge: "Die Wahre Neapolitanische Tradition",
       heroTitle: "Die Kunst der Pizza, Mit Herz Gemacht.",
       heroSubtitle:
-        "Seit drei Generationen bringen wir am alten Shadërvani die authentischen Aromen Neapels. Langsame Fermentation, DOP-Zutaten und das Feuer unserer Leidenschaft.",
+        "Ein authentisches italienisches Erlebnis,\nmit Leidenschaft und Tradition geschaffen.",
       heroCta: "Speisekarte Entdecken",
-      storyTitle: "Eine Familiengeschichte Seit 1954",
+      storyTitle: "Eine Familiengeschichte Seit 1989",
       storyP1:
-        "Alles begann mit Oma Maria und ihrem kleinen Holzbackofen in einer Neapler Gasse. Ihr Teigrezept, geheim und von Generation zu Generation weitergegeben, ist noch heute das Herz unserer Pizzeria.",
+          "Unsere Tradition beginnt mit der Leidenschaft für die italienische Küche und setzt sich bis heute mit dem gleichen Engagement für Qualität, Authentizität und ein besonderes Erlebnis für jeden Gast fort.",
       storyP2:
-        "Wir nehmen keine Abkürzungen. Nur steingemahles Mehl, San Marzano DOP-Tomaten, frischer Fior di latte und eine Gärung von mindestens 48 Stunden.",
+          "Jeder Besuch bei uns ist ein kleines Stück Neapel, mit Stolz nach Prizren gebracht.",
       storyYears: "Jahre Geschichte",
       storyFerment: "Fermentation",
       storyQuote: "Das Geheimnis liegt in den Händen, der Zeit und dem Herzen.",
@@ -527,16 +541,19 @@ export const translations = {
       hello: "Merhaba",
     },
     home: {
+      galleryTitle: "Galeri",
+      atmosphereTitle: "Getirdiğimiz atmosfer",
+      atmosphereSubtitle: "Napoli'nin gerçek büyüsünü Prizren'de yaşayın.",
       heroBadge: "Gerçek Napoliten Geleneği",
       heroTitle: "Pizzanın Sanatı, Yürekten Yapılmış.",
       heroSubtitle:
-        "Üç nesildir Eski Shadërvani'ye Napoli'nin özgün lezzetlerini taşıyoruz. Yavaş mayalama, DOP malzemeleri ve tutkumuzun ateşi.",
+        "Tutkuyla ve gelenekle yaratılmış,\notantik bir İtalyan deneyimi.",
       heroCta: "Menüyü Keşfet",
-      storyTitle: "1954'ten Bu Yana Bir Aile Hikayesi",
+      storyTitle: "1989'ten Bu Yana Bir Aile Hikayesi",
       storyP1:
-        "Her şey Büyükanne Maria ve Napoli'nin bir sokağındaki küçük odun fırınıyla başladı. Nesiller boyu aktarılan gizli hamur tarifi bugün hala pizzeriamızın kalbidir.",
+          "Geleneğimiz, İtalyan mutfağına olan tutkumuzla başlar ve bugün de her misafir için kaliteye, özgünlüğe ve özel bir deneyime aynı bağlılıkla devam eder.",
       storyP2:
-        "Kısayol kullanmıyoruz. Yalnızca taş öğütülmüş un, San Marzano DOP domates, taze fior di latte ve en az 48 saatlik mayalama.",
+          "Bize her ziyaretiniz, gururla Prizren’e taşınan küçük bir Napoli parçasıdır.",
       storyYears: "Yıllık Tarih",
       storyFerment: "Mayalama",
       storyQuote: "Sır ellerde, zamanda ve yürekte saklıdır.",
@@ -639,16 +656,19 @@ export const translations = {
       hello: "Bonjour",
     },
     home: {
+      galleryTitle: "Galerie",
+      atmosphereTitle: "L'atmosphère que nous apportons",
+      atmosphereSubtitle: "Vivez la véritable magie de Naples à Prizren.",
       heroBadge: "La Vraie Tradition Napolitaine",
       heroTitle: "L'Art de la Pizza, Fait avec le Coeur.",
       heroSubtitle:
-        "Depuis trois générations, nous apportons au Vieux Shadërvani les saveurs authentiques de Naples. Fermentation lente, ingrédients DOP et le feu de notre passion.",
+        "Une expérience italienne authentique,\ncréée avec passion et tradition",
       heroCta: "Découvrir le Menu",
-      storyTitle: "Une Histoire de Famille Depuis 1954",
+      storyTitle: "Une Histoire de Famille Depuis 1989",
       storyP1:
-        "Tout a commencé avec Grand-mère Maria et son petit four à bois dans une ruelle de Naples. Sa recette de pâte, secrète et transmise de génération en génération, est encore aujourd'hui le coeur de notre pizzeria.",
+        "Notre tradition commence par la passion de la cuisine italienne et se poursuit aujourd’hui avec le même engagement envers la qualité, l’authenticité et une expérience unique pour chaque invité.",
       storyP2:
-        "Nous n'utilisons pas de raccourcis. Seulement de la farine moulue à la pierre, des tomates San Marzano DOP, du fior di latte frais et une fermentation d'au moins 48 heures.",
+        "Chaque visite chez nous est un petit morceau de Naples, apporté à Prizren avec fierté.",
       storyYears: "Ans d'Histoire",
       storyFerment: "Fermentation",
       storyQuote: "Le secret est dans les mains, le temps et le coeur.",
@@ -751,12 +771,15 @@ export const translations = {
       hello: "Zdravo",
     },
     home: {
+      galleryTitle: "Galerija",
+      atmosphereTitle: "Atmosfera koju donosimo",
+      atmosphereSubtitle: "Doživite pravu magiju Napulja u Prizrenu.",
       heroBadge: "Prava Napuljska Tradicija",
       heroTitle: "Umijeće Pizze, Napravljene s Ljubavlju.",
-      heroSubtitle:
-        "Tri generacije donosimo u Stari Shadërvani autentične okuse Napulja. Sporo fermentiranje, DOP sastojci i vatra naše strasti.",
+        heroSubtitle:
+          "Autentično talijansko iskustvo,\nstvoreno sa strašću i tradicijom",
       heroCta: "Istraži Meni",
-      storyTitle: "Porodična Priča od 1954",
+      storyTitle: "Porodična Priča od 1989",
       storyP1:
         "Sve je počelo sa Bakom Marijom i njenom malom drvenom furnom u uličici Napulja. Njena tajna receptura tijesta, prenošena s generacije na generaciju, i danas je srce naše pizzerije.",
       storyP2:

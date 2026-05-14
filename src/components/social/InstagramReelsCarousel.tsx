@@ -77,9 +77,17 @@ export function InstagramReelsCarousel({ reels, heading, subheading }: Instagram
       .catch(() => undefined);
   }, [reels]);
 
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
   if (!reels.length) {
     return null;
   }
+
+  // Handler for carousel change (Embla API)
+  const handleSelect = (api?: any) => {
+    if (!api) return;
+    setSelectedIndex(api.selectedScrollSnap());
+  };
 
   return (
     <section className="py-24 bg-muted/20 border-y border-border/40">
@@ -90,41 +98,62 @@ export function InstagramReelsCarousel({ reels, heading, subheading }: Instagram
         </div>
 
         <Carousel
-          opts={{ align: "start", loop: reels.length > 2 }}
+          opts={{ align: "center", loop: reels.length > 2 }}
+          setApi={(api) => {
+            if (!api) return;
+            setSelectedIndex(api.selectedScrollSnap());
+            api.on("select", () => handleSelect(api));
+          }}
           className="mx-auto max-w-6xl px-3 md:px-12"
         >
           <CarouselContent>
-            {reels.map((reel) => (
-              <CarouselItem key={reel.id} className="basis-full md:basis-1/2 xl:basis-1/3">
-                <div className="mx-auto max-w-[360px]">
-                  <div className="relative aspect-[9/16] overflow-hidden rounded-[28px] border border-border bg-black shadow-sm">
-                    <blockquote
-                      className="instagram-media absolute inset-x-0 top-0 h-[calc(100%+260px)] w-full"
-                      data-instgrm-permalink={reel.permalink}
-                      data-instgrm-version="14"
-                      style={{
-                        background: "#FFF",
-                        border: 0,
-                        borderRadius: "28px",
-                        boxShadow: "none",
-                        margin: 0,
-                        maxWidth: "100%",
-                        minWidth: "100%",
-                        padding: 0,
-                        width: "100%",
-                      }}
-                    >
-                      <a href={reel.permalink} target="_blank" rel="noopener noreferrer">
-                        View this post on Instagram
-                      </a>
-                    </blockquote>
+            {reels.map((reel, idx) => {
+              // Calculate 3D effect classes
+              let effectClass = "transition-all duration-500";
+              if (idx === selectedIndex) {
+                effectClass += " scale-100 z-20 shadow-2xl border-2 border-primary ";
+              } else if (idx === selectedIndex - 1 || (selectedIndex === 0 && idx === reels.length - 1)) {
+                effectClass += " scale-90 -rotate-2 z-10 opacity-80 blur-[1px] ";
+              } else if (idx === selectedIndex + 1 || (selectedIndex === reels.length - 1 && idx === 0)) {
+                effectClass += " scale-90 rotate-2 z-10 opacity-80 blur-[1px] ";
+              } else {
+                effectClass += " scale-75 z-0 opacity-60 blur-[2px] ";
+              }
+              return (
+                <CarouselItem key={reel.id} className={`basis-full md:basis-1/2 xl:basis-1/3 flex justify-center ${effectClass}`}>
+                  <div className="mx-auto max-w-[360px]">
+                    <div className="relative aspect-[9/16] overflow-hidden rounded-[28px] border border-border bg-black shadow-sm">
+                      <blockquote
+                        className="instagram-media absolute inset-x-0 top-0 h-[calc(100%+260px)] w-full"
+                        data-instgrm-permalink={reel.permalink}
+                        data-instgrm-version="14"
+                        style={{
+                          background: "#FFF",
+                          border: 0,
+                          borderRadius: "28px",
+                          boxShadow: "none",
+                          margin: 0,
+                          maxWidth: "100%",
+                          minWidth: "100%",
+                          padding: 0,
+                          width: "100%"
+                        }}
+                      >
+                        <a href={reel.permalink} target="_blank" rel="noopener noreferrer">
+                          View this post on Instagram
+                        </a>
+                      </blockquote>
+                    </div>
+                    <div className="text-center mt-3 font-medium text-base text-foreground/80">
+                      {reel.label}
+                    </div>
                   </div>
-                </div>
-              </CarouselItem>
-            ))}
+                </CarouselItem>
+              );
+            })}
           </CarouselContent>
-          {reels.length > 1 ? <CarouselPrevious className="left-0 md:left-2" /> : null}
-          {reels.length > 1 ? <CarouselNext className="right-0 md:right-2" /> : null}
+          <CarouselPrevious />
+          <CarouselNext />
         </Carousel>
       </div>
     </section>

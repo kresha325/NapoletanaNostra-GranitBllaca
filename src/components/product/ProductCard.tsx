@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Heart } from "lucide-react";
 import { Product } from "@/lib/data";
 import { useCartContext } from "@/contexts/cart-context";
@@ -8,6 +9,8 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
 import { useLocation } from "wouter";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -15,12 +18,16 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
+export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function ProductCard(
+  { product, index = 0, onClick },
+  ref
+) {
   const { addToCart } = useCartContext();
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
+  const isMobile = useIsMobile();
 
   // Helper to safely get product translation
   const getProductTranslation = (key: string) =>
@@ -45,10 +52,14 @@ export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+      className={cn(
+        "group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border transition-all duration-300 cursor-pointer",
+        isMobile ? "" : "hover:shadow-lg"
+      )}
       onClick={onClick}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
@@ -60,7 +71,6 @@ export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
           }
           alt={getProductTranslation(product.key)?.name || product.key}
           className="max-w-full max-h-full w-auto h-auto object-contain"
-          style={{ display: 'block' }}
           onError={(e) => {
             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
           }}
@@ -111,4 +121,4 @@ export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
       </div>
     </motion.div>
   );
-}
+});
