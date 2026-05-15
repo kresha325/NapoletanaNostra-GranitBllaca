@@ -133,3 +133,7 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+.nn-yt-footer-wrap iframe {
+  border: 0;
+}

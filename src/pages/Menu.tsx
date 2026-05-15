@@ -199,7 +199,7 @@ export default function Menu() {
             src={`${import.meta.env.BASE_URL}images/menu-hero2.jpg`}
             alt=""
             className="h-full w-full object-cover object-center"
-            fetchPriority="high"
+            fetchpriority="high"
             decoding="async"
           />
           <div className="absolute inset-0 bg-black/15" />

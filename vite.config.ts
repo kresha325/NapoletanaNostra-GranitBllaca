@@ -24,6 +24,17 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "docs"),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("framer-motion")) return "motion";
+          if (/[/\\]node_modules[/\\]react-dom[/\\]/.test(id)) return "react-vendor";
+          if (/[/\\]node_modules[/\\]react[/\\]/.test(id)) return "react-vendor";
+        },
+      },
+    },
   },
   server: {
     port,

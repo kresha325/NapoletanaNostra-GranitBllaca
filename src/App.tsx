@@ -13,6 +13,7 @@ import { CartProvider } from "@/contexts/cart-context";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AmbientMusic } from "@/components/layout/AmbientMusic";
+import { YoutubeAmbientProvider } from "@/contexts/youtube-ambient-context";
 
 const Home = lazy(() => import("@/pages/Home"));
 const Menu = lazy(() => import("@/pages/Menu"));
@@ -52,15 +53,17 @@ function App() {
           <LanguageProvider>
             <CartProvider>
               <FavoritesProvider>
-                <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}> 
-                  <div className="min-h-[100dvh] flex flex-col">
-                    <Navbar />
-                    <main className="flex-1 flex flex-col">
-                      <Router />
-                    </main>
-                    <Footer />
-                    <AmbientMusic />
-                  </div>
+                <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+                  <YoutubeAmbientProvider>
+                    <div className="min-h-[100dvh] flex flex-col">
+                      <Navbar />
+                      <main className="flex-1 flex flex-col">
+                        <Router />
+                      </main>
+                      <Footer />
+                      <AmbientMusic />
+                    </div>
+                  </YoutubeAmbientProvider>
                 </WouterRouter>
                 <Toaster />
                 <SonnerToaster position="top-center" />

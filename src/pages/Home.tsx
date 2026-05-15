@@ -145,8 +145,8 @@ export default function Home() {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={`${import.meta.env.BASE_URL}images/hero-oven.png`}
-          alt="Wood fired pizza oven"
+          src={`${import.meta.env.BASE_URL}images/hero.png`}
+          alt="Napoletana Nostra"
           className="absolute inset-0 w-full h-full object-cover"
         />
 

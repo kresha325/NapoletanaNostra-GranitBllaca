@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/language-context";
+import { YOUTUBE_AMBIENT_MOUNT_ID, YOUTUBE_AMBIENT_WRAP_CLASS } from "@/contexts/youtube-ambient-context";
+import { AMBIENT_YOUTUBE_WATCH_URL } from "@/lib/youtube-ambient-config";
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -49,23 +51,18 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background border-t mt-auto">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
-
-          {/* Brand + Socials */}
-          <div className="md:col-span-2 space-y-5">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-6 lg:gap-8">
+          {/* Kolona 1 — marka + rrjetet */}
+          <div className="min-w-0 space-y-5">
             <h3 className="font-serif text-2xl font-bold tracking-tight text-primary">
               Napoletana Nostra
             </h3>
-            <p className="text-background/70 max-w-sm leading-relaxed text-sm">
-              {t.footer.desc}
-            </p>
-
-            {/* Social icons */}
+            <p className="text-background/70 text-sm leading-relaxed">{t.footer.desc}</p>
             <div className="space-y-3">
               <p className="text-xs font-semibold uppercase tracking-widest text-background/40">
                 {t.footer.followUs}
               </p>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 {SOCIALS.map(({ name, href, Icon }) => (
                   <a
                     key={name}
@@ -73,38 +70,65 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={name}
-                    className="w-10 h-10 rounded-full bg-background/10 hover:bg-primary/80 flex items-center justify-center transition-all duration-200 hover:scale-110 group"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-background/10 transition-all duration-200 hover:scale-110 hover:bg-primary/80 group"
                   >
-                    <Icon className="w-5 h-5 text-background/60 group-hover:text-white transition-colors" />
+                    <Icon className="h-5 w-5 text-background/60 transition-colors group-hover:text-white" />
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Explore */}
-          <div className="space-y-4">
+          {/* Kolona 2 — eksploro */}
+          <div className="min-w-0 space-y-4">
             <h4 className="font-serif text-lg font-semibold">{t.footer.explore}</h4>
-            <nav className="flex flex-col space-y-2 text-background/70 text-sm">
-              <Link href="/" className="hover:text-primary transition-colors">{t.nav.home}</Link>
-              <Link href="/menu" className="hover:text-primary transition-colors">{t.nav.menu}</Link>
-              <Link href="/login" className="hover:text-primary transition-colors">{t.nav.login}</Link>
+            <nav className="flex flex-col space-y-2 text-sm text-background/70">
+              <Link href="/" className="transition-colors hover:text-primary">
+                {t.nav.home}
+              </Link>
+              <Link href="/menu" className="transition-colors hover:text-primary">
+                {t.nav.menu}
+              </Link>
+              <Link href="/login" className="transition-colors hover:text-primary">
+                {t.nav.login}
+              </Link>
             </nav>
           </div>
 
-          {/* Contacts */}
-          <div className="space-y-4">
+          {/* Kolona 3 — kontakte */}
+          <div className="min-w-0 space-y-4">
             <h4 className="font-serif text-lg font-semibold">{t.footer.contacts}</h4>
-            <div className="flex flex-col space-y-2 text-background/70 text-sm">
-              <p>Marin Barleti 2, Prizren<br />Kosovo 20000</p>
+            <div className="flex flex-col space-y-2 text-sm text-background/70">
+              <p>
+                Marin Barleti 2, Prizren
+                <br />
+                Kosovo 20000
+              </p>
               <p>+383 49 976 100</p>
-              <p>napoletana.nostra@gmail.com</p>
-              <p className="pt-4 whitespace-pre-line">{t.footer.openHours}</p>
+              <p className="break-all">napoletana.nostra@gmail.com</p>
+              <p className="whitespace-pre-line pt-4">{t.footer.openHours}</p>
             </div>
+          </div>
+
+          {/* Kolona 4 — YouTube (gjerësi e plotë e kolonës, format horizontal) */}
+          <div className="flex min-w-0 flex-col space-y-2">
+            <div
+              className={`${YOUTUBE_AMBIENT_WRAP_CLASS} relative aspect-video w-full overflow-hidden rounded-md border border-background/20 bg-black shadow-inner`}
+            >
+              <div id={YOUTUBE_AMBIENT_MOUNT_ID} className="absolute inset-0 min-h-[1px] min-w-[1px]" />
+            </div>
+            <a
+              href={AMBIENT_YOUTUBE_WATCH_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-background/50 underline-offset-2 hover:text-primary hover:underline"
+            >
+              YouTube
+            </a>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-background/20 text-center text-sm text-background/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 border-t border-background/20 pt-8 text-center text-sm text-background/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} Napoletana Nostra. {t.footer.rights}</p>
           <p className="font-serif italic text-primary/80">{t.footer.madeWith} ❤️</p>
         </div>
