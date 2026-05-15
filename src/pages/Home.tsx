@@ -4,7 +4,7 @@ import { animate, motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { InstagramReelsCarousel, type InstagramReel } from "@/components/social/InstagramReelsCarousel";
-import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone, Volume2, Pause } from "lucide-react";
+import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
 
@@ -20,9 +20,6 @@ const TESTIMONIALS_BG = "images/testimonials-background.jpg";
 const STORY_PIZZAIOLO_IMAGES = ["images/picaolo.webp", "images/pizzaiolo.png"] as const;
 /** Intervali i ndërrimit të fotove (5 sekonda). */
 const STORY_PIZZAIOLO_ROTATE_MS = 5 * 1000;
-
-/** Muzikë opsionale: `public/audio/music.mp3`. Luhet vetëm pas klikimit. */
-const AMBIENT_AUDIO = "audio/music.mp3";
 
 /** Shembull me video lokale (pa UI Instagram): shto videoSrc: "videos/emri.mp4" dhe opsionale posterSrc. */
 const INSTAGRAM_REELS: InstagramReel[] = [
@@ -97,8 +94,6 @@ export default function Home() {
   const storyYearsTarget = useMemo(() => new Date().getFullYear() - 1989, []);
   const [statYears, setStatYears] = useState(0);
   const [statHours, setStatHours] = useState(0);
-  const ambientRef = useRef<HTMLAudioElement | null>(null);
-  const [ambientPlaying, setAmbientPlaying] = useState(false);
   // Fallback i sigurt për t
   const t = tRaw || { products: {}, home: {} };
   const localizedProducts = (t.products as Record<string, { name?: string; description?: string }> | undefined) || {};
@@ -140,15 +135,6 @@ export default function Home() {
       hCtrl.stop();
     };
   }, [storyStatsInView, storyYearsTarget]);
-
-  useEffect(() => {
-    return () => {
-      const el = ambientRef.current;
-      if (!el) return;
-      el.pause();
-      el.currentTime = 0;
-    };
-  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -526,30 +512,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <audio
-        ref={ambientRef}
-        src={publicImage(AMBIENT_AUDIO)}
-        preload="metadata"
-        loop
-        playsInline
-        onPlay={() => setAmbientPlaying(true)}
-        onPause={() => setAmbientPlaying(false)}
-      />
-      <button
-        type="button"
-        className="fixed bottom-5 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/95 text-foreground shadow-lg backdrop-blur-sm transition hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        aria-pressed={ambientPlaying}
-        aria-label={ambientPlaying ? "Ndalo muzikën" : "Luaj Buongiorno Italia"}
-        title="Buongiorno Italia"
-        onClick={() => {
-          const el = ambientRef.current;
-          if (!el) return;
-          if (el.paused) void el.play().catch(() => setAmbientPlaying(false));
-          else el.pause();
-        }}
-      >
-        {ambientPlaying ? <Pause className="h-5 w-5 shrink-0" aria-hidden /> : <Volume2 className="h-5 w-5 shrink-0" aria-hidden />}
-      </button>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { FavoritesProvider } from "@/contexts/favorites-context";
 import { CartProvider } from "@/contexts/cart-context";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AmbientMusic } from "@/components/layout/AmbientMusic";
 
 const Home = lazy(() => import("@/pages/Home"));
 const Menu = lazy(() => import("@/pages/Menu"));
@@ -58,6 +59,7 @@ function App() {
                       <Router />
                     </main>
                     <Footer />
+                    <AmbientMusic />
                   </div>
                 </WouterRouter>
                 <Toaster />
