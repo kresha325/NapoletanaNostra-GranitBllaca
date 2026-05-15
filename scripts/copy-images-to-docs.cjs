@@ -26,10 +26,36 @@ function copyImages() {
 
   const docsIndex = path.join(__dirname, '../docs/index.html');
   const docs404 = path.join(__dirname, '../docs/404.html');
-  if (fs.existsSync(docsIndex)) {
-    fs.copyFileSync(docsIndex, docs404);
-    console.log('Copied docs/index.html to docs/404.html (GitHub Pages SPA fallback).');
+  if (!fs.existsSync(docsIndex)) {
+    console.warn('Skipping docs/404.html: docs/index.html not found (run vite build first).');
+    return;
   }
+  // Must match vite.config.ts base path (no trailing slash in template string below).
+  const repoBase = '/NapoletanaNostra-GranitBllaca';
+  const spa404 = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting…</title>
+  <script>
+    (function () {
+      var base = "${repoBase}";
+      try {
+        window.sessionStorage.setItem(
+          "ghp-spa",
+          window.location.pathname + window.location.search + window.location.hash
+        );
+      } catch (e) {}
+      window.location.replace(window.location.origin + base + "/");
+    })();
+  </script>
+</head>
+<body></body>
+</html>
+`;
+  fs.writeFileSync(docs404, spa404, 'utf8');
+  console.log('Wrote docs/404.html (GitHub Pages SPA redirect to index).');
 }
 
 copyImages();
