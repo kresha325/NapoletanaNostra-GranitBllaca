@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { menuData } from "@/lib/data";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,10 @@ const PHONE = "+38349976100";
 const PHONE_DISPLAY = "+383 49 976 100";
 const OPEN_HOUR = 11;
 const CLOSE_HOUR = 24;
+
+const publicImage = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+/** Sfond seksionit të testimonialeve — përdor foto të gjerë (p.sh. ≥1920px); skedar i vogël zmadhohet në ekran dhe duket i turbullt. */
+const TESTIMONIALS_BG = "images/testimonials-background.jpg";
 
 /** Shembull me video lokale (pa UI Instagram): shto videoSrc: "videos/emri.mp4" dhe opsionale posterSrc. */
 const INSTAGRAM_REELS: InstagramReel[] = [
@@ -241,8 +244,17 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="relative isolate overflow-hidden py-14 md:py-20">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <img
+            src={publicImage(TESTIMONIALS_BG)}
+            alt=""
+            className="h-full w-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div className="container relative z-10 mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -261,13 +273,16 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0 }}
-              className="bg-card border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
               onClick={() => window.open("https://www.facebook.com/share/17Xivws7xJ/?mibextid=wwXIfr", "_blank")}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1">
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <div
+                  className="inline-flex items-center gap-0.5 rounded-full border border-white/15 bg-black/50 px-2 py-0.5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-black/60"
+                  aria-label="5 / 5"
+                >
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg key={i} className="h-3.5 w-3.5 shrink-0 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                   ))}
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1877F2]/10 text-[#1877F2]">
@@ -275,7 +290,7 @@ export default function Home() {
                   <span className="text-xs font-semibold">Facebook</span>
                 </div>
               </div>
-              <p className="text-foreground/80 leading-relaxed flex-1">
+              <p className="text-foreground leading-relaxed flex-1 font-medium">
                 &ldquo;{t.home.reviewFacebook}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
@@ -293,13 +308,16 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="bg-card border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
               onClick={() => window.open("https://www.instagram.com/napoletana.nostra?igsh=cDV3ZzU2dGo5bG5s", "_blank")}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1">
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <div
+                  className="inline-flex items-center gap-0.5 rounded-full border border-white/15 bg-black/50 px-2 py-0.5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-black/60"
+                  aria-label="5 / 5"
+                >
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg key={i} className="h-3.5 w-3.5 shrink-0 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                   ))}
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E1306C]/10 text-[#E1306C]">
@@ -307,7 +325,7 @@ export default function Home() {
                   <span className="text-xs font-semibold">Instagram</span>
                 </div>
               </div>
-              <p className="text-foreground/80 leading-relaxed flex-1">
+              <p className="text-foreground leading-relaxed flex-1 font-medium">
                 &ldquo;{t.home.reviewInstagram}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
@@ -325,13 +343,16 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-card border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
               onClick={() => window.open("https://www.tiktok.com/@napoletana.nostra?_r=1&_t=ZS-95GN6BUOGnZ", "_blank")}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1">
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <div
+                  className="inline-flex items-center gap-0.5 rounded-full border border-white/15 bg-black/50 px-2 py-0.5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-black/60"
+                  aria-label="5 / 5"
+                >
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg key={i} className="h-3.5 w-3.5 shrink-0 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                   ))}
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-foreground/5 text-foreground">
@@ -339,7 +360,7 @@ export default function Home() {
                   <span className="text-xs font-semibold">TikTok</span>
                 </div>
               </div>
-              <p className="text-foreground/80 leading-relaxed flex-1">
+              <p className="text-foreground leading-relaxed flex-1 font-medium">
                 &ldquo;{t.home.reviewTikTok}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-border">
@@ -357,10 +378,10 @@ export default function Home() {
       {/* Removed duplicate InstagramReelsCarousel at the end */}
 
       {/* Info Section */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 z-0" />
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="bg-card border border-border shadow-xl rounded-3xl p-8 md:p-12">
+      <section className="relative overflow-hidden py-14 md:py-20">
+        <div className="absolute inset-0 z-0 bg-primary/5" />
+        <div className="container relative z-10 mx-auto px-4 md:px-6">
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-xl md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-border">
               <a
                 href="https://maps.app.goo.gl/UnXT5EhxT7uk8Y6L6?g_st=ic"
