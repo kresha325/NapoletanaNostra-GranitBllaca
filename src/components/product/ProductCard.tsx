@@ -57,12 +57,13 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className={cn(
-        "group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border transition-all duration-300 cursor-pointer",
+        "group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border transition-all duration-300",
+        onClick && "cursor-pointer",
         isMobile ? "" : "hover:shadow-lg"
       )}
       onClick={onClick}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
+      <div className="relative flex h-72 w-full shrink-0 items-center justify-center overflow-hidden bg-white sm:h-80 md:h-[22rem]">
         <img
           src={
             product.image?.startsWith('http')
@@ -70,7 +71,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
               : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`
           }
           alt={getProductTranslation(product.key)?.name || product.key}
-          className="max-w-full max-h-full w-auto h-auto object-contain"
+          className="max-h-full max-w-full object-contain"
           onError={(e) => {
             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
           }}

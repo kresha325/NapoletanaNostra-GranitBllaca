@@ -164,23 +164,23 @@ export const translations = {
       heroBadge: "The True Neapolitan Tradition",
       heroTitle: "The Art of Pizza, Made with Heart.",
       heroSubtitle:
-        "An authentic Italian experience,\ncrafted with passion and tradition.",
-      heroCta: "Discover the Menu",
+        "An authentic Italian experience,\ncreated with passion and tradition.",
+      heroCta: "View the Menu",
       storyTitle: "A Family Story Since 1989",
       storyP1:
-          "Our tradition begins with a passion for Italian cuisine and continues today with the same dedication to quality, authenticity, and a unique experience for every guest.",
+        "Our tradition begins with a passion for Italian cuisine and continues today with the same commitment to quality, authenticity, and a distinctive experience for every guest.",
       storyP2:
-          "Every visit with us is a small piece of Naples, brought to Prizren with pride.",
+        "Every visit to us is a small piece of Naples, brought to Prizren with pride.",
       storyYears: "Years of History",
       storyFerment: "Fermentation",
-      storyQuote: "The secret is in the hands, time and heart.",
+      storyQuote: "The secret is in the hands, in time and in the heart.",
       classicsTitle: "Our Classics",
       classicsSubtitle:
-        "Savor the true icons of Neapolitan tradition, prepared exactly as they used to be.",
+        "Enjoy the true icons of Neapolitan tradition, prepared exactly as they once were.",
       classicItems: [
         { title: "Margherita Verace", desc: "The undisputed queen. Simplicity that becomes perfection." },
-        { title: "Tasty Antipasti", desc: "Golden and light fried bites to prepare the palate." },
-        { title: "Homemade Desserts", desc: "Fresh sfogliatelle and warm pastiera every morning." },
+        { title: "Tasty Antipasti", desc: "Golden, light fried bites to prepare the palate." },
+        { title: "Homemade Desserts", desc: "Sfogliatelle and warm pastiera every morning." },
       ],
       classicsCta: "View the full menu",
       infoWhere: "Where We Are",
@@ -188,18 +188,19 @@ export const translations = {
       infoHoursVal: "Mon - Sun\n11:00 - 24:00",
       infoReservations: "Reservations",
       infoReservationsVal: "We recommend reserving\nahead on weekends.",
-      testimonialsTitle: "What our guests say",
-      testimonialsSubtitle: "Real reviews from our social media",
+      testimonialsTitle: "What our clients say",
+      testimonialsSubtitle: "Real comments from social media",
       reviewFacebook:
-        "True Neapolitan pizza! The Margherita was amazing — such a light, airy dough. A warm atmosphere and excellent service. We'll be back with the whole family! ❤️",
+        "True Neapolitan pizza! The Margherita was outstanding — the dough so light and airy. A warm atmosphere, excellent service. We will come back with the whole family! ❤️",
       reviewInstagram:
-        "Perfect atmosphere and amazing pizza 🍕 The Diavola was spicy just the way we like it! Super quick, friendly service. 100% recommend — go back without hesitation!",
+        "Perfect atmosphere and wonderful pizza 🍕 The Diavola was spicy exactly as it should be! Super fast, friendly service. We recommend it 100% — come back without hesitation!",
       reviewTikTok:
-        "The burrata 😍 I've never tasted anything so wonderful! Napoletana Nostra has a new fan! Every pizza made with real love. You have to try it as soon as you can!",
+        "The burrata 😍 I had never eaten anything so wonderful! Napoletana Nostra has made a new fan! Every pizza made with true love. You should try it as soon as possible!",
     },
     menu: {
       title: "Our Menu",
-      subtitle: "Choose from our specialties prepared fresh with genuine ingredients.",
+      subtitle:
+        "Choose among our specialties, prepared fresh at any moment with fresh, natural ingredients.",
       all: "All",
       noProducts: "No products found in this category.",
       addToOrder: "Add to Order",
@@ -207,9 +208,9 @@ export const translations = {
     },
     login: {
       titleRegister: "Create an Account",
-      titleLogin: "Welcome Back",
+      titleLogin: "Welcome",
       subtitleRegister: "Register to save your favorites",
-      subtitleLogin: "Login to order your favorite pizzas",
+      subtitleLogin: "Log in to order your favorite pizza",
       name: "Name",
       email: "Email",
       password: "Password",
@@ -235,8 +236,8 @@ export const translations = {
     cart: {
       title: "Your Order",
       empty: "Your cart is empty.",
-      count_one: "You have 1 item in your cart.",
-      count_other: (n: number) => `You have ${n} items in your cart.`,
+      count_one: "You have 1 product in your cart.",
+      count_other: (n: number) => `You have ${n} products in your cart.`,
       notesLabel: "Special notes / ingredients to avoid",
       notesPlaceholder: "E.g. No onion, well done...",
       total: "Total",
@@ -263,6 +264,13 @@ export const translations = {
 
   it: {
     products: menuProductLabels,
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Pasta",
+      Antipasti: "Antipasti",
+      Dolci: "Dolci",
+      Bevande: "Bevande",
+    },
     nav: {
       home: "Home",
       menu: "Menu",
@@ -280,22 +288,22 @@ export const translations = {
       heroTitle: "L'Arte della Pizza, Fatta col Cuore.",
       heroSubtitle:
         "Un'autentica esperienza italiana,\ncreata con passione e tradizione.",
-      heroCta: "Scopri il Menù",
+      heroCta: "Vedi il menù",
       storyTitle: "Una Storia di Famiglia dal 1989",
       storyP1:
-          "La nostra tradizione nasce dalla passione per la cucina italiana e continua ancora oggi con la stessa dedizione alla qualità, all’autenticità e all’esperienza unica per ogni ospite.",
+        "La nostra tradizione nasce dalla passione per la cucina italiana e continua ancora oggi con lo stesso impegno verso qualità, autenticità e un'esperienza distintiva per ogni ospite.",
       storyP2:
-          "Ogni visita da noi è un piccolo pezzo di Napoli, portato a Prizren con orgoglio.",
+        "Ogni visita da noi è un piccolo pezzo di Napoli, portato a Prizren con orgoglio.",
       storyYears: "Anni di Storia",
-      storyFerment: "Lievitazione",
+      storyFerment: "Fermentazione",
       storyQuote: "Il segreto è nelle mani, nel tempo e nel cuore.",
       classicsTitle: "I Nostri Classici",
       classicsSubtitle:
-        "Assapora le vere icone della tradizione napoletana, preparate esattamente come una volta.",
+        "Assaggia le vere icone della tradizione napoletana, preparate esattamente come una volta.",
       classicItems: [
         { title: "Margherita Verace", desc: "La regina indiscussa. Semplicità che diventa perfezione." },
-        { title: "Antipasti Sfiziosi", desc: "Fritture dorate e leggere per preparare il palato." },
-        { title: "Dolci Fatti in Casa", desc: "Sfogliatelle ricce e pastiere calde ogni mattina." },
+        { title: "Antipasti Gustosi", desc: "Fritture dorate e leggere per preparare il palato." },
+        { title: "Dolci Fatti in Casa", desc: "Sfogliatelle e pastiera calde ogni mattina." },
       ],
       classicsCta: "Vedi tutto il menù",
       infoWhere: "Dove Siamo",
@@ -303,18 +311,19 @@ export const translations = {
       infoHoursVal: "Lun - Dom\n11:00 - 24:00",
       infoReservations: "Prenotazioni",
       infoReservationsVal: "Consigliamo la prenotazione\nnei fine settimana.",
-      testimonialsTitle: "Cosa dicono i nostri ospiti",
-      testimonialsSubtitle: "Recensioni reali dai nostri social",
+      testimonialsTitle: "Cosa dicono i nostri clienti",
+      testimonialsSubtitle: "Commenti veri dai social",
       reviewFacebook:
         "Vera pizza napoletana! La Margherita era straordinaria — impasto così leggero e arioso. Atmosfera calda, servizio eccellente. Torneremo con tutta la famiglia! ❤️",
       reviewInstagram:
-        "Atmosfera perfetta e pizza favolosa 🍕 La Diavola era piccante proprio come deve essere! Servizio super veloce e cordiale. Consiglio al 100% — tornate senza esitare!",
+        "Atmosfera perfetta e pizza meravigliosa 🍕 La Diavola era piccante proprio come deve essere! Servizio super veloce e cordiale. La consigliamo al 100% — tornate senza esitazione!",
       reviewTikTok:
-        "La burrata 😍 non avevo mai mangiato qualcosa di così meraviglioso! Napoletana Nostra mi ha conquistato! Ogni pizza fatta con vero amore. Dovete provarla al più presto!",
+        "La burrata 😍 non avevo mai mangiato nulla di così meraviglioso! Napoletana Nostra ha conquistato un nuovo fan! Ogni pizza fatta con vero amore. Dovete provarla il prima possibile!",
     },
     menu: {
       title: "Il Nostro Menù",
-      subtitle: "Scegli tra le nostre specialità preparate al momento con ingredienti freschi e genuini.",
+      subtitle:
+        "Scegli tra le nostre specialità, preparate fresche in ogni momento con ingredienti freschi e naturali.",
       all: "Tutti",
       noProducts: "Nessun prodotto trovato in questa categoria.",
       addToOrder: "Aggiungi all'Ordine",
@@ -322,9 +331,9 @@ export const translations = {
     },
     login: {
       titleRegister: "Crea un Account",
-      titleLogin: "Bentornato",
+      titleLogin: "Benvenuto",
       subtitleRegister: "Registrati per salvare i tuoi preferiti",
-      subtitleLogin: "Accedi per ordinare le tue pizze preferite",
+      subtitleLogin: "Accedi per ordinare la tua pizza preferita",
       name: "Nome",
       email: "Email",
       password: "Password",
@@ -378,6 +387,13 @@ export const translations = {
 
   de: {
     products: menuProductLabels,
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Pasta",
+      Antipasti: "Antipasti",
+      Dolci: "Desserts",
+      Bevande: "Getränke",
+    },
     nav: {
       home: "Startseite",
       menu: "Speisekarte",
@@ -389,28 +405,28 @@ export const translations = {
     },
     home: {
       galleryTitle: "Galerie",
-      atmosphereTitle: "Die Atmosphäre, die wir bringen",
+      atmosphereTitle: "Die Atmosphäre, die wir mitbringen",
       atmosphereSubtitle: "Erleben Sie den wahren Zauber Neapels in Prizren.",
       heroBadge: "Die Wahre Neapolitanische Tradition",
       heroTitle: "Die Kunst der Pizza, Mit Herz Gemacht.",
       heroSubtitle:
-        "Ein authentisches italienisches Erlebnis,\nmit Leidenschaft und Tradition geschaffen.",
-      heroCta: "Speisekarte Entdecken",
+        "Ein authentisches italienisches Erlebnis,\ngeschaffen mit Leidenschaft und Tradition.",
+      heroCta: "Speisekarte ansehen",
       storyTitle: "Eine Familiengeschichte Seit 1989",
       storyP1:
-          "Unsere Tradition beginnt mit der Leidenschaft für die italienische Küche und setzt sich bis heute mit dem gleichen Engagement für Qualität, Authentizität und ein besonderes Erlebnis für jeden Gast fort.",
+        "Unsere Tradition beginnt mit der Leidenschaft für die italienische Küche und setzt sich bis heute mit dem gleichen Engagement für Qualität, Authentizität und ein besonderes Erlebnis für jeden Gast fort.",
       storyP2:
-          "Jeder Besuch bei uns ist ein kleines Stück Neapel, mit Stolz nach Prizren gebracht.",
+        "Jeder Besuch bei uns ist ein kleines Stück Neapel, mit Stolz nach Prizren gebracht.",
       storyYears: "Jahre Geschichte",
       storyFerment: "Fermentation",
-      storyQuote: "Das Geheimnis liegt in den Händen, der Zeit und dem Herzen.",
+      storyQuote: "Das Geheimnis liegt in den Händen, in der Zeit und im Herzen.",
       classicsTitle: "Unsere Klassiker",
       classicsSubtitle:
-        "Genießen Sie die wahren Ikonen der neapolitanischen Tradition, zubereitet genau wie früher.",
+        "Genießen Sie die wahren Ikonen der neapolitanischen Tradition, zubereitet genau wie einst.",
       classicItems: [
         { title: "Margherita Verace", desc: "Die unangefochtene Königin. Einfachheit wird zur Perfektion." },
-        { title: "Köstliche Antipasti", desc: "Goldgelbe, leichte frittierte Häppchen, die den Gaumen einstimmen." },
-        { title: "Hausgemachte Desserts", desc: "Frische Sfogliatelle und warme Pastiera jeden Morgen." },
+        { title: "Schmackhafte Antipasti", desc: "Goldgelbe, leichte frittierte Häppchen zur Vorbereitung des Gaumens." },
+        { title: "Hausgemachte Desserts", desc: "Sfogliatelle und warme Pastiera jeden Morgen." },
       ],
       classicsCta: "Die ganze Speisekarte ansehen",
       infoWhere: "Wo Wir Sind",
@@ -418,18 +434,19 @@ export const translations = {
       infoHoursVal: "Mo - So\n11:00 - 24:00",
       infoReservations: "Reservierungen",
       infoReservationsVal: "Wir empfehlen eine Reservierung\nan Wochenenden.",
-      testimonialsTitle: "Was unsere Gäste sagen",
-      testimonialsSubtitle: "Echte Bewertungen aus unseren sozialen Netzwerken",
+      testimonialsTitle: "Was unsere Kunden sagen",
+      testimonialsSubtitle: "Echte Kommentare aus den sozialen Medien",
       reviewFacebook:
-        "Echte neapolitanische Pizza! Die Margherita war großartig — so leichter, luftiger Teig. Warme Atmosphäre, hervorragender Service. Wir kommen mit der ganzen Familie wieder! ❤️",
+        "Echte neapolitanische Pizza! Die Margherita war hervorragend — Teig so leicht und luftig. Warme Atmosphäre, ausgezeichneter Service. Wir kommen mit der ganzen Familie wieder! ❤️",
       reviewInstagram:
-        "Perfekte Atmosphäre und fantastische Pizza 🍕 Die Diavola war genau richtig scharf! Super schneller, freundlicher Service. 100 % empfehlenswert — unbedingt wieder hingehen!",
+        "Perfekte Atmosphäre und wunderbare Pizza 🍕 Die Diavola war genau richtig scharf! Super schneller, freundlicher Service. Wir empfehlen sie zu 100 % — kommt ohne Zögern wieder!",
       reviewTikTok:
-        "Die Burrata 😍 ich hatte noch nie etwas so Wunderbares gegessen! Napoletana Nostra hat mich überzeugt! Jede Pizza mit echter Liebe gemacht. Muss man so schnell wie möglich probieren!",
+        "Die Burrata 😍 ich hatte noch nie etwas so Wunderbares gegessen! Napoletana Nostra hat einen neuen Fan! Jede Pizza mit echter Liebe gemacht. Ihr solltet sie so bald wie möglich probieren!",
     },
     menu: {
       title: "Unsere Speisekarte",
-      subtitle: "Wählen Sie aus unseren Spezialitäten, frisch mit echten Zutaten zubereitet.",
+      subtitle:
+        "Wählen Sie aus unseren Spezialitäten, frisch in jedem Moment mit frischen, natürlichen Zutaten zubereitet.",
       all: "Alle",
       noProducts: "Keine Produkte in dieser Kategorie gefunden.",
       addToOrder: "Zur Bestellung Hinzufügen",
@@ -437,7 +454,7 @@ export const translations = {
     },
     login: {
       titleRegister: "Konto Erstellen",
-      titleLogin: "Willkommen Zurück",
+      titleLogin: "Willkommen",
       subtitleRegister: "Registrieren Sie sich, um Ihre Favoriten zu speichern",
       subtitleLogin: "Melden Sie sich an, um Ihre Lieblingspizza zu bestellen",
       name: "Name",
@@ -465,8 +482,8 @@ export const translations = {
     cart: {
       title: "Ihre Bestellung",
       empty: "Ihr Warenkorb ist leer.",
-      count_one: "Sie haben 1 Artikel im Warenkorb.",
-      count_other: (n: number) => `Sie haben ${n} Artikel im Warenkorb.`,
+      count_one: "Sie haben 1 Produkt im Warenkorb.",
+      count_other: (n: number) => `Sie haben ${n} Produkte im Warenkorb.`,
       notesLabel: "Besondere Hinweise / zu vermeidende Zutaten",
       notesPlaceholder: "Z.B. Ohne Zwiebel, gut durchgebacken...",
       total: "Gesamt",
@@ -493,6 +510,13 @@ export const translations = {
 
   tr: {
     products: menuProductLabels,
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Makarna",
+      Antipasti: "Antipasti",
+      Dolci: "Tatlılar",
+      Bevande: "İçecekler",
+    },
     nav: {
       home: "Ana Sayfa",
       menu: "Menü",
@@ -509,23 +533,23 @@ export const translations = {
       heroBadge: "Gerçek Napoliten Geleneği",
       heroTitle: "Pizzanın Sanatı, Yürekten Yapılmış.",
       heroSubtitle:
-        "Tutkuyla ve gelenekle yaratılmış,\notantik bir İtalyan deneyimi.",
-      heroCta: "Menüyü Keşfet",
+        "Otantik bir İtalyan deneyimi,\ntutku ve gelenekle yaratılmış.",
+      heroCta: "Menüyü Görüntüle",
       storyTitle: "1989'ten Bu Yana Bir Aile Hikayesi",
       storyP1:
-          "Geleneğimiz, İtalyan mutfağına olan tutkumuzla başlar ve bugün de her misafir için kaliteye, özgünlüğe ve özel bir deneyime aynı bağlılıkla devam eder.",
+        "Geleneğimiz, İtalyan mutfağına olan tutkuyla başlar ve bugün de her misafir için kaliteye, özgünlüğe ve ayırt edici bir deneyime aynı bağlılıkla devam eder.",
       storyP2:
-          "Bize her ziyaretiniz, gururla Prizren’e taşınan küçük bir Napoli parçasıdır.",
-      storyYears: "Yılların hikâyesi",
-      storyFerment: "Mayalama",
+        "Bize her gelişiniz, gururla Prizren'e taşınan küçük bir Napoli parçasıdır.",
+      storyYears: "Yıllarca Süren Tarih",
+      storyFerment: "Fermantasyon",
       storyQuote: "Sır ellerde, zamanda ve yürekte saklıdır.",
       classicsTitle: "Klasiklerimiz",
       classicsSubtitle:
-        "Napoliten geleneğinin gerçek ikonlarını, tıpkı eskisi gibi hazırlanmış olarak tadın.",
+        "Napoliten geleneğinin gerçek ikonlarının tadına varın; tıpkı eskiden olduğu gibi hazırlanırlar.",
       classicItems: [
         { title: "Margherita Verace", desc: "Tartışmasız kraliçe. Basitlik mükemmelliğe dönüşür." },
-        { title: "Lezzetli Antipasti", desc: "Damağı hazırlamak için altın sarısı hafif kızartmalar." },
-        { title: "Ev Yapımı Tatlılar", desc: "Her sabah taze sfogliatelle ve sıcak pastiera." },
+        { title: "Lezzetli Antipasti", desc: "Damak hazırlığı için altın sarısı, hafif kızartmalar." },
+        { title: "Ev Yapımı Tatlılar", desc: "Her sabah sfogliatelle ve sıcak pastiera." },
       ],
       classicsCta: "Tüm menüyü gör",
       infoWhere: "Neredeyiz",
@@ -533,18 +557,19 @@ export const translations = {
       infoHoursVal: "Pzt - Paz\n11:00 - 24:00",
       infoReservations: "Rezervasyon",
       infoReservationsVal: "Hafta sonları önceden\nrezervasyonu tavsiye ederiz.",
-      testimonialsTitle: "Misafirlerimiz ne diyor",
+      testimonialsTitle: "Müşterilerimiz ne diyor",
       testimonialsSubtitle: "Sosyal medyadan gerçek yorumlar",
       reviewFacebook:
-        "Gerçek Napoli pizzası! Margherita muhteşemdi — hamur çok hafif ve havalı. Sıcak ortam, mükemmel hizmet. Tüm aileyle döneceğiz! ❤️",
+        "Gerçek Napoli pizzası! Margherita harikaydı — hamur çok hafif ve havalı. Sıcak ortam, mükemmel hizmet. Tüm aileyle geri geleceğiz! ❤️",
       reviewInstagram:
-        "Mükemmel ortam ve harika pizza 🍕 Diavola tam olması gerektiği gibi acıydı! Süper hızlı, samimi hizmet. %100 tavsiye — tereddüt etmeden gidin!",
+        "Mükemmel ortam ve harika pizza 🍕 Diavola tam olması gerektiği gibi acıydı! Süper hızlı, samimi hizmet. %100 tavsiye ediyoruz — tereddüt etmeden tekrar gelin!",
       reviewTikTok:
         "Burrata 😍 hiç bu kadar muhteşem bir şey yememiştim! Napoletana Nostra yeni bir hayran kazandı! Her pizza gerçek sevgiyle. En kısa sürede denemelisiniz!",
     },
     menu: {
       title: "Menümüz",
-      subtitle: "Taze ve doğal malzemelerle hazırlanan spesiyaliterimizden seçin.",
+      subtitle:
+        "Her an taze, doğal malzemelerle hazırlanan spesiyalitelerimiz arasından seçin.",
       all: "Tümü",
       noProducts: "Bu kategoride ürün bulunamadı.",
       addToOrder: "Siparişe Ekle",
@@ -552,7 +577,7 @@ export const translations = {
     },
     login: {
       titleRegister: "Hesap Oluştur",
-      titleLogin: "Tekrar Hoş Geldiniz",
+      titleLogin: "Hoş geldiniz",
       subtitleRegister: "Favorilerinizi kaydetmek için kayıt olun",
       subtitleLogin: "Favori pizzanızı sipariş etmek için giriş yapın",
       name: "Ad",
@@ -608,6 +633,13 @@ export const translations = {
 
   fr: {
     products: menuProductLabels,
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Pâtes",
+      Antipasti: "Antipasti",
+      Dolci: "Desserts",
+      Bevande: "Boissons",
+    },
     nav: {
       home: "Accueil",
       menu: "Menu",
@@ -624,23 +656,23 @@ export const translations = {
       heroBadge: "La Vraie Tradition Napolitaine",
       heroTitle: "L'Art de la Pizza, Fait avec le cœur.",
       heroSubtitle:
-        "Une expérience italienne authentique,\ncréée avec passion et tradition",
-      heroCta: "Découvrir le Menu",
+        "Une expérience italienne authentique,\ncréée avec passion et tradition.",
+      heroCta: "Voir le menu",
       storyTitle: "Une Histoire de Famille Depuis 1989",
       storyP1:
-        "Notre tradition commence par la passion de la cuisine italienne et se poursuit aujourd’hui avec le même engagement envers la qualité, l’authenticité et une expérience unique pour chaque invité.",
+        "Notre tradition naît de la passion pour la cuisine italienne et se poursuit aujourd'hui avec le même engagement envers la qualité, l'authenticité et une expérience distinctive pour chaque invité.",
       storyP2:
         "Chaque visite chez nous est un petit morceau de Naples, apporté à Prizren avec fierté.",
-      storyYears: "Ans d'Histoire",
+      storyYears: "Années d'histoire",
       storyFerment: "Fermentation",
-      storyQuote: "Le secret est dans les mains, le temps et le cœur.",
+      storyQuote: "Le secret est dans les mains, dans le temps et dans le cœur.",
       classicsTitle: "Nos Classiques",
       classicsSubtitle:
-        "Savourez les vraies icônes de la tradition napolitaine, préparées exactement comme autrefois.",
+        "Savourez les véritables icônes de la tradition napolitaine, préparées exactement comme autrefois.",
       classicItems: [
         { title: "Margherita Verace", desc: "La reine incontestée. La simplicité devient perfection." },
-        { title: "Antipasti Savoureux", desc: "Friture dorée et légère pour préparer le palais." },
-        { title: "Desserts Maison", desc: "Sfogliatelle fraîches et pastiera chaude chaque matin." },
+        { title: "Antipasti savoureux", desc: "Beignets dorés et légers pour préparer le palais." },
+        { title: "Desserts Maison", desc: "Sfogliatelle et pastiera chaudes chaque matin." },
       ],
       classicsCta: "Voir tout le menu",
       infoWhere: "Où Nous Sommes",
@@ -649,17 +681,18 @@ export const translations = {
       infoReservations: "Réservations",
       infoReservationsVal: "Nous recommandons de réserver\nle week-end.",
       testimonialsTitle: "Ce que disent nos clients",
-      testimonialsSubtitle: "Vrais avis de nos réseaux sociaux",
+      testimonialsSubtitle: "Vrais commentaires sur les réseaux sociaux",
       reviewFacebook:
-        "Vraie pizza napolitaine ! La Margherita était exceptionnelle — pâte si légère et aérée. Ambiance chaleureuse, service excellent. Nous reviendrons en famille ! ❤️",
+        "Vraie pizza napolitaine ! La Margherita était exceptionnelle — pâte si légère et aérienne. Ambiance chaleureuse, excellent service. Nous reviendrons en famille ! ❤️",
       reviewInstagram:
-        "Ambiance parfaite et pizza formidable 🍕 La Diavola était épicée comme il faut ! Service super rapide et sympathique. Je recommande à 100 % — n'hésitez pas à y retourner !",
+        "Ambiance parfaite et pizza merveilleuse 🍕 La Diavola était épicée comme il se doit ! Service super rapide et sympathique. Nous la recommandons à 100 % — revenez sans hésiter !",
       reviewTikTok:
-        "La burrata 😍 je n'avais jamais mangé quelque chose d'aussi merveilleux ! Napoletana Nostra m'a conquise ! Chaque pizza faite avec du vrai amour. Il faut la goûter au plus vite !",
+        "La burrata 😍 je n'avais jamais rien mangé d'aussi merveilleux ! Napoletana Nostra a conquis un nouveau fan ! Chaque pizza faite avec un véritable amour. Il faut la goûter le plus tôt possible !",
     },
     menu: {
       title: "Notre Menu",
-      subtitle: "Choisissez parmi nos spécialités préparées à la minute avec des ingrédients frais et authentiques.",
+      subtitle:
+        "Choisissez parmi nos spécialités, préparées fraîches à tout moment avec des ingrédients frais et naturels.",
       all: "Tous",
       noProducts: "Aucun produit trouvé dans cette catégorie.",
       addToOrder: "Ajouter à la Commande",
@@ -667,9 +700,9 @@ export const translations = {
     },
     login: {
       titleRegister: "Créer un Compte",
-      titleLogin: "Bon Retour",
+      titleLogin: "Bienvenue",
       subtitleRegister: "Inscrivez-vous pour sauvegarder vos favoris",
-      subtitleLogin: "Connectez-vous pour commander vos pizzas préférées",
+      subtitleLogin: "Connectez-vous pour commander votre pizza préférée",
       name: "Nom",
       email: "E-mail",
       password: "Mot de passe",
@@ -695,8 +728,8 @@ export const translations = {
     cart: {
       title: "Votre Commande",
       empty: "Votre panier est vide.",
-      count_one: "Vous avez 1 article dans votre panier.",
-      count_other: (n: number) => `Vous avez ${n} articles dans votre panier.`,
+      count_one: "Vous avez 1 produit dans votre panier.",
+      count_other: (n: number) => `Vous avez ${n} produits dans votre panier.`,
       notesLabel: "Notes spéciales / ingrédients à éviter",
       notesPlaceholder: "Ex. Sans oignon, bien cuit...",
       total: "Total",
@@ -723,6 +756,13 @@ export const translations = {
 
   bs: {
     products: menuProductLabels,
+    categories: {
+      Pizza: "Pizza",
+      Pasta: "Pasta",
+      Antipasti: "Predjela",
+      Dolci: "Deserti",
+      Bevande: "Pića",
+    },
     nav: {
       home: "Početna",
       menu: "Meni",
@@ -740,22 +780,22 @@ export const translations = {
       heroTitle: "Umijeće Pizze, Napravljene s Ljubavlju.",
       heroSubtitle:
         "Autentično talijansko iskustvo,\nstvoreno sa strašću i tradicijom",
-      heroCta: "Istraži Meni",
+      heroCta: "Pogledaj meni",
       storyTitle: "Porodična Priča od 1989",
       storyP1:
-        "Naša tradicija počinje ljubavlju prema italijanskoj kuhinji i nastavlja se i danas s istom posvećenošću kvalitetu, autentičnosti i posebnom iskustvu za svakog gosta.",
+        "Naša tradicija počinje strašću prema italijanskoj kuhinji i nastavlja se i danas s istom predanošću prema kvalitetu, autentičnosti i posebnom iskustvu za svakog gosta.",
       storyP2:
-        "Svaka posjeta nama je mali komadić Napulja, donesen u Prizren s ponosom.",
+        "Svaka posjeta kod nas je mali komadić Napulja, donesen u Prizren s ponosom.",
       storyYears: "Godina Istorije",
       storyFerment: "Fermentacija",
-      storyQuote: "Tajna je u rukama, vremenu i srcu.",
+      storyQuote: "Tajna je u rukama, u vremenu i u srcu.",
       classicsTitle: "Naši Klasici",
       classicsSubtitle:
-        "Uživajte u pravim ikonama napuljske tradicije, pripremljenim tačno kao nekada.",
+        "Uživajte u pravim ikonama napuljske tradicije, pripremljenim tačno kao nekad.",
       classicItems: [
         { title: "Margherita Verace", desc: "Neosporiva kraljica. Jednostavnost postaje savršenstvo." },
         { title: "Ukusni Antipasti", desc: "Zlatno i lagano prženo za pripremu nepca." },
-        { title: "Domaći Deserti", desc: "Svježe sfogliatelle i topla pastiera svako jutro." },
+        { title: "Domaći Deserti", desc: "Sfogliatelle i topla pastiera svako jutro." },
       ],
       classicsCta: "Pogledaj cijeli meni",
       infoWhere: "Gdje Se Nalazimo",
@@ -763,18 +803,19 @@ export const translations = {
       infoHoursVal: "Pon - Ned\n11:00 - 24:00",
       infoReservations: "Rezervacije",
       infoReservationsVal: "Preporučujemo rezervaciju\nvikendom.",
-      testimonialsTitle: "Što kažu naši gosti",
+      testimonialsTitle: "Šta kažu naši klijenti",
       testimonialsSubtitle: "Pravi komentari s društvenih mreža",
       reviewFacebook:
-        "Prava napolitanska pizza! Margherita je bila nevjerojatna — tijesto tako lahko i zračno. Topla atmosfera, odlična usluga. Vratit ćemo se cijelom porodicom! ❤️",
+        "Prava napolitanska pizza! Margherita je bila izvanredna — tijesto tako lahko i zračno. Topla atmosfera, odlična usluga. Vratićemo se cijelom porodicom! ❤️",
       reviewInstagram:
-        "Savršena atmosfera i fenomenalna pizza 🍕 Diavola je bila ljuta tačno kako treba! Super brza, ljubazna usluga. Preporuka 100 % — vratite se bez oklijevanja!",
+        "Savršena atmosfera i divna pizza 🍕 Diavola je bila ljuta tačno kako treba! Super brza, ljubazna usluga. Preporučujemo je u 100 % — vratite se bez oklijevanja!",
       reviewTikTok:
-        "Burrata 😍 nikad nisam jela nešto tako divno! Napoletana Nostra ima novog obožavatelja! Svaka pizza s pravom ljubavlju. Morate probati što prije!",
+        "Burrata 😍 nikad nisam jela ništa tako divno! Napoletana Nostra ima novog obožavatelja! Svaka pizza s pravom ljubavlju. Trebate je probati što prije!",
     },
     menu: {
       title: "Naš Meni",
-      subtitle: "Birajte između naših specijaliteta pripremljenih u trenutku sa svježim i pravim sastojcima.",
+      subtitle:
+        "Birajte među našim specijalitetima, pripremljenim svježim u svakom trenutku sa svježim i prirodnim sastojcima.",
       all: "Svi",
       noProducts: "Nema proizvoda u ovoj kategoriji.",
       addToOrder: "Dodaj u Narudžbu",
@@ -782,7 +823,7 @@ export const translations = {
     },
     login: {
       titleRegister: "Kreiraj Nalog",
-      titleLogin: "Dobro Došao Nazad",
+      titleLogin: "Dobrodošli",
       subtitleRegister: "Registrujte se da sačuvate omiljene",
       subtitleLogin: "Prijavite se da naručite omiljenu pizzu",
       name: "Ime",
