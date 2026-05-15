@@ -1,5 +1,5 @@
 // scripts/copy-images-to-docs.cjs
-// This script copies all images from public/images to docs/images for GitHub Pages deployment.
+// Copies public/images → docs/images, writes GitHub Pages SPA helpers (404.html, route shells).
 
 const fs = require('fs');
 const path = require('path');
@@ -56,6 +56,16 @@ function copyImages() {
 `;
   fs.writeFileSync(docs404, spa404, 'utf8');
   console.log('Wrote docs/404.html (GitHub Pages SPA redirect to index).');
+
+  // Static HTML shells so /repo/menu etc. return 200 (no document 404) on GitHub Pages.
+  const indexHtml = fs.readFileSync(docsIndex, 'utf8');
+  const spaRoutes = ['menu', 'login', 'favorites'];
+  for (const seg of spaRoutes) {
+    const routeDir = path.join(__dirname, '../docs', seg);
+    fs.mkdirSync(routeDir, { recursive: true });
+    fs.writeFileSync(path.join(routeDir, 'index.html'), indexHtml, 'utf8');
+    console.log(`Wrote docs/${seg}/index.html (SPA shell).`);
+  }
 }
 
 copyImages();

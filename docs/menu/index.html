@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages: 404.html redirects here with the real path in sessionStorage.
+      (function () {
+        try {
+          var s = window.sessionStorage.getItem("ghp-spa");
+          if (!s) return;
+          window.sessionStorage.removeItem("ghp-spa");
+          var cur = window.location.pathname + window.location.search + window.location.hash;
+          if (s !== cur) window.history.replaceState(null, "", s);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Napoletana Nostra Pizzeria</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // GitHub Pages SPA fallback without duplicate base-path prefixing.
+      (function () {
+        var repoBase = "/NapoletanaNostra-GranitBllaca";
+        var path = window.location.pathname;
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        if (!isGithubPages) return;
+
+        var isAssetPath = path.startsWith(repoBase + "/assets");
+        var alreadyUnderBase = path === repoBase || path.startsWith(repoBase + "/");
+        if (isAssetPath || alreadyUnderBase) return;
+
+        window.history.replaceState(
+          {},
+          "",
+          repoBase + (path.startsWith("/") ? path : "/" + path) + window.location.search + window.location.hash,
+        );
+      })();
+    </script>
+    <script type="module" crossorigin src="/NapoletanaNostra-GranitBllaca/assets/index-e00c9351.js"></script>
+    <link rel="stylesheet" href="/NapoletanaNostra-GranitBllaca/assets/index-c7e16efa.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
+</html>
