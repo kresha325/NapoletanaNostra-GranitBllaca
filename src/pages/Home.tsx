@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
-import { motion } from "framer-motion";
+import { animate, motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { InstagramReelsCarousel, type InstagramReel } from "@/components/social/InstagramReelsCarousel";
-import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-react";
+import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone, Volume2, Pause } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
 
@@ -16,6 +16,13 @@ const CLOSE_HOUR = 24;
 const publicImage = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 /** Sfond seksionit të testimonialeve — përdor foto të gjerë (p.sh. ≥1920px); skedar i vogël zmadhohet në ekran dhe duket i turbullt. */
 const TESTIMONIALS_BG = "images/testimonials-background.jpg";
+/** Fotot e seksionit të historisë (pizzaiolo). */
+const STORY_PIZZAIOLO_IMAGES = ["images/picaolo.webp", "images/pizzaiolo.png"] as const;
+/** Intervali i ndërrimit të fotove (5 sekonda). */
+const STORY_PIZZAIOLO_ROTATE_MS = 5 * 1000;
+
+/** Muzikë opsionale: `public/audio/music.mp3`. Luhet vetëm pas klikimit. */
+const AMBIENT_AUDIO = "audio/music.mp3";
 
 /** Shembull me video lokale (pa UI Instagram): shto videoSrc: "videos/emri.mp4" dhe opsionale posterSrc. */
 const INSTAGRAM_REELS: InstagramReel[] = [
@@ -84,12 +91,63 @@ const reserveLabels: Record<Language, { title: string; call: string; or: string 
 export default function Home() {
   const [, setLocation] = useLocation();
   const { t: tRaw, lang } = useLanguage();
+  const [storyImgIdx, setStoryImgIdx] = useState(0);
+  const storyStatsRef = useRef<HTMLDivElement>(null);
+  const storyStatsInView = useInView(storyStatsRef, { once: true, margin: "-80px" });
+  const storyYearsTarget = useMemo(() => new Date().getFullYear() - 1989, []);
+  const [statYears, setStatYears] = useState(0);
+  const [statHours, setStatHours] = useState(0);
+  const ambientRef = useRef<HTMLAudioElement | null>(null);
+  const [ambientPlaying, setAmbientPlaying] = useState(false);
   // Fallback i sigurt për t
   const t = tRaw || { products: {}, home: {} };
   const localizedProducts = (t.products as Record<string, { name?: string; description?: string }> | undefined) || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      setStoryImgIdx((i) => (i + 1) % STORY_PIZZAIOLO_IMAGES.length);
+    }, STORY_PIZZAIOLO_ROTATE_MS);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    if (!storyStatsInView) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setStatYears(storyYearsTarget);
+      setStatHours(48);
+      return;
+    }
+    const duration = 1.35;
+    const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+    const yCtrl = animate(0, storyYearsTarget, {
+      duration,
+      ease,
+      onUpdate: (v) => setStatYears(Math.round(v)),
+    });
+    const hCtrl = animate(0, 48, {
+      duration,
+      ease,
+      onUpdate: (v) => setStatHours(Math.round(v)),
+    });
+    return () => {
+      yCtrl.stop();
+      hCtrl.stop();
+    };
+  }, [storyStatsInView, storyYearsTarget]);
+
+  useEffect(() => {
+    return () => {
+      const el = ambientRef.current;
+      if (!el) return;
+      el.pause();
+      el.currentTime = 0;
+    };
   }, []);
 
   return (
@@ -169,14 +227,16 @@ export default function Home() {
                 <p>{t.home.storyP1}</p>
                 <p>{t.home.storyP2}</p>
               </div>
-              <div className="flex items-center gap-6 pt-4">
+              <div ref={storyStatsRef} className="flex items-center gap-6 pt-4">
                 <div className="flex flex-col">
-                  <span className="font-serif text-4xl font-bold text-primary">{`${new Date().getFullYear() - 1989}+`}</span>
+                  <span className="font-serif text-4xl font-bold text-primary tabular-nums">
+                    {statYears < storyYearsTarget ? statYears : `${storyYearsTarget}+`}
+                  </span>
                   <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground mt-1">{t.home.storyYears}</span>
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="flex flex-col">
-                  <span className="font-serif text-4xl font-bold text-primary">48h</span>
+                  <span className="font-serif text-4xl font-bold text-primary tabular-nums">{statHours}h</span>
                   <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground mt-1">{t.home.storyFerment}</span>
                 </div>
               </div>
@@ -190,7 +250,15 @@ export default function Home() {
               className="relative mb-16 md:mb-0"
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                <img src={`${import.meta.env.BASE_URL}images/pizzaiolo.png`} alt="Pizzaiolo at work" className="w-full h-full object-cover" />
+                <img
+                  src={publicImage(STORY_PIZZAIOLO_IMAGES[storyImgIdx])}
+                  alt="Pizzaiolo at work"
+                  className="w-full h-full object-cover transition-opacity duration-300"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = publicImage("images/pizzaiolo.png");
+                  }}
+                />
               </div>
               <div className="absolute z-10 max-w-[min(280px,calc(100%-1.5rem))] rounded-xl border border-border bg-card/95 p-4 shadow-xl backdrop-blur-sm sm:p-6 md:max-w-[240px] bottom-0 left-3 translate-y-12 sm:left-4 md:translate-y-0 md:-bottom-8 md:-left-8">
                 <ChefHat className="mb-3 h-7 w-7 text-primary sm:mb-4 sm:h-8 sm:w-8" />
@@ -458,6 +526,30 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <audio
+        ref={ambientRef}
+        src={publicImage(AMBIENT_AUDIO)}
+        preload="metadata"
+        loop
+        playsInline
+        onPlay={() => setAmbientPlaying(true)}
+        onPause={() => setAmbientPlaying(false)}
+      />
+      <button
+        type="button"
+        className="fixed bottom-5 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/95 text-foreground shadow-lg backdrop-blur-sm transition hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        aria-pressed={ambientPlaying}
+        aria-label={ambientPlaying ? "Ndalo muzikën" : "Luaj Buongiorno Italia"}
+        title="Buongiorno Italia"
+        onClick={() => {
+          const el = ambientRef.current;
+          if (!el) return;
+          if (el.paused) void el.play().catch(() => setAmbientPlaying(false));
+          else el.pause();
+        }}
+      >
+        {ambientPlaying ? <Pause className="h-5 w-5 shrink-0" aria-hidden /> : <Volume2 className="h-5 w-5 shrink-0" aria-hidden />}
+      </button>
     </div>
   );
 }
