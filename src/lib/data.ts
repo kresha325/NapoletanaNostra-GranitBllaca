@@ -157,7 +157,7 @@ export const menuData: Product[] = [
     key: "rucola",
     price: 9.9,
     category: "Pizza",
-    image: "images/rucola1.png",
+    image: "images/rucola.png",
   },
   {
     id: "p11",
@@ -178,14 +178,14 @@ export const menuData: Product[] = [
     key: "tartufina",
     price: 11.9,
     category: "Pizza",
-    image: "images/margherita.png",
+    image: "images/tartufina.png",
   },
   {
     id: "p14",
     key: "burratina",
     price: 12.9,
     category: "Pizza",
-    image: "images/margherita.png",
+    image: "images/burratina.png",
   },
 
   // ── DOLCI ──────────────────────────────────────────────────────────────────
