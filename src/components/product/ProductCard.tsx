@@ -63,7 +63,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
       )}
       onClick={onClick}
     >
-      <div className="relative flex h-72 w-full shrink-0 items-center justify-center overflow-hidden bg-white sm:h-80 md:h-[22rem]">
+      <div className="relative w-full shrink-0 bg-white px-4 py-5 sm:px-5 sm:py-6">
         <img
           src={
             product.image?.startsWith('http')
@@ -71,7 +71,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
               : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`
           }
           alt={getProductTranslation(product.key)?.name || product.key}
-          className="max-h-full max-w-full object-contain"
+          className="mx-auto block h-auto w-full object-contain"
           onError={(e) => {
             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
           }}

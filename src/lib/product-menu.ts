@@ -1,36 +1,110 @@
 /**
- * Emrat sipas menusë së printuar (Napoletana NOSTRA).
- * Përshkrimet bosh — plotësohen dhe përkthehen më vonë për çdo gjuhë në `translations.ts`
- * ose duke ndarë këtë skedar sipas gjuhës kur të jetë gati.
+ * Emrat dhe përbërësit sipas menusë së printuar (Napoletana NOSTRA) — 1:1 me menynë fizike.
  */
 export const menuProductLabels: Record<string, { name: string; description: string }> = {
-  bruschetta: { name: "BRUSCHETTA CLASSICA", description: "" },
-  "insalata-verde": { name: "INSALATA VERDE", description: "" },
-  "insalata-rucola": { name: "INSALATA RUCOLA", description: "" },
-  "insalata-caprese": { name: "INSALATA CAPRESE TRICOLORE", description: "" },
+  bruschetta: {
+    name: "BRUSCHETTA CLASSICA",
+    description: "DOMATE, ULLINJE, BORZILOK",
+  },
+  "insalata-verde": {
+    name: "INSALATA VERDE",
+    description: "MARULLE, QEPË, ULLINJ",
+  },
+  "insalata-rucola": {
+    name: "INSALATA RUCOLA",
+    description: "RUCOLA, DOMATINA, GRANA PADANO, ARRA, RRUSH I TERUR",
+  },
+  "insalata-caprese": {
+    name: "INSALATA CAPRESE TRICOLORE",
+    description: "DJATH MOZZARELLA, DOMATE, BORZILOK",
+  },
 
-  "rigatoni-arrabiata": { name: "RIGATONI ALL'ARRABBIATA", description: "" },
-  "linguine-scampi": { name: "LINGUINE CON SCAMPI", description: "" },
-  "spaghetti-aglio-olio": { name: "SPAGHETTI AGLIO, OLIO E PEPERONCINO", description: "" },
-  "linguine-pesto": { name: "LINGUINE AL PESTO GENOVESE", description: "" },
-  "spaghetti-bolognese": { name: "SPAGHETTI BOLOGNESE", description: "" },
-  "tortellini-quattro-formaggi": { name: "TORTELLINI QUATTRO FORMAGGI", description: "" },
-  "lasagne-casa": { name: "LASAGNE DELLA CASA", description: "" },
+  "rigatoni-arrabiata": {
+    name: "RIGATONI ALL'ARRABIATA",
+    description: "SALCE DOMATESH, SPEC DJEGES, BORZILOK",
+  },
+  "linguine-scampi": {
+    name: "LINGUINE CON SCAMPI",
+    description: "KARKALECA, BORZILOK",
+  },
+  "spaghetti-aglio-olio": {
+    name: "SPAGHETTI AGLIO, OLIO E PEPERONCINO",
+    description: "HUDHER, VAJ ULLIRI, SPEC DJEGES",
+  },
+  "linguine-pesto": {
+    name: "LINGUINE AL PESTO GENOVESE",
+    description: "SALCE PESTO, HUDHER, KREM",
+  },
+  "spaghetti-bolognese": {
+    name: "SPAGHETTI BOLOGNESE",
+    description: "SALCE BOLONJEZE, GRANA PADANO, BORZILOK",
+  },
+  "tortellini-quattro-formaggi": {
+    name: "TORTELLINI QUATTRO FORMAGGI",
+    description: "MOZZARELLA, GRANA PADANO, GORGONZOLA, DJATHE I BARDHE",
+  },
+  "lasagne-casa": {
+    name: "LASAGNE DELLA CASA",
+    description: "",
+  },
 
-  marinara: { name: "MARINARA", description: "" },
-  "margherita-classica": { name: "MARGHERITA CLASSICA", description: "" },
-  funghi: { name: "FUNGHI", description: "" },
-  "prosciutto-funghi": { name: "PROSCIUTTO E FUNGHI", description: "" },
-  diavola: { name: "DIAVOLA", description: "" },
-  "quattro-formaggi": { name: "QUATTRO FORMAGGI", description: "" },
-  napoli: { name: "NAPOLI", description: "" },
-  "tonno-cipolla": { name: "TONNO E CIPOLLA", description: "" },
-  primavera: { name: "PRIMAVERA", description: "" },
-  rucola: { name: "RUCOLA", description: "" },
-  capricciosa: { name: "CAPRICCIOSA", description: "" },
-  enrico: { name: "ENRICO", description: "" },
-  tartufina: { name: "TARTUFINA", description: "" },
-  burratina: { name: "BURRATINA", description: "" },
+  marinara: {
+    name: "MARINARA",
+    description: "SALCE DOMATESH, HUDHER, BORZILOK, VAJ ULLIRI, ORIGANO",
+  },
+  "margherita-classica": {
+    name: "MARGHERITA CLASSICA",
+    description: "SALCE DOMATESH, MOZZARELLA, BORZILOK, VAJ ULLIRI",
+  },
+  funghi: {
+    name: "FUNGHI",
+    description: "SALCE DOMATESH, MOZZARELLA, KERPUDHA, BORZILOK",
+  },
+  "prosciutto-funghi": {
+    name: "PROSCIUTTO E FUNGHI",
+    description: "SALCE DOMATESH, MOZZARELLA, PROSHUTE, KERPUDHA",
+  },
+  diavola: {
+    name: "DIAVOLA",
+    description: "SALCE DOMATESH, MOZZARELLA, SUXHUK DJEGES, SPEC, ULLINJ, BOZILOK",
+  },
+  "quattro-formaggi": {
+    name: "QUATTRO FORMAGGI",
+    description: "SALCE DOMATESH, MOZZARELLA, GRANA PADANO, GORGONZOLA, DJATHE I BARDHE",
+  },
+  napoli: {
+    name: "NAPOLI",
+    description: "SALCE DOMATESH, MOZZARELLA, PESHK ACUGE (E KRIPOSUR), KAPERI",
+  },
+  "tonno-cipolla": {
+    name: "TONNO E CIPOLLA",
+    description: "SALCE DOMATESH, MOZZARELLA, PESHK TUNA, QEPE",
+  },
+  primavera: {
+    name: "PRIMAVERA",
+    description:
+      "SALCE DOMATESH, MOZZARELLA, SPEC I KUQ JO DJEGES, KUNGULLESHE, PATELLXHAN I ZI, KERPUDHA, QEPE E KUQE, ULLINJ",
+  },
+  rucola: {
+    name: "RUCOLA",
+    description: "SALCE DOMATESH, MOZZARELLA, DOMATINA, PROSHUTE, RUCOLA, GRANA PADANO",
+  },
+  capricciosa: {
+    name: "CAPRICIOSA",
+    description: "SALCE DOMATESH, MOZZARELLA, PROSHUTE, ANGJINARE, KERPUDHA, ULLINJ",
+  },
+  enrico: {
+    name: "ENRICO",
+    description: "SALCE DOMATESH, MOZZARELLA, PROSHUTE, GORGONZOLA, DOMATINA, GRANA PADANO",
+  },
+  tartufina: {
+    name: "TARTUFINA",
+    description: "SALCE DOMATESH, MOZZARELLA, KEPURDHA, SALCE TARTUFI, VAJ ULLIRI, BORZILOK",
+  },
+  burratina: {
+    name: "BURRATINA",
+    description: "SALCE DOMATESH, MOZZARELLA, PROSHUTE, RUCOLA, GRANA PADANO BURRATINA",
+  },
 
   tiramisu: { name: "TIRAMISU", description: "" },
   "panna-cotta": { name: "PANNA COTTA", description: "" },
