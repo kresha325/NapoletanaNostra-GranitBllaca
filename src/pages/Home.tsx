@@ -21,33 +21,13 @@ const STORY_PIZZAIOLO_IMAGES = ["images/picaolo.webp", "images/pizzaiolo.png"] a
 /** Intervali i ndërrimit të fotove (5 sekonda). */
 const STORY_PIZZAIOLO_ROTATE_MS = 5 * 1000;
 
-/** Shembull me video lokale (pa UI Instagram): shto videoSrc: "videos/emri.mp4" dhe opsionale posterSrc. */
+/** Video lokale në `public/videos/` */
 const INSTAGRAM_REELS: InstagramReel[] = [
-  {
-    id: "deil6troq2s",
-    permalink: "https://www.instagram.com/reel/DEIL6troQ2s/",
-    label: "Reel i zgjedhur",
-  },
-  {
-    id: "c_pqkqoin38",
-    permalink: "https://www.instagram.com/reel/C_pqkqoIn38/",
-    label: "Reel i dyte",
-  },
-  {
-    id: "c_tg7hlo5l4",
-    permalink: "https://www.instagram.com/reel/C_TG7hlo5L4/",
-    label: "Reel i trete",
-  },
-  {
-    id: "c59bzcklco4",
-    permalink: "https://www.instagram.com/reel/C59BZcKLCo4/",
-    label: "Reel i katert",
-  },
-  {
-    id: "du_vjjvdb2m",
-    permalink: "https://www.instagram.com/reel/DU_vjjVDB2M/",
-    label: "Reel i peste",
-  },
+  { id: "reel-1", videoSrc: "videos/Video-146.mp4" },
+  { id: "reel-2", videoSrc: "videos/Video-282.mp4" },
+  { id: "reel-3", videoSrc: "videos/Video-374.mp4" },
+  { id: "reel-4", videoSrc: "videos/Video-573.mp4" },
+  { id: "reel-5", videoSrc: "videos/Video-691.mp4" },
 ];
 
 function getHoursStatus(lang: Language) {
@@ -257,16 +237,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Atmosfera/Instagram Carousel Section */}
-      <section className="bg-background">
-        <div className="container mx-auto px-4 md:px-6">
-          <InstagramReelsCarousel
-            reels={INSTAGRAM_REELS}
-            heading={t.home.atmosphereTitle || "Atmosfera që sjellim ne"}
-            subheading={t.home.atmosphereSubtitle || "Përjetoni magjinë e vërtetë të Napolit në Prizren."}
-          />
-        </div>
-      </section>
+      <InstagramReelsCarousel
+        reels={INSTAGRAM_REELS}
+        heading={t.home.atmosphereTitle || "Atmosfera që sjellim ne"}
+      />
 
       {/* Gallery Section */}
       <section className="py-10 md:py-16 bg-muted/10 border-b border-border/50">

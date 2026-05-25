@@ -40,7 +40,7 @@ export const translations = {
       atmosphereSubtitle: "Përjetoni magjinë e vërtetë të Napolit në Prizren.",
       storyFerment: "Fermentim",
       heroBadge: "Tradita e Vërtetë Napoletane",
-      heroTitle: "Arti i Picës, Bërë me Zemër.",
+      heroTitle: "Pizza napolitane në Prizren",
       heroSubtitle:
         "Një përvojë italiane autentike,\ne krijuar me pasion dhe traditë.",
       heroCta: "Shiko Menynë",
@@ -162,7 +162,7 @@ export const translations = {
       atmosphereTitle: "The atmosphere we bring",
       atmosphereSubtitle: "Experience the true magic of Naples in Prizren.",
       heroBadge: "The True Neapolitan Tradition",
-      heroTitle: "The Art of Pizza, Made with Heart.",
+      heroTitle: "Neapolitan pizza in Prizren",
       heroSubtitle:
         "An authentic Italian experience,\ncreated with passion and tradition.",
       heroCta: "View the Menu",
@@ -285,7 +285,7 @@ export const translations = {
       atmosphereTitle: "L'atmosfera che portiamo",
       atmosphereSubtitle: "Vivi la vera magia di Napoli a Prizren.",
       heroBadge: "La Vera Tradizione Napoletana",
-      heroTitle: "L'Arte della Pizza, Fatta col Cuore.",
+      heroTitle: "Pizza napoletana a Prizren",
       heroSubtitle:
         "Un'autentica esperienza italiana,\ncreata con passione e tradizione.",
       heroCta: "Vedi il menù",
@@ -408,7 +408,7 @@ export const translations = {
       atmosphereTitle: "Die Atmosphäre, die wir mitbringen",
       atmosphereSubtitle: "Erleben Sie den wahren Zauber Neapels in Prizren.",
       heroBadge: "Die Wahre Neapolitanische Tradition",
-      heroTitle: "Die Kunst der Pizza, Mit Herz Gemacht.",
+      heroTitle: "Neapolitanische Pizza in Prizren",
       heroSubtitle:
         "Ein authentisches italienisches Erlebnis,\ngeschaffen mit Leidenschaft und Tradition.",
       heroCta: "Speisekarte ansehen",
@@ -531,7 +531,7 @@ export const translations = {
       atmosphereTitle: "Getirdiğimiz atmosfer",
       atmosphereSubtitle: "Napoli'nin gerçek büyüsünü Prizren'de yaşayın.",
       heroBadge: "Gerçek Napoliten Geleneği",
-      heroTitle: "Pizzanın Sanatı, Yürekten Yapılmış.",
+      heroTitle: "Prizren'de Napoliten pizza",
       heroSubtitle:
         "Otantik bir İtalyan deneyimi,\ntutku ve gelenekle yaratılmış.",
       heroCta: "Menüyü Görüntüle",
@@ -654,7 +654,7 @@ export const translations = {
       atmosphereTitle: "L'atmosphère que nous apportons",
       atmosphereSubtitle: "Vivez la véritable magie de Naples à Prizren.",
       heroBadge: "La Vraie Tradition Napolitaine",
-      heroTitle: "L'Art de la Pizza, Fait avec le cœur.",
+      heroTitle: "Pizza napolitaine à Prizren",
       heroSubtitle:
         "Une expérience italienne authentique,\ncréée avec passion et tradition.",
       heroCta: "Voir le menu",
@@ -777,7 +777,7 @@ export const translations = {
       atmosphereTitle: "Atmosfera koju donosimo",
       atmosphereSubtitle: "Doživite pravu magiju Napulja u Prizrenu.",
       heroBadge: "Prava Napuljska Tradicija",
-      heroTitle: "Umijeće Pizze, Napravljene s Ljubavlju.",
+      heroTitle: "Napuljska pizza u Prizrenu",
       heroSubtitle:
         "Autentično talijansko iskustvo,\nstvoreno sa strašću i tradicijom",
       heroCta: "Pogledaj meni",

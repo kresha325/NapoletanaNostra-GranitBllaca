@@ -6,6 +6,25 @@ const path = require('path');
 
 const srcDir = path.join(__dirname, '../public/images');
 const destDir = path.join(__dirname, '../docs/images');
+const videosSrcDir = path.join(__dirname, '../public/videos');
+const videosDestDir = path.join(__dirname, '../docs/videos');
+
+function copyVideos() {
+  if (!fs.existsSync(videosSrcDir)) {
+    return;
+  }
+  if (!fs.existsSync(videosDestDir)) {
+    fs.mkdirSync(videosDestDir, { recursive: true });
+  }
+  const files = fs.readdirSync(videosSrcDir).filter((f) => f.endsWith('.mp4') || f.endsWith('.webm'));
+  files.forEach((file) => {
+    fs.copyFileSync(path.join(videosSrcDir, file), path.join(videosDestDir, file));
+    console.log(`Copied video ${file}`);
+  });
+  if (files.length) {
+    console.log('All videos copied to docs/videos.');
+  }
+}
 
 function copyImages() {
   if (!fs.existsSync(srcDir)) {
@@ -23,6 +42,7 @@ function copyImages() {
     console.log(`Copied ${file}`);
   });
   console.log('All images copied to docs/images.');
+  copyVideos();
 
   const docsIndex = path.join(__dirname, '../docs/index.html');
   const docs404 = path.join(__dirname, '../docs/404.html');
