@@ -194,14 +194,14 @@ export const menuData: Product[] = [
     key: "tiramisu",
     price: 2.9,
     category: "Dolci",
-    image: "images/sfogliatella.png",
+    image: "images/tiramisu.jpg",
   },
   {
     id: "d2",
     key: "panna-cotta",
     price: 2.9,
     category: "Dolci",
-    image: "images/sfogliatella.png",
+    image: "images/panna-cotta.jpg",
   },
 
   // ── BEVANDE ────────────────────────────────────────────────────────────────

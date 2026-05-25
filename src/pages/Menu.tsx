@@ -191,7 +191,7 @@ export default function Menu() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <div className="relative overflow-hidden border-b py-16 md:py-24">
         <div className="absolute inset-0">
