@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef, useState } from "react";
+import { Play, Volume2, VolumeX } from "lucide-react";
 
 export type InstagramReel = {
   id: string;
@@ -26,27 +27,8 @@ function resolvePublicMediaUrl(pathOrUrl: string): string {
 
 function GalleryVideo({ reel }: { reel: InstagramReel }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = wrapRef.current;
-    const video = videoRef.current;
-    if (!el || !video || !reel.videoSrc) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => undefined);
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.45 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [reel.videoSrc]);
+  const [soundOn, setSoundOn] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   if (!reel.videoSrc) return null;
 
@@ -56,14 +38,28 @@ function GalleryVideo({ reel }: { reel: InstagramReel }) {
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) video.play().catch(() => undefined);
-    else video.pause();
+    if (video.paused) {
+      video.muted = !soundOn;
+      video.play().catch(() => undefined);
+      setPlaying(true);
+    } else {
+      video.pause();
+      setPlaying(false);
+    }
+  };
+
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !soundOn;
+    setSoundOn(next);
+    video.muted = !next;
   };
 
   return (
     <div
-      ref={wrapRef}
-      className="min-w-[260px] max-w-[320px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border-0 shadow-lg"
+      className="relative min-w-[260px] max-w-[320px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border-0 shadow-lg"
       onClick={togglePlay}
       role="button"
       tabIndex={0}
@@ -81,10 +77,30 @@ function GalleryVideo({ reel }: { reel: InstagramReel }) {
         poster={poster}
         className="h-96 w-full border-0 object-cover"
         playsInline
-        muted
+        muted={!soundOn}
         loop
         preload="metadata"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
       />
+      {!playing ? (
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center bg-black/25"
+          aria-hidden
+        >
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-foreground shadow-md">
+            <Play className="ml-1 h-7 w-7 fill-current" />
+          </span>
+        </div>
+      ) : null}
+      <button
+        type="button"
+        onClick={toggleSound}
+        className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75"
+        aria-label={soundOn ? "Çaktivizo zërin" : "Aktivizo zërin"}
+      >
+        {soundOn ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+      </button>
     </div>
   );
 }

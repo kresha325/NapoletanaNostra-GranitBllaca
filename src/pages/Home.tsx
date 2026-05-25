@@ -14,6 +14,7 @@ const OPEN_HOUR = 11;
 const CLOSE_HOUR = 24;
 
 const publicImage = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+const HERO_BG = "images/hero-oven.png";
 /** Sfond seksionit të testimonialeve — përdor foto të gjerë (p.sh. ≥1920px); skedar i vogël zmadhohet në ekran dhe duket i turbullt. */
 const TESTIMONIALS_BG = "images/testimonials-background.jpg";
 /** Fotot e seksionit të historisë (pizzaiolo). */
@@ -24,10 +25,10 @@ const STORY_PIZZAIOLO_ROTATE_MS = 5 * 1000;
 /** Video lokale në `public/videos/` */
 const INSTAGRAM_REELS: InstagramReel[] = [
   { id: "reel-1", videoSrc: "videos/Video-146.mp4" },
-  { id: "reel-2", videoSrc: "videos/Video-282.mp4" },
-  { id: "reel-3", videoSrc: "videos/Video-374.mp4" },
-  { id: "reel-4", videoSrc: "videos/Video-573.mp4" },
-  { id: "reel-5", videoSrc: "videos/Video-691.mp4" },
+  { id: "reel-2", videoSrc: "videos/Video-374.mp4" },
+  { id: "reel-3", videoSrc: "videos/Video-573.mp4" },
+  { id: "reel-4", videoSrc: "videos/Video-691.mp4" },
+  { id: "reel-5", videoSrc: "videos/Video-282.mp4" },
 ];
 
 function getHoursStatus(lang: Language) {
@@ -125,8 +126,8 @@ export default function Home() {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={`${import.meta.env.BASE_URL}images/hero.png`}
-          alt="Napoletana Nostra"
+          src={publicImage(HERO_BG)}
+          alt="Napoletana Nostra — furrë napolitane"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
