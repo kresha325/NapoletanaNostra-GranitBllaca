@@ -49,6 +49,8 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
   };
 
   const isFav = user ? isFavorite(product.id) : false;
+  const productName = getProductTranslation(product.key)?.name || product.key;
+  const productDescription = getProductTranslation(product.key)?.description || "";
 
   return (
     <motion.div
@@ -57,21 +59,21 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className={cn(
-        "group relative flex flex-col bg-card rounded-xl overflow-hidden border border-border transition-all duration-300",
+        "group relative flex h-full flex-col bg-card rounded-xl overflow-hidden border border-border transition-all duration-300",
         onClick && "cursor-pointer",
         isMobile ? "" : "hover:shadow-lg"
       )}
       onClick={onClick}
     >
-      <div className="relative w-full shrink-0 bg-white px-4 py-5 sm:px-5 sm:py-6">
+      <div className="relative flex h-56 w-full shrink-0 items-center justify-center bg-white px-4 sm:h-60 md:h-64">
         <img
           src={
             product.image?.startsWith('http')
               ? product.image
               : `${import.meta.env.BASE_URL}${product.image || "images/margherita.png"}`
           }
-          alt={getProductTranslation(product.key)?.name || product.key}
-          className="mx-auto block h-auto w-full object-contain"
+          alt={productName}
+          className="max-h-full max-w-full object-contain"
           onError={(e) => {
             e.currentTarget.src = `${import.meta.env.BASE_URL}images/margherita.png`;
           }}
@@ -98,17 +100,19 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function
         </button>
       </div>
 
-      <div className="flex flex-col flex-1 p-5 space-y-4">
-        <div className="flex justify-between items-start gap-4">
-          <h3 className="font-serif text-xl font-bold leading-tight">{getProductTranslation(product.key)?.name || product.key}</h3>
-          <span className="font-serif text-lg font-bold text-primary whitespace-nowrap">
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-3 flex min-h-[4.5rem] items-start justify-between gap-3">
+          <h3 className="line-clamp-3 font-serif text-xl font-bold leading-tight">{productName}</h3>
+          <span className="shrink-0 font-serif text-lg font-bold text-primary whitespace-nowrap">
             €{product.price.toFixed(2)}
           </span>
         </div>
 
-        <p className="text-muted-foreground text-sm flex-1 leading-relaxed">
-          {getProductTranslation(product.key)?.description || ""}
-        </p>
+        {productDescription ? (
+          <p className="mb-4 line-clamp-3 min-h-[3.75rem] text-sm leading-relaxed text-muted-foreground">
+            {productDescription}
+          </p>
+        ) : null}
 
         <Button
           onClick={(e) => {

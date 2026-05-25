@@ -91,7 +91,7 @@ const DRINK_MODAL_TITLES: Record<Language, string> = {
 
 const DRINK_SECTION_KEYS: Record<DrinkSectionKey, string[]> = {
   "soft-drinks": ["coca-cola", "coca-cola-zero", "fanta", "sprite", "schweppes", "tonic", "ice-tea", "juices"],
-  waters: ["water-025", "water-075", "mineral-water-025", "mineral-water-075"],
+  waters: ["water-075", "mineral-water-075", "water-025", "mineral-water-025"],
   beers: [
     "peja-draught-03",
     "peja-draught-05",
@@ -267,7 +267,7 @@ export default function Menu() {
 
                 <motion.div
                   layout
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+                  className="grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
                 >
                   <AnimatePresence mode="popLayout">
                     {section.products.map((product, index) => (
@@ -285,7 +285,7 @@ export default function Menu() {
         ) : (
           <motion.div
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+            className="grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, index) => (
