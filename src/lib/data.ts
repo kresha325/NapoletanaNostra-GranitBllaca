@@ -34,7 +34,7 @@ export const menuData: Product[] = [
     key: "insalata-caprese",
     price: 4.8,
     category: "Antipasti",
-    image: "images/frittura.png",
+    image: "images/galleri-3.jpg",
   },
 
   // ── PASTA ──────────────────────────────────────────────────────────────────
