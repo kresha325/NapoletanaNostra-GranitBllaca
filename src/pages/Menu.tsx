@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { usePageSeo } from "@/lib/seo";
 
 type CategoryKey = "" | Product["category"];
 type DrinkSectionKey = "soft-drinks" | "waters" | "beers" | "vino-bianco" | "vino-rosso" | "aperitivo";
@@ -144,6 +145,13 @@ export default function Menu() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  usePageSeo({
+    title: "Menyja — Pizza napolitane Prizren | Napoletana Nostra",
+    description:
+      "Menyja e plotë: pizza napolitane, pasta, antipasti, ëmbëlsira dhe pije në Napoletana Nostra, Prizren. Çmime dhe foto për çdo specialitet.",
+    path: "/menu",
+  });
 
   const filteredProducts = menuData.filter((product) =>
     activeCategory === "" ? true : product.category === activeCategory

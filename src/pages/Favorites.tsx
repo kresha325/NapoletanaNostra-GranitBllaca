@@ -8,12 +8,20 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { HeartCrack } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
+import { usePageSeo } from "@/lib/seo";
 
 export default function Favorites() {
   const [, setLocation] = useLocation();
   const { user } = useAuth();
   const { favorites } = useFavorites();
   const { t } = useLanguage();
+
+  usePageSeo({
+    title: "Të preferuarat | Napoletana Nostra",
+    description: "Pjatat e ruajtura nga menuja e Napoletana Nostra, Prizren.",
+    path: "/favorites",
+    noindex: true,
+  });
 
   useEffect(() => {
     if (!user) {

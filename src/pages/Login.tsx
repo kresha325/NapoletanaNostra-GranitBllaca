@@ -7,11 +7,19 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
+import { usePageSeo } from "@/lib/seo";
 
 export default function Login() {
   const [, setLocation] = useLocation();
   const { login } = useAuth();
   const { t } = useLanguage();
+
+  usePageSeo({
+    title: "Hyrje | Napoletana Nostra",
+    description: "Hyr ose regjistrohu për të ruajtur të preferuarat në Napoletana Nostra, Prizren.",
+    path: "/login",
+    noindex: true,
+  });
 
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");

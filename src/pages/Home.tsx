@@ -7,6 +7,7 @@ import { InstagramReelsCarousel, type InstagramReel } from "@/components/social/
 import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
+import { usePageSeo } from "@/lib/seo";
 
 const PHONE = "+38349976100";
 const PHONE_DISPLAY = "+383 49 976 100";
@@ -78,6 +79,13 @@ export default function Home() {
   // Fallback i sigurt për t
   const t = tRaw || { products: {}, home: {} };
   const localizedProducts = (t.products as Record<string, { name?: string; description?: string }> | undefined) || {};
+
+  usePageSeo({
+    title: "Pizza napolitane Prizren | Napoletana Nostra",
+    description:
+      "Pizza napolitane në Prizren — Napoletana Nostra. Pizzeria me brumë të fermentuar, pasta, antipasti dhe specialitete italiane. Shiko menynë dhe vizitoni ne.",
+    path: "",
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
