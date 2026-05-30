@@ -247,6 +247,42 @@ export default function Menu() {
     products: filteredProducts.filter((product) => getDrinkSectionKey(product) === section),
   })).filter((section) => section.products.length > 0);
 
+  const allGroupedDrinkProducts = DRINK_SECTION_ORDER.map((section) => ({
+    key: section,
+    label: getDrinkSectionLabel(section),
+    layout: DRINK_SECTION_LAYOUT[section],
+    products: menuData.filter(
+      (product) => product.category === "Bevande" && getDrinkSectionKey(product) === section
+    ),
+  })).filter((section) => section.products.length > 0);
+
+  const renderDrinkSections = (
+    sections: Array<{
+      key: DrinkSectionKey;
+      label: string;
+      layout: "two-column" | "single-column";
+      products: Product[];
+    }>
+  ) => (
+    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:gap-12 lg:grid-cols-2">
+      {sections.map((section) => (
+        <div
+          key={section.key}
+          ref={(element) => {
+            drinkSectionRefs.current[section.key] = element;
+          }}
+          className="scroll-mt-24"
+        >
+          <MenuDrinkSection
+            title={section.label}
+            products={section.products}
+            layout={section.layout}
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   useEffect(() => {
     if (activeCategory !== "Bevande" || !pendingDrinkSection) {
       return;
@@ -353,48 +389,45 @@ export default function Menu() {
         </div>
 
         {isDrinkView ? (
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:gap-12 lg:grid-cols-2">
-            {groupedDrinkProducts.map((section) => (
-              <div
-                key={section.key}
-                ref={(element) => {
-                  drinkSectionRefs.current[section.key] = element;
-                }}
-                className="scroll-mt-24"
-              >
-                <MenuDrinkSection
-                  title={section.label}
-                  products={section.products}
-                  layout={section.layout}
-                />
-              </div>
-            ))}
-          </div>
+          renderDrinkSections(groupedDrinkProducts)
         ) : activeCategory === "" ? (
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-y-10 md:gap-y-12 lg:grid-cols-2 lg:gap-x-6">
-            <div className="flex flex-col gap-10 md:gap-12">
-              {groupedFoodSections
-                .filter((section) => FOOD_LEFT_COLUMN.includes(section.category))
-                .map((section) => (
-                  <MenuFoodSection
-                    key={section.category}
-                    title={section.title}
-                    products={section.products}
-                  />
-                ))}
+          <>
+            <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-y-10 md:gap-y-12 lg:grid-cols-2 lg:gap-x-6">
+              <div className="flex flex-col gap-10 md:gap-12">
+                {groupedFoodSections
+                  .filter((section) => FOOD_LEFT_COLUMN.includes(section.category))
+                  .map((section) => (
+                    <MenuFoodSection
+                      key={section.category}
+                      title={section.title}
+                      products={section.products}
+                    />
+                  ))}
+              </div>
+              <div className="flex flex-col gap-10 md:gap-12">
+                {groupedFoodSections
+                  .filter((section) => FOOD_RIGHT_COLUMN.includes(section.category))
+                  .map((section) => (
+                    <MenuFoodSection
+                      key={section.category}
+                      title={section.title}
+                      products={section.products}
+                    />
+                  ))}
+              </div>
             </div>
-            <div className="flex flex-col gap-10 md:gap-12">
-              {groupedFoodSections
-                .filter((section) => FOOD_RIGHT_COLUMN.includes(section.category))
-                .map((section) => (
-                  <MenuFoodSection
-                    key={section.category}
-                    title={section.title}
-                    products={section.products}
-                  />
-                ))}
-            </div>
-          </div>
+
+            {allGroupedDrinkProducts.length > 0 ? (
+              <div
+                className="relative left-1/2 mt-10 w-screen max-w-[100vw] -translate-x-1/2 px-3 py-10 transition-colors duration-300 md:mt-12 md:py-14"
+                style={{ backgroundColor: MENU_DRINK.bg }}
+              >
+                <div className="mx-auto max-w-6xl md:px-3">
+                  {renderDrinkSections(allGroupedDrinkProducts)}
+                </div>
+              </div>
+            ) : null}
+          </>
         ) : (
           <div className="mx-auto flex max-w-3xl flex-col gap-10 md:gap-12">
             {groupedFoodSections.map((section) => (
