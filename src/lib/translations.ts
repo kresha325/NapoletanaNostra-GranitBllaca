@@ -1,5 +1,10 @@
 
-import { menuProductLabels } from "./product-menu";
+import { getMenuProductLabels } from "./product-menu-i18n";
+import {
+  menuDrinkModalTitlesByLang,
+  menuDrinkSectionTitlesByLang,
+  menuFoodSectionTitlesByLang,
+} from "./menu-section-titles";
 
 export type Language = "sq" | "en" | "it" | "de" | "tr" | "fr" | "bs";
 
@@ -17,7 +22,7 @@ export type TranslationKeys = typeof translations.sq;
 
 export const translations = {
   sq: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("sq"),
     categories: {
       Pizza: "Pica",
       Pasta: "Pasta",
@@ -74,13 +79,16 @@ export const translations = {
         "Burrata 😍 nuk kisha ngrënë kurrë diçka kaq të mrekullueshme! Napoletana Nostra ka bërë fan të ri! Çdo pizza e bërë me dashuri të vërtetë. Duhet ta provoni sa më shpejt!",
     },
     menu: {
-      title: "Menyja Jonë",
+      title: "Meny",
       subtitle:
         "Zgjidhni ndër specialitetet tona të përgatitura çdo çast me përbërës të freskët dhe të natyrshëm.",
       all: "Të gjitha",
       noProducts: "Asnjë produkt nuk u gjet në këtë kategori.",
       addToOrder: "Shto në Porosi",
       addedToCart: "u shtua në shportë",
+      foodSections: menuFoodSectionTitlesByLang.sq,
+      drinkSections: menuDrinkSectionTitlesByLang.sq,
+      drinkModalTitle: menuDrinkModalTitlesByLang.sq,
     },
     login: {
       titleRegister: "Krijo Llogari",
@@ -140,7 +148,7 @@ export const translations = {
   },
 
   en: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("en"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
@@ -198,13 +206,16 @@ export const translations = {
         "The burrata 😍 I had never eaten anything so wonderful! Napoletana Nostra has made a new fan! Every pizza made with true love. You should try it as soon as possible!",
     },
     menu: {
-      title: "Our Menu",
+      title: "Menu",
       subtitle:
         "Choose among our specialties, prepared fresh at any moment with fresh, natural ingredients.",
       all: "All",
       noProducts: "No products found in this category.",
       addToOrder: "Add to Order",
       addedToCart: "added to cart",
+      foodSections: menuFoodSectionTitlesByLang.en,
+      drinkSections: menuDrinkSectionTitlesByLang.en,
+      drinkModalTitle: menuDrinkModalTitlesByLang.en,
     },
     login: {
       titleRegister: "Create an Account",
@@ -263,7 +274,7 @@ export const translations = {
   },
 
   it: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("it"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
@@ -321,13 +332,16 @@ export const translations = {
         "La burrata 😍 non avevo mai mangiato nulla di così meraviglioso! Napoletana Nostra ha conquistato un nuovo fan! Ogni pizza fatta con vero amore. Dovete provarla il prima possibile!",
     },
     menu: {
-      title: "Il Nostro Menù",
+      title: "Menù",
       subtitle:
         "Scegli tra le nostre specialità, preparate fresche in ogni momento con ingredienti freschi e naturali.",
       all: "Tutti",
       noProducts: "Nessun prodotto trovato in questa categoria.",
       addToOrder: "Aggiungi all'Ordine",
       addedToCart: "aggiunto al carrello",
+      foodSections: menuFoodSectionTitlesByLang.it,
+      drinkSections: menuDrinkSectionTitlesByLang.it,
+      drinkModalTitle: menuDrinkModalTitlesByLang.it,
     },
     login: {
       titleRegister: "Crea un Account",
@@ -386,7 +400,7 @@ export const translations = {
   },
 
   de: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("de"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
@@ -444,13 +458,16 @@ export const translations = {
         "Die Burrata 😍 ich hatte noch nie etwas so Wunderbares gegessen! Napoletana Nostra hat einen neuen Fan! Jede Pizza mit echter Liebe gemacht. Ihr solltet sie so bald wie möglich probieren!",
     },
     menu: {
-      title: "Unsere Speisekarte",
+      title: "Speisekarte",
       subtitle:
         "Wählen Sie aus unseren Spezialitäten, frisch in jedem Moment mit frischen, natürlichen Zutaten zubereitet.",
       all: "Alle",
       noProducts: "Keine Produkte in dieser Kategorie gefunden.",
       addToOrder: "Zur Bestellung Hinzufügen",
       addedToCart: "zum Warenkorb hinzugefügt",
+      foodSections: menuFoodSectionTitlesByLang.de,
+      drinkSections: menuDrinkSectionTitlesByLang.de,
+      drinkModalTitle: menuDrinkModalTitlesByLang.de,
     },
     login: {
       titleRegister: "Konto Erstellen",
@@ -509,7 +526,7 @@ export const translations = {
   },
 
   tr: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("tr"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Makarna",
@@ -567,13 +584,16 @@ export const translations = {
         "Burrata 😍 hiç bu kadar muhteşem bir şey yememiştim! Napoletana Nostra yeni bir hayran kazandı! Her pizza gerçek sevgiyle. En kısa sürede denemelisiniz!",
     },
     menu: {
-      title: "Menümüz",
+      title: "Menü",
       subtitle:
         "Her an taze, doğal malzemelerle hazırlanan spesiyalitelerimiz arasından seçin.",
       all: "Tümü",
       noProducts: "Bu kategoride ürün bulunamadı.",
       addToOrder: "Siparişe Ekle",
       addedToCart: "sepete eklendi",
+      foodSections: menuFoodSectionTitlesByLang.tr,
+      drinkSections: menuDrinkSectionTitlesByLang.tr,
+      drinkModalTitle: menuDrinkModalTitlesByLang.tr,
     },
     login: {
       titleRegister: "Hesap Oluştur",
@@ -632,7 +652,7 @@ export const translations = {
   },
 
   fr: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("fr"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Pâtes",
@@ -690,13 +710,16 @@ export const translations = {
         "La burrata 😍 je n'avais jamais rien mangé d'aussi merveilleux ! Napoletana Nostra a conquis un nouveau fan ! Chaque pizza faite avec un véritable amour. Il faut la goûter le plus tôt possible !",
     },
     menu: {
-      title: "Notre Menu",
+      title: "Menu",
       subtitle:
         "Choisissez parmi nos spécialités, préparées fraîches à tout moment avec des ingrédients frais et naturels.",
       all: "Tous",
       noProducts: "Aucun produit trouvé dans cette catégorie.",
       addToOrder: "Ajouter à la Commande",
       addedToCart: "ajouté au panier",
+      foodSections: menuFoodSectionTitlesByLang.fr,
+      drinkSections: menuDrinkSectionTitlesByLang.fr,
+      drinkModalTitle: menuDrinkModalTitlesByLang.fr,
     },
     login: {
       titleRegister: "Créer un Compte",
@@ -755,7 +778,7 @@ export const translations = {
   },
 
   bs: {
-    products: menuProductLabels,
+    products: getMenuProductLabels("bs"),
     categories: {
       Pizza: "Pizza",
       Pasta: "Pasta",
@@ -813,13 +836,16 @@ export const translations = {
         "Burrata 😍 nikad nisam jela ništa tako divno! Napoletana Nostra ima novog obožavatelja! Svaka pizza s pravom ljubavlju. Trebate je probati što prije!",
     },
     menu: {
-      title: "Naš Meni",
+      title: "Meni",
       subtitle:
         "Birajte među našim specijalitetima, pripremljenim svježim u svakom trenutku sa svježim i prirodnim sastojcima.",
       all: "Svi",
       noProducts: "Nema proizvoda u ovoj kategoriji.",
       addToOrder: "Dodaj u Narudžbu",
       addedToCart: "dodano u košaricu",
+      foodSections: menuFoodSectionTitlesByLang.bs,
+      drinkSections: menuDrinkSectionTitlesByLang.bs,
+      drinkModalTitle: menuDrinkModalTitlesByLang.bs,
     },
     login: {
       titleRegister: "Kreiraj Nalog",

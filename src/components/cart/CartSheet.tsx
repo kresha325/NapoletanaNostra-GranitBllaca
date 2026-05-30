@@ -112,42 +112,37 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
               <ScrollArea className="flex-1 px-6">
                 <div className="flex flex-col gap-6 py-6">
                   {cart.map((item) => (
-                    <div key={item.id} className="flex gap-4">
-                      <div className="h-20 w-20 rounded-md overflow-hidden bg-muted flex-shrink-0">
-                        <img src={`${import.meta.env.BASE_URL}${item.image}`} alt={getCartItemTitle(item.key)} className="w-full h-full object-cover" />
+                    <div key={item.id} className="flex flex-col flex-1">
+                      <div className="flex justify-between items-start">
+                        <h4 className="font-medium text-sm leading-tight">{getCartItemTitle(item.key)}</h4>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-muted-foreground hover:text-destructive transition-colors p-1"
+                          aria-label="Remove from cart"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
-                      <div className="flex flex-col flex-1">
-                        <div className="flex justify-between items-start">
-                          <h4 className="font-medium text-sm leading-tight">{getCartItemTitle(item.key)}</h4>
+                      <p className="text-primary font-medium text-sm mt-1">€{item.price.toFixed(2)}</p>
+                      <div className="flex items-center justify-between mt-auto pt-2">
+                        <div className="flex items-center border rounded-md">
                           <button
-                            onClick={() => removeFromCart(item.id)}
-                            className="text-muted-foreground hover:text-destructive transition-colors p-1"
-                            aria-label="Remove from cart"
+                            className="p-1 hover:bg-muted transition-colors"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            aria-label="Decrease quantity"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                          <button
+                            className="p-1 hover:bg-muted transition-colors"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="w-3 h-3" />
                           </button>
                         </div>
-                        <p className="text-primary font-medium text-sm mt-1">€{item.price.toFixed(2)}</p>
-                        <div className="flex items-center justify-between mt-auto pt-2">
-                          <div className="flex items-center border rounded-md">
-                            <button
-                              className="p-1 hover:bg-muted transition-colors"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              aria-label="Decrease quantity"
-                            >
-                              <Minus className="w-3 h-3" />
-                            </button>
-                            <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                            <button
-                              className="p-1 hover:bg-muted transition-colors"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              aria-label="Increase quantity"
-                            >
-                              <Plus className="w-3 h-3" />
-                            </button>
-                          </div>
-                          <p className="font-bold text-sm">€{(item.price * item.quantity).toFixed(2)}</p>
-                        </div>
+                        <p className="font-bold text-sm">€{(item.price * item.quantity).toFixed(2)}</p>
                       </div>
                     </div>
                   ))}

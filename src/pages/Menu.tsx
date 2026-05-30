@@ -3,7 +3,6 @@ import { menuData, type Product } from "@/lib/data";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
-import type { Language } from "@/lib/translations";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { usePageSeo } from "@/lib/seo";
 import { MenuFoodSection } from "@/components/menu/MenuFoodSection";
@@ -36,114 +35,6 @@ const DRINK_SECTION_LAYOUT: Record<DrinkSectionKey, "two-column" | "single-colum
   "vino-bianco": "two-column",
   "vino-rosso": "two-column",
   aperitivo: "single-column",
-};
-
-const FOOD_SECTION_TITLES: Record<FoodCategory, Record<Language, string>> = {
-  Antipasti: {
-    sq: "ANTIPASTI",
-    en: "ANTIPASTI",
-    it: "ANTIPASTI",
-    de: "ANTIPASTI",
-    tr: "ANTIPASTI",
-    fr: "ANTIPASTI",
-    bs: "ANTIPASTI",
-  },
-  Pasta: {
-    sq: "LA NOSTRA PASTA",
-    en: "LA NOSTRA PASTA",
-    it: "LA NOSTRA PASTA",
-    de: "LA NOSTRA PASTA",
-    tr: "LA NOSTRA PASTA",
-    fr: "LA NOSTRA PASTA",
-    bs: "LA NOSTRA PASTA",
-  },
-  Pizza: {
-    sq: "LE NOSTRE PIZZE",
-    en: "LE NOSTRE PIZZE",
-    it: "LE NOSTRE PIZZE",
-    de: "LE NOSTRE PIZZE",
-    tr: "LE NOSTRE PIZZE",
-    fr: "LE NOSTRE PIZZE",
-    bs: "LE NOSTRE PIZZE",
-  },
-  Dolci: {
-    sq: "DOLCI",
-    en: "DOLCI",
-    it: "DOLCI",
-    de: "DOLCI",
-    tr: "DOLCI",
-    fr: "DOLCI",
-    bs: "DOLCI",
-  },
-};
-
-const DRINK_SECTION_LABELS: Record<Language, Record<DrinkSectionKey, string>> = {
-  sq: {
-    "soft-drinks": "PIJET",
-    waters: "UJE",
-    beers: "BIRRA",
-    "vino-bianco": "VINO BIANCO",
-    "vino-rosso": "VINO ROSSO",
-    aperitivo: "APERITIVO",
-  },
-  en: {
-    "soft-drinks": "DRINKS",
-    waters: "WATER",
-    beers: "BEER",
-    "vino-bianco": "WHITE WINE",
-    "vino-rosso": "RED WINE",
-    aperitivo: "APERITIVO",
-  },
-  it: {
-    "soft-drinks": "PIJET",
-    waters: "UJE",
-    beers: "BIRRA",
-    "vino-bianco": "VINO BIANCO",
-    "vino-rosso": "VINO ROSSO",
-    aperitivo: "APERITIVO",
-  },
-  de: {
-    "soft-drinks": "GETRÄNKE",
-    waters: "WASSER",
-    beers: "BIER",
-    "vino-bianco": "WEISSWEIN",
-    "vino-rosso": "ROTWEIN",
-    aperitivo: "APERITIV",
-  },
-  tr: {
-    "soft-drinks": "İÇECEKLER",
-    waters: "SU",
-    beers: "BİRA",
-    "vino-bianco": "BEYAZ ŞARAP",
-    "vino-rosso": "KIRMIZI ŞARAP",
-    aperitivo: "APERİTİF",
-  },
-  fr: {
-    "soft-drinks": "BOISSONS",
-    waters: "EAUX",
-    beers: "BIÈRES",
-    "vino-bianco": "VIN BLANC",
-    "vino-rosso": "VIN ROUGE",
-    aperitivo: "APÉRITIF",
-  },
-  bs: {
-    "soft-drinks": "PIĆA",
-    waters: "VODE",
-    beers: "PIVA",
-    "vino-bianco": "BIJELO VINO",
-    "vino-rosso": "CRNO VINO",
-    aperitivo: "APERITIV",
-  },
-};
-
-const DRINK_MODAL_TITLES: Record<Language, string> = {
-  sq: "Kategoritë e pijeve",
-  en: "Drink Categories",
-  it: "Categorie Bevande",
-  de: "Getränkekategorien",
-  tr: "İçecek Kategorileri",
-  fr: "Catégories de boissons",
-  bs: "Kategorije pića",
 };
 
 const DRINK_SECTION_KEYS: Record<DrinkSectionKey, string[]> = {
@@ -195,7 +86,7 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("");
   const [isDrinkModalOpen, setIsDrinkModalOpen] = useState(false);
   const [pendingDrinkSection, setPendingDrinkSection] = useState<DrinkSectionKey | null>(null);
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
   const drinkSectionRefs = useRef<Partial<Record<DrinkSectionKey, HTMLElement | null>>>({});
 
   const isDrinkView = activeCategory === "Bevande";
@@ -220,11 +111,9 @@ export default function Menu() {
     return t.categories?.[key] || key;
   };
 
-  const getFoodSectionTitle = (category: FoodCategory) =>
-    (FOOD_SECTION_TITLES[category][lang] || FOOD_SECTION_TITLES[category].sq);
+  const getFoodSectionTitle = (category: FoodCategory) => t.menu.foodSections[category];
 
-  const getDrinkSectionLabel = (section: DrinkSectionKey) =>
-    (DRINK_SECTION_LABELS[lang] || DRINK_SECTION_LABELS.sq)[section];
+  const getDrinkSectionLabel = (section: DrinkSectionKey) => t.menu.drinkSections[section];
 
   const groupedFoodSections = FOOD_CATEGORY_ORDER.map((category) => ({
     category,
@@ -460,7 +349,7 @@ export default function Menu() {
               className="text-2xl font-bold uppercase tracking-[0.1em] md:text-3xl"
               style={{ color: MENU_DRINK.text }}
             >
-              {DRINK_MODAL_TITLES[lang] || DRINK_MODAL_TITLES.sq}
+              {t.menu.drinkModalTitle}
             </DialogTitle>
             <DialogDescription className="sr-only">Zgjidh një kategori pijesh.</DialogDescription>
           </div>
