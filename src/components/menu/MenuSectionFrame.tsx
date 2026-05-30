@@ -20,6 +20,8 @@ export function MenuSectionFrame({
   children,
   className = "",
 }: MenuSectionFrameProps) {
+  const { lang } = useLanguage();
+
   return (
     <section className={cn("w-full pt-5 md:pt-6", className)}>
       <div className="rounded-[28px] border p-[3px]" style={{ borderColor }}>
