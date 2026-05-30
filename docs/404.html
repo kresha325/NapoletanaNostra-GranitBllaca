@@ -1,21 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting…</title>
-  <script>
-    (function () {
-      var base = "/NapoletanaNostra-GranitBllaca";
-      try {
-        window.sessionStorage.setItem(
-          "ghp-spa",
-          window.location.pathname + window.location.search + window.location.hash
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages: 404.html redirects here with the real path in sessionStorage.
+      (function () {
+        try {
+          var s = window.sessionStorage.getItem("ghp-spa");
+          if (!s) return;
+          window.sessionStorage.removeItem("ghp-spa");
+          var cur = window.location.pathname + window.location.search + window.location.hash;
+          if (s !== cur) window.history.replaceState(null, "", s);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza napolitane Prizren | Napoletana Nostra</title>
+    <meta
+      name="description"
+      content="Pizza napolitane në Prizren — Napoletana Nostra. Pizzeria me brumë të fermentuar, specialitete italiane dhe ambient autentik. Shiko menynë dhe vizitoni ne."
+    />
+    <meta
+      name="keywords"
+      content="pizza prizren, pizza napolitane prizren, pizzeri prizren, napoletana nostra, pizza napolitane"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://kresha325.github.io/NapoletanaNostra-GranitBllaca/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sq_AL" />
+    <meta property="og:site_name" content="Napoletana Nostra" />
+    <meta property="og:title" content="Pizza napolitane Prizren | Napoletana Nostra" />
+    <meta
+      property="og:description"
+      content="Pizza napolitane në Prizren — brumë i fermentuar, specialitete italiane. Napoletana Nostra."
+    />
+    <meta
+      property="og:url"
+      content="https://kresha325.github.io/NapoletanaNostra-GranitBllaca/"
+    />
+    <meta
+      property="og:image"
+      content="https://kresha325.github.io/NapoletanaNostra-GranitBllaca/images/hero-oven.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pizza napolitane Prizren | Napoletana Nostra" />
+    <meta
+      name="twitter:description"
+      content="Pizza napolitane në Prizren — Napoletana Nostra."
+    />
+    <meta
+      name="twitter:image"
+      content="https://kresha325.github.io/NapoletanaNostra-GranitBllaca/images/hero-oven.png"
+    />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Napoletana Nostra",
+        "servesCuisine": ["Italian", "Pizza"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Prizren",
+          "addressCountry": "XK"
+        },
+        "url": "https://kresha325.github.io/NapoletanaNostra-GranitBllaca/",
+        "telephone": "+38349976100",
+        "image": "https://kresha325.github.io/NapoletanaNostra-GranitBllaca/images/hero-oven.png"
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // GitHub Pages SPA fallback without duplicate base-path prefixing.
+      (function () {
+        var repoBase = "/NapoletanaNostra-GranitBllaca";
+        var path = window.location.pathname;
+        var isGithubPages = window.location.hostname.endsWith("github.io");
+        if (!isGithubPages) return;
+
+        var isAssetPath = path.startsWith(repoBase + "/assets");
+        var alreadyUnderBase = path === repoBase || path.startsWith(repoBase + "/");
+        if (isAssetPath || alreadyUnderBase) return;
+
+        window.history.replaceState(
+          {},
+          "",
+          repoBase + (path.startsWith("/") ? path : "/" + path) + window.location.search + window.location.hash,
         );
-      } catch (e) {}
-      window.location.replace(window.location.origin + base + "/");
-    })();
-  </script>
-</head>
-<body></body>
+      })();
+    </script>
+    <script type="module" crossorigin src="/NapoletanaNostra-GranitBllaca/assets/index-b6be8a84.js"></script>
+    <link rel="modulepreload" crossorigin href="/NapoletanaNostra-GranitBllaca/assets/react-vendor-3952d933.js">
+    <link rel="modulepreload" crossorigin href="/NapoletanaNostra-GranitBllaca/assets/motion-f04d6522.js">
+    <link rel="stylesheet" href="/NapoletanaNostra-GranitBllaca/assets/index-b1b44d0e.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
 </html>

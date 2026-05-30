@@ -26,7 +26,7 @@ export const translations = {
     categories: {
       Pizza: "Pica",
       Pasta: "Pasta",
-      Antipasti: "Antipasta",
+      Antipasti: "Antipasti",
       Dolci: "Ëmbëlsira",
       Bevande: "Pije",
     },

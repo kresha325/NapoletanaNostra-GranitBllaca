@@ -66,7 +66,7 @@ export const menuProductLabels: Record<string, { name: string; description: stri
   },
   diavola: {
     name: "DIAVOLA",
-    description: "SALCE DOMATESH, MOZZARELLA, SUXHUK DJEGES, SPEC, ULLINJ, BOZILOK",
+    description: "SALCE DOMATESH, MOZZARELLA, SUXHUK DJEGES, SPEC, ULLINJ, BORZILOK",
   },
   "quattro-formaggi": {
     name: "QUATTRO FORMAGGI",
@@ -90,7 +90,7 @@ export const menuProductLabels: Record<string, { name: string; description: stri
     description: "SALCE DOMATESH, MOZZARELLA, DOMATINA, PROSHUTE, RUCOLA, GRANA PADANO",
   },
   capricciosa: {
-    name: "CAPRICIOSA",
+    name: "CAPRICCIOSA",
     description: "SALCE DOMATESH, MOZZARELLA, PROSHUTE, ANGJINARE, KERPUDHA, ULLINJ",
   },
   enrico: {
@@ -118,10 +118,10 @@ export const menuProductLabels: Record<string, { name: string; description: stri
   "ice-tea": { name: "ICE TEA", description: "" },
   juices: { name: "JUICES", description: "" },
 
-  "water-025": { name: "UJË NATYRAL MINERAL 250 ML", description: "" },
-  "water-075": { name: "UJË NATYRAL MINERAL 750 ML", description: "" },
-  "mineral-water-025": { name: "UJË MINERAL NATYRAL 250 ML", description: "" },
-  "mineral-water-075": { name: "UJË MINERAL NATYRAL 750 ML", description: "" },
+  "water-025": { name: "UJË NATYRAL 250 ML", description: "" },
+  "water-075": { name: "UJË NATYRAL 750 ML", description: "" },
+  "mineral-water-025": { name: "UJË MINERAL 250 ML", description: "" },
+  "mineral-water-075": { name: "UJË MINERAL 750 ML", description: "" },
 
   "peja-draught-03": { name: "PEJA DRAUGHT 0.3", description: "" },
   "peja-draught-05": { name: "PEJA DRAUGHT 0.5", description: "" },

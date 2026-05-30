@@ -1,23 +1,36 @@
 import { useId } from "react";
 import { cn } from "@/lib/utils";
+import { renderSvgAlbanianBoldE } from "./AlbanianBoldE";
 
 export type MenuCurvedTextSize = "section";
 
+/** Extra viewBox room so glyph edges are not clipped when the SVG is scaled down. */
+const SIDE_PAD = 14;
+
 function getArcMetrics(text: string) {
-  const length = text.length;
-  const width = Math.max(140, Math.min(380, length * 11 + 52));
+  const normalized = text.toUpperCase();
+  const length = normalized.length;
+
+  const fontSize = length <= 7 ? 22 : length <= 11 ? 20 : length <= 15 ? 18 : 16;
+  const letterSpacingEm = length <= 9 ? 0.06 : length <= 13 ? 0.04 : 0.03;
+  const charUnit = fontSize * 0.74 + fontSize * letterSpacingEm;
+  const textRun = length * charUnit;
+
+  // Long arc path so all letters fit; display size stays compact via viewBox scaling.
+  const width = Math.max(168, Math.ceil(textRun * 1.28 + 44));
   const height = 48;
   const baseline = height - 10;
-  const arch = length <= 5 ? 13 : length <= 12 ? 15 : 17;
+  const arch = length <= 8 ? 14 : length <= 13 ? 16 : 18;
+  const margin = 10;
 
   return {
     width,
     height,
-    path: `M 6 ${baseline} Q ${width / 2} ${baseline - arch} ${width - 6} ${baseline}`,
-    svgWidth: Math.round(width * 0.62),
-    svgHeight: 40,
-    fontSize: length <= 5 ? 22 : length <= 12 ? 20 : 18,
-    letterSpacing: "0.1em",
+    path: `M ${margin} ${baseline} Q ${width / 2} ${baseline - arch} ${width - margin} ${baseline}`,
+    svgWidth: Math.min(Math.round(width * 0.68), 210),
+    svgHeight: 38,
+    fontSize,
+    letterSpacing: `${letterSpacingEm}em`,
   };
 }
 
@@ -27,6 +40,8 @@ interface MenuCurvedTextProps {
   backgroundColor?: string;
   size?: MenuCurvedTextSize;
   className?: string;
+  /** Bold Ë/ë when Crafter Vintage falls back to a lighter glyph. */
+  boldAlbanianE?: boolean;
 }
 
 export function MenuCurvedText({
@@ -35,9 +50,11 @@ export function MenuCurvedText({
   backgroundColor,
   size = "section",
   className,
+  boldAlbanianE = false,
 }: MenuCurvedTextProps) {
   const pathId = useId();
   const { width, height, path, svgWidth, svgHeight, fontSize, letterSpacing } = getArcMetrics(text);
+  const viewBox = `${-SIDE_PAD} 0 ${width + SIDE_PAD * 2} ${height}`;
 
   return (
     <div
@@ -45,10 +62,11 @@ export function MenuCurvedText({
       style={backgroundColor ? { backgroundColor } : undefined}
     >
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={viewBox}
         width={svgWidth}
         height={svgHeight}
-        className="block overflow-visible"
+        preserveAspectRatio="xMidYMid meet"
+        className="block shrink-0"
         role="img"
         aria-label={text}
       >
@@ -57,13 +75,13 @@ export function MenuCurvedText({
         </defs>
         <text
           fill={color}
-          fontFamily='"Crafter Vintage", sans-serif'
+          fontFamily='"Crafter Vintage", "Playlist Caps", sans-serif'
           fontSize={fontSize}
           fontWeight={700}
           letterSpacing={letterSpacing}
         >
           <textPath href={`#${pathId}`} startOffset="50%" textAnchor="middle">
-            {text.toUpperCase()}
+            {boldAlbanianE ? renderSvgAlbanianBoldE(text.toUpperCase()) : text.toUpperCase()}
           </textPath>
         </text>
       </svg>

@@ -12,7 +12,7 @@ export type MenuDrinkSectionKey =
 
 export const menuFoodSectionTitlesByLang: Record<Language, Record<MenuFoodSectionKey, string>> = {
   sq: {
-    Antipasti: "ANTIPASTA",
+    Antipasti: "ANTIPASTI",
     Pasta: "PASTA JONË",
     Pizza: "PICAT TONA",
     Dolci: "ËMBËLSIRA",
@@ -58,7 +58,7 @@ export const menuFoodSectionTitlesByLang: Record<Language, Record<MenuFoodSectio
 export const menuDrinkSectionTitlesByLang: Record<Language, Record<MenuDrinkSectionKey, string>> = {
   sq: {
     "soft-drinks": "PIJET",
-    waters: "UJE",
+    waters: "UJË",
     beers: "BIRRA",
     "vino-bianco": "VINO BIANCO",
     "vino-rosso": "VINO ROSSO",

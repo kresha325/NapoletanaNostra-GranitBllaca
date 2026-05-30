@@ -9,6 +9,7 @@ import { MenuFoodSection } from "@/components/menu/MenuFoodSection";
 import { MenuDrinkSection } from "@/components/menu/MenuDrinkSection";
 import { MENU_DRINK, MENU_FOOD } from "@/components/menu/menu-theme";
 import { MenuBrandLogo } from "@/components/menu/MenuBrandLogo";
+import { AlbanianBoldText } from "@/components/menu/AlbanianBoldE";
 
 type CategoryKey = "" | Product["category"];
 type DrinkSectionKey = "soft-drinks" | "waters" | "beers" | "vino-bianco" | "vino-rosso" | "aperitivo";
@@ -86,7 +87,7 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("");
   const [isDrinkModalOpen, setIsDrinkModalOpen] = useState(false);
   const [pendingDrinkSection, setPendingDrinkSection] = useState<DrinkSectionKey | null>(null);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const drinkSectionRefs = useRef<Partial<Record<DrinkSectionKey, HTMLElement | null>>>({});
 
   const isDrinkView = activeCategory === "Bevande";
@@ -106,9 +107,13 @@ export default function Menu() {
     activeCategory === "" ? true : product.category === activeCategory
   );
 
+  const renderMenuLabel = (label: string) =>
+    lang === "sq" ? <AlbanianBoldText text={label} /> : label;
+
   const getCategoryLabel = (key: CategoryKey) => {
     if (key === "") return t.menu.all;
-    return t.categories?.[key] || key;
+    if (key === "Bevande") return t.categories.Bevande;
+    return t.menu.foodSections[key as FoodCategory];
   };
 
   const getFoodSectionTitle = (category: FoodCategory) => t.menu.foodSections[category];
@@ -272,7 +277,7 @@ export default function Menu() {
                       }
               }
             >
-              {getCategoryLabel(key)}
+              {renderMenuLabel(getCategoryLabel(key))}
             </button>
           ))}
         </div>
@@ -368,7 +373,7 @@ export default function Menu() {
                 onClick={() => handleDrinkSectionSelect(section.key)}
               >
                 <span className="text-lg font-bold uppercase tracking-[0.08em]">
-                  {section.label}
+                  {renderMenuLabel(section.label)}
                 </span>
               </button>
             ))}
