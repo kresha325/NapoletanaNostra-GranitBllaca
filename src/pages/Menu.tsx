@@ -1,17 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { menuData, type Product } from "@/lib/data";
-import { ProductCard } from "@/components/product/ProductCard";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { usePageSeo } from "@/lib/seo";
+import { MenuFoodSection } from "@/components/menu/MenuFoodSection";
+import { MenuDrinkSection } from "@/components/menu/MenuDrinkSection";
+import { MENU_DRINK, MENU_FOOD } from "@/components/menu/menu-theme";
+import { MenuBrandLogo } from "@/components/menu/MenuBrandLogo";
 
 type CategoryKey = "" | Product["category"];
 type DrinkSectionKey = "soft-drinks" | "waters" | "beers" | "vino-bianco" | "vino-rosso" | "aperitivo";
+type FoodCategory = Exclude<Product["category"], "Bevande">;
 
 const CATEGORY_KEYS: CategoryKey[] = ["", "Pizza", "Pasta", "Antipasti", "Dolci", "Bevande"];
+const FOOD_CATEGORY_ORDER: FoodCategory[] = ["Antipasti", "Pasta", "Pizza", "Dolci"];
+const FOOD_LEFT_COLUMN: FoodCategory[] = ["Antipasti", "Pasta"];
+const FOOD_RIGHT_COLUMN: FoodCategory[] = ["Pizza", "Dolci"];
+
 const DRINK_SECTION_ORDER: DrinkSectionKey[] = [
   "soft-drinks",
   "waters",
@@ -21,62 +29,110 @@ const DRINK_SECTION_ORDER: DrinkSectionKey[] = [
   "aperitivo",
 ];
 
+const DRINK_SECTION_LAYOUT: Record<DrinkSectionKey, "two-column" | "single-column"> = {
+  "soft-drinks": "two-column",
+  waters: "two-column",
+  beers: "single-column",
+  "vino-bianco": "two-column",
+  "vino-rosso": "two-column",
+  aperitivo: "single-column",
+};
+
+const FOOD_SECTION_TITLES: Record<FoodCategory, Record<Language, string>> = {
+  Antipasti: {
+    sq: "ANTIPASTI",
+    en: "ANTIPASTI",
+    it: "ANTIPASTI",
+    de: "ANTIPASTI",
+    tr: "ANTIPASTI",
+    fr: "ANTIPASTI",
+    bs: "ANTIPASTI",
+  },
+  Pasta: {
+    sq: "LA NOSTRA PASTA",
+    en: "LA NOSTRA PASTA",
+    it: "LA NOSTRA PASTA",
+    de: "LA NOSTRA PASTA",
+    tr: "LA NOSTRA PASTA",
+    fr: "LA NOSTRA PASTA",
+    bs: "LA NOSTRA PASTA",
+  },
+  Pizza: {
+    sq: "LE NOSTRE PIZZE",
+    en: "LE NOSTRE PIZZE",
+    it: "LE NOSTRE PIZZE",
+    de: "LE NOSTRE PIZZE",
+    tr: "LE NOSTRE PIZZE",
+    fr: "LE NOSTRE PIZZE",
+    bs: "LE NOSTRE PIZZE",
+  },
+  Dolci: {
+    sq: "DOLCI",
+    en: "DOLCI",
+    it: "DOLCI",
+    de: "DOLCI",
+    tr: "DOLCI",
+    fr: "DOLCI",
+    bs: "DOLCI",
+  },
+};
+
 const DRINK_SECTION_LABELS: Record<Language, Record<DrinkSectionKey, string>> = {
   sq: {
-    "soft-drinks": "Pije Joalkoolike",
-    waters: "Ujëra",
-    beers: "Birra",
-    "vino-bianco": "Verë e Bardhë",
-    "vino-rosso": "Verë e Kuqe",
-    aperitivo: "Aperitivo",
+    "soft-drinks": "PIJET",
+    waters: "UJE",
+    beers: "BIRRA",
+    "vino-bianco": "VINO BIANCO",
+    "vino-rosso": "VINO ROSSO",
+    aperitivo: "APERITIVO",
   },
   en: {
-    "soft-drinks": "Soft Drinks",
-    waters: "Waters",
-    beers: "Beers",
-    "vino-bianco": "White Wine",
-    "vino-rosso": "Red Wine",
-    aperitivo: "Aperitivo",
+    "soft-drinks": "DRINKS",
+    waters: "WATER",
+    beers: "BEER",
+    "vino-bianco": "WHITE WINE",
+    "vino-rosso": "RED WINE",
+    aperitivo: "APERITIVO",
   },
   it: {
-    "soft-drinks": "Bibite",
-    waters: "Acque",
-    beers: "Birre",
-    "vino-bianco": "Vino Bianco",
-    "vino-rosso": "Vino Rosso",
-    aperitivo: "Aperitivo",
+    "soft-drinks": "PIJET",
+    waters: "UJE",
+    beers: "BIRRA",
+    "vino-bianco": "VINO BIANCO",
+    "vino-rosso": "VINO ROSSO",
+    aperitivo: "APERITIVO",
   },
   de: {
-    "soft-drinks": "Softdrinks",
-    waters: "Wasser",
-    beers: "Biere",
-    "vino-bianco": "Weisswein",
-    "vino-rosso": "Rotwein",
-    aperitivo: "Aperitif",
+    "soft-drinks": "GETRÄNKE",
+    waters: "WASSER",
+    beers: "BIER",
+    "vino-bianco": "WEISSWEIN",
+    "vino-rosso": "ROTWEIN",
+    aperitivo: "APERITIV",
   },
   tr: {
-    "soft-drinks": "Mesrubatlar",
-    waters: "Sular",
-    beers: "Biralar",
-    "vino-bianco": "Beyaz Sarap",
-    "vino-rosso": "Kirmizi Sarap",
-    aperitivo: "Aperitif",
+    "soft-drinks": "İÇECEKLER",
+    waters: "SU",
+    beers: "BİRA",
+    "vino-bianco": "BEYAZ ŞARAP",
+    "vino-rosso": "KIRMIZI ŞARAP",
+    aperitivo: "APERİTİF",
   },
   fr: {
-    "soft-drinks": "Boissons",
-    waters: "Eaux",
-    beers: "Bieres",
-    "vino-bianco": "Vin Blanc",
-    "vino-rosso": "Vin Rouge",
-    aperitivo: "Aperitif",
+    "soft-drinks": "BOISSONS",
+    waters: "EAUX",
+    beers: "BIÈRES",
+    "vino-bianco": "VIN BLANC",
+    "vino-rosso": "VIN ROUGE",
+    aperitivo: "APÉRITIF",
   },
   bs: {
-    "soft-drinks": "Bezalkoholna Pica",
-    waters: "Vode",
-    beers: "Piva",
-    "vino-bianco": "Bijelo Vino",
-    "vino-rosso": "Crno Vino",
-    aperitivo: "Aperitiv",
+    "soft-drinks": "PIĆA",
+    waters: "VODE",
+    beers: "PIVA",
+    "vino-bianco": "BIJELO VINO",
+    "vino-rosso": "CRNO VINO",
+    aperitivo: "APERITIV",
   },
 };
 
@@ -142,6 +198,8 @@ export default function Menu() {
   const { t, lang } = useLanguage();
   const drinkSectionRefs = useRef<Partial<Record<DrinkSectionKey, HTMLElement | null>>>({});
 
+  const isDrinkView = activeCategory === "Bevande";
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -149,7 +207,7 @@ export default function Menu() {
   usePageSeo({
     title: "Menyja — Pizza napolitane Prizren | Napoletana Nostra",
     description:
-      "Menyja e plotë: pizza napolitane, pasta, antipasti, ëmbëlsira dhe pije në Napoletana Nostra, Prizren. Çmime dhe foto për çdo specialitet.",
+      "Menyja e plotë: pizza napolitane, pasta, antipasti, ëmbëlsira dhe pije në Napoletana Nostra, Prizren.",
     path: "/menu",
   });
 
@@ -162,9 +220,30 @@ export default function Menu() {
     return t.categories?.[key] || key;
   };
 
+  const getFoodSectionTitle = (category: FoodCategory) =>
+    (FOOD_SECTION_TITLES[category][lang] || FOOD_SECTION_TITLES[category].sq);
+
+  const getDrinkSectionLabel = (section: DrinkSectionKey) =>
+    (DRINK_SECTION_LABELS[lang] || DRINK_SECTION_LABELS.sq)[section];
+
+  const groupedFoodSections = FOOD_CATEGORY_ORDER.map((category) => ({
+    category,
+    title: getFoodSectionTitle(category),
+    products: menuData.filter((product) => product.category === category),
+  })).filter((section) => {
+    if (activeCategory !== "" && activeCategory !== "Bevande") {
+      return section.category === activeCategory;
+    }
+    if (activeCategory === "Bevande") {
+      return false;
+    }
+    return section.products.length > 0;
+  });
+
   const groupedDrinkProducts = DRINK_SECTION_ORDER.map((section) => ({
     key: section,
-    label: (DRINK_SECTION_LABELS[lang] || DRINK_SECTION_LABELS.sq)[section],
+    label: getDrinkSectionLabel(section),
+    layout: DRINK_SECTION_LAYOUT[section],
     products: filteredProducts.filter((product) => getDrinkSectionKey(product) === section),
   })).filter((section) => section.products.length > 0);
 
@@ -199,130 +278,158 @@ export default function Menu() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Header */}
-      <div className="relative overflow-hidden border-b py-16 md:py-24">
-        <div className="absolute inset-0">
-          <img
-            src={`${import.meta.env.BASE_URL}images/menu-hero2.jpg`}
-            alt=""
-            className="h-full w-full object-cover object-center"
-            fetchpriority="high"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-black/15" />
-          <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_95%_75%_at_50%_42%,rgba(0,0,0,0.38)_0%,rgba(0,0,0,0.1)_58%,rgba(0,0,0,0.18)_100%)]"
-            aria-hidden
-          />
-        </div>
-
-        <div className="container relative z-10 mx-auto flex justify-center px-4 md:px-6">
-          <div className="max-w-2xl rounded-2xl border border-white/10 bg-black/10 px-8 py-9 text-center shadow-[0_16px_40px_-16px_rgba(0,0,0,0.28)] backdrop-blur-[2px] md:max-w-3xl md:px-12 md:py-11">
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-serif text-4xl font-bold tracking-tight text-balance text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.4)] md:text-6xl md:tracking-tight"
-            >
-              {t.menu.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 }}
-              className="mx-auto mt-5 max-w-xl text-pretty text-base font-medium leading-relaxed tracking-wide text-white [text-shadow:0_1px_14px_rgba(0,0,0,0.5)] md:mt-6 md:max-w-2xl md:text-xl md:leading-relaxed md:tracking-[0.02em]"
-            >
-              {t.menu.subtitle}
-            </motion.p>
-          </div>
+    <div
+      className="font-menu min-h-screen flex flex-col transition-colors duration-300"
+      style={{ backgroundColor: isDrinkView ? MENU_DRINK.bg : MENU_FOOD.bg }}
+    >
+      <div
+        className={cn("py-6 md:py-8", !isDrinkView && "border-b-0")}
+        style={{
+          backgroundColor: isDrinkView ? MENU_DRINK.bg : MENU_FOOD.bg,
+          borderColor: isDrinkView ? "rgba(255,255,255,0.25)" : "transparent",
+        }}
+      >
+        <div className="container mx-auto px-4 text-center md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center pb-2 md:pb-3"
+          >
+            <MenuBrandLogo
+              variant={isDrinkView ? "drinks" : "food"}
+              size="menu"
+            />
+          </motion.div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-12">
-        {/* Categories */}
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 mb-12">
+      <div className="container mx-auto px-3 pb-8 md:px-6 md:pb-10">
+        <h1
+          className="mb-3 text-center text-xl font-bold uppercase tracking-[0.12em] md:mb-4 md:text-3xl"
+          style={{ color: isDrinkView ? MENU_DRINK.text : MENU_FOOD.title }}
+        >
+          {t.menu.title}
+        </h1>
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-2 md:mb-10 md:gap-2.5">
           {CATEGORY_KEYS.map((key) => (
             <button
               key={key}
               onClick={() => handleCategoryClick(key)}
               className={cn(
-                "px-6 py-2.5 rounded-full font-medium transition-all duration-300 border",
+                "rounded-full border px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.07em] transition-all duration-300 md:px-5 md:py-2 md:text-xs",
                 activeCategory === key
-                  ? "bg-primary border-primary text-primary-foreground shadow-md"
-                  : "bg-transparent border-border text-foreground hover:border-primary/50 hover:bg-primary/5"
+                  ? isDrinkView || key === "Bevande"
+                    ? "shadow-md"
+                    : "shadow-md"
+                  : "bg-transparent hover:opacity-80"
               )}
+              style={
+                activeCategory === key
+                  ? isDrinkView
+                    ? {
+                        backgroundColor: MENU_DRINK.text,
+                        borderColor: MENU_DRINK.text,
+                        color: MENU_DRINK.bg,
+                      }
+                    : {
+                        backgroundColor: MENU_FOOD.title,
+                        borderColor: MENU_FOOD.title,
+                        color: MENU_FOOD.bg,
+                      }
+                  : isDrinkView
+                    ? {
+                        borderColor: "rgba(255,255,255,0.55)",
+                        color: MENU_DRINK.text,
+                      }
+                    : {
+                        borderColor: MENU_FOOD.border,
+                        color: MENU_FOOD.title,
+                      }
+              }
             >
               {getCategoryLabel(key)}
             </button>
           ))}
         </div>
 
-        {/* Product Grid */}
-        {activeCategory === "Bevande" ? (
-          <div className="space-y-12">
+        {isDrinkView ? (
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:gap-12 lg:grid-cols-2">
             {groupedDrinkProducts.map((section) => (
-              <section
+              <div
                 key={section.key}
                 ref={(element) => {
                   drinkSectionRefs.current[section.key] = element;
                 }}
-                className="scroll-mt-24 space-y-6"
+                className="scroll-mt-24"
               >
-                <div className="flex items-center gap-4">
-                  <h2 className="font-serif text-2xl font-bold md:text-3xl">{section.label}</h2>
-                  <div className="h-px flex-1 bg-border" />
-                </div>
-
-                <motion.div
-                  layout
-                  className="grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-                >
-                  <AnimatePresence mode="popLayout">
-                    {section.products.map((product, index) => (
-                      <ProductCard
-                        key={product.id}
-                        product={product}
-                        index={index}
-                      />
-                    ))}
-                  </AnimatePresence>
-                </motion.div>
-              </section>
+                <MenuDrinkSection
+                  title={section.label}
+                  products={section.products}
+                  layout={section.layout}
+                />
+              </div>
             ))}
           </div>
+        ) : activeCategory === "" ? (
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-y-10 md:gap-y-12 lg:grid-cols-2 lg:gap-x-6">
+            <div className="flex flex-col gap-10 md:gap-12">
+              {groupedFoodSections
+                .filter((section) => FOOD_LEFT_COLUMN.includes(section.category))
+                .map((section) => (
+                  <MenuFoodSection
+                    key={section.category}
+                    title={section.title}
+                    products={section.products}
+                  />
+                ))}
+            </div>
+            <div className="flex flex-col gap-10 md:gap-12">
+              {groupedFoodSections
+                .filter((section) => FOOD_RIGHT_COLUMN.includes(section.category))
+                .map((section) => (
+                  <MenuFoodSection
+                    key={section.category}
+                    title={section.title}
+                    products={section.products}
+                  />
+                ))}
+            </div>
+          </div>
         ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((product, index) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  index={index}
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
+          <div className="mx-auto flex max-w-3xl flex-col gap-10 md:gap-12">
+            {groupedFoodSections.map((section) => (
+              <MenuFoodSection
+                key={section.category}
+                title={section.title}
+                products={section.products}
+              />
+            ))}
+          </div>
         )}
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-24 text-muted-foreground text-lg">
+          <div
+            className="py-24 text-center text-lg"
+            style={{ color: isDrinkView ? MENU_DRINK.text : MENU_FOOD.title }}
+          >
             {t.menu.noProducts}
           </div>
         )}
       </div>
 
       <Dialog open={isDrinkModalOpen} onOpenChange={setIsDrinkModalOpen}>
-        <DialogContent className="overflow-hidden border-border/70 bg-background p-0 shadow-2xl sm:max-w-xl">
-          <div className="border-b border-border/60 bg-gradient-to-br from-primary/10 via-background to-accent/20 px-6 py-6 sm:px-8">
-            <DialogTitle className="font-serif text-3xl leading-tight text-foreground">
+        <DialogContent
+          className="font-menu overflow-hidden border-0 p-0 shadow-2xl sm:max-w-xl"
+          style={{ backgroundColor: MENU_DRINK.bg }}
+        >
+          <div className="border-b px-6 py-6 sm:px-8" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
+            <DialogTitle
+              className="text-2xl font-bold uppercase tracking-[0.1em] md:text-3xl"
+              style={{ color: MENU_DRINK.text }}
+            >
               {DRINK_MODAL_TITLES[lang] || DRINK_MODAL_TITLES.sq}
             </DialogTitle>
-            <DialogDescription className="sr-only">
-              Zgjidh një kategori pijesh.
-            </DialogDescription>
+            <DialogDescription className="sr-only">Zgjidh një kategori pijesh.</DialogDescription>
           </div>
 
           <div className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-2 sm:gap-4 sm:p-6">
@@ -330,14 +437,16 @@ export default function Menu() {
               <button
                 key={section.key}
                 type="button"
-                className="group flex min-h-[88px] items-center justify-between rounded-2xl border border-border/70 bg-card px-5 py-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="rounded-2xl border px-5 py-4 text-left transition-all duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                style={{
+                  borderColor: MENU_DRINK.border,
+                  color: MENU_DRINK.text,
+                  backgroundColor: "rgba(255,255,255,0.06)",
+                }}
                 onClick={() => handleDrinkSectionSelect(section.key)}
               >
-                <span className="font-serif text-xl font-bold text-foreground transition-colors group-hover:text-primary">
+                <span className="text-lg font-bold uppercase tracking-[0.08em]">
                   {section.label}
-                </span>
-                <span className="text-lg font-semibold text-primary transition-transform duration-200 group-hover:translate-x-1">
-                  →
                 </span>
               </button>
             ))}

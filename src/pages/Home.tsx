@@ -8,6 +8,7 @@ import { ArrowRight, Utensils, Clock, MapPin, ChefHat, Phone } from "lucide-reac
 import { useLanguage } from "@/contexts/language-context";
 import { Language } from "@/lib/translations";
 import { usePageSeo } from "@/lib/seo";
+import { MENU_BURGUNDY } from "@/components/menu/menu-theme";
 
 const PHONE = "+38349976100";
 const PHONE_DISPLAY = "+383 49 976 100";
@@ -126,7 +127,7 @@ export default function Home() {
   }, [storyStatsInView, storyYearsTarget]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="font-menu flex min-h-screen flex-col">
       {/* Hero Section */}
       <section className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/50 z-10" />
@@ -154,7 +155,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 max-w-4xl"
+            className="font-menu text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 max-w-4xl"
           >
             {t.home.heroTitle}
           </motion.h1>
@@ -195,7 +196,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground">
+              <h2 className="font-menu text-4xl md:text-5xl font-bold text-foreground">
                 {t.home.storyTitle}
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
@@ -204,14 +205,14 @@ export default function Home() {
               </div>
               <div ref={storyStatsRef} className="flex items-center gap-6 pt-4">
                 <div className="flex flex-col">
-                  <span className="font-serif text-4xl font-bold text-primary tabular-nums">
+                  <span className="font-menu text-4xl font-bold text-primary tabular-nums">
                     {statYears < storyYearsTarget ? statYears : `${storyYearsTarget}+`}
                   </span>
                   <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground mt-1">{t.home.storyYears}</span>
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="flex flex-col">
-                  <span className="font-serif text-4xl font-bold text-primary tabular-nums">{statHours}h</span>
+                  <span className="font-menu text-4xl font-bold text-primary tabular-nums">{statHours}h</span>
                   <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground mt-1">{t.home.storyFerment}</span>
                 </div>
               </div>
@@ -237,7 +238,7 @@ export default function Home() {
               </div>
               <div className="absolute z-10 max-w-[min(280px,calc(100%-1.5rem))] rounded-xl border border-border bg-card/95 p-4 shadow-xl backdrop-blur-sm sm:p-6 md:max-w-[240px] bottom-0 left-3 translate-y-12 sm:left-4 md:translate-y-0 md:-bottom-8 md:-left-8">
                 <ChefHat className="mb-3 h-7 w-7 text-primary sm:mb-4 sm:h-8 sm:w-8" />
-                <p className="font-serif text-base font-medium leading-snug sm:text-lg sm:leading-tight">
+                <p className="font-menu text-base font-medium leading-snug sm:text-lg sm:leading-tight">
                   &ldquo;{t.home.storyQuote}&rdquo;
                 </p>
               </div>
@@ -252,9 +253,9 @@ export default function Home() {
       />
 
       {/* Gallery Section */}
-      <section className="py-10 md:py-16 bg-muted/10 border-b border-border/50">
+      <section className="py-10 md:py-16 bg-background border-b border-border/50">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-8">{t.home.galleryTitle || "Galeria"}</h2>
+          <h2 className="font-menu text-4xl md:text-5xl font-bold text-center mb-8">{t.home.galleryTitle || "Galeria"}</h2>
           <div className="flex gap-6 overflow-x-auto pb-2 no-scrollbar hide-scrollbar">
             {[
               "galleri-1.jpg",
@@ -267,7 +268,11 @@ export default function Home() {
               "galleri-8.jpg",
               "galleri-9.jpg",
             ].map((img, i) => (
-              <div key={img} className="rounded-xl overflow-hidden shadow-lg min-w-[260px] max-w-[320px] flex-shrink-0">
+              <div
+                key={img}
+                className="min-w-[260px] max-w-[320px] flex-shrink-0 overflow-hidden rounded-xl border shadow-lg"
+                style={{ borderColor: MENU_BURGUNDY }}
+              >
                 <img
                   src={`${import.meta.env.BASE_URL}images/${img}`}
                   alt={`Galeria ${i + 1}`}
@@ -299,7 +304,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-2xl mx-auto mb-10 space-y-3"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold">{t.home.testimonialsTitle}</h2>
+            <h2 className="font-menu text-4xl md:text-5xl font-bold">{t.home.testimonialsTitle}</h2>
             <p className="text-lg text-muted-foreground">{t.home.testimonialsSubtitle}</p>
           </motion.div>
 
@@ -310,7 +315,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0 }}
-              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              className="rounded-2xl border bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              style={{ borderColor: MENU_BURGUNDY }}
               onClick={() => window.open("https://www.facebook.com/share/17Xivws7xJ/?mibextid=wwXIfr", "_blank")}
             >
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -345,7 +351,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              className="rounded-2xl border bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              style={{ borderColor: MENU_BURGUNDY }}
               onClick={() => window.open("https://www.instagram.com/napoletana.nostra?igsh=cDV3ZzU2dGo5bG5s", "_blank")}
             >
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -380,7 +387,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="rounded-2xl border border-border/30 bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              className="rounded-2xl border bg-background/22 p-8 backdrop-blur-md shadow-md shadow-black/6 dark:bg-background/22 dark:shadow-black/20 flex flex-col gap-5 hover:bg-background/34 hover:shadow-lg transition-[box-shadow,background-color] cursor-pointer"
+              style={{ borderColor: MENU_BURGUNDY }}
               onClick={() => window.open("https://www.tiktok.com/@napoletana.nostra?_r=1&_t=ZS-95GN6BUOGnZ", "_blank")}
             >
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -416,9 +424,12 @@ export default function Home() {
 
       {/* Info Section */}
       <section className="relative overflow-hidden py-14 md:py-20">
-        <div className="absolute inset-0 z-0 bg-primary/5" />
+        <div className="absolute inset-0 z-0 bg-background" />
         <div className="container relative z-10 mx-auto px-4 md:px-6">
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-xl md:p-12">
+          <div
+            className="rounded-3xl border bg-card p-8 shadow-xl md:p-12"
+            style={{ borderColor: MENU_BURGUNDY }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-border">
               <a
                 href="https://maps.app.goo.gl/UnXT5EhxT7uk8Y6L6?g_st=ic"
@@ -429,7 +440,7 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <MapPin className="w-8 h-8" />
                 </div>
-                <h3 className="font-serif text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoWhere}</h3>
+                <h3 className="font-menu text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoWhere}</h3>
                 <p className="text-muted-foreground">Marin Barleti 2<br />Prizren, Kosovo 20000</p>
               </a>
 
@@ -440,7 +451,7 @@ export default function Home() {
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                       <Clock className="w-8 h-8" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoHours}</h3>
+                    <h3 className="font-menu text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoHours}</h3>
                     <p className="text-muted-foreground whitespace-pre-line">{t.home.infoHoursVal}</p>
                   </button>
                 </PopoverTrigger>
@@ -465,12 +476,12 @@ export default function Home() {
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                       <Utensils className="w-8 h-8" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoReservations}</h3>
+                    <h3 className="font-menu text-2xl font-bold group-hover:text-primary transition-colors">{t.home.infoReservations}</h3>
                     <p className="text-muted-foreground whitespace-pre-line">{t.home.infoReservationsVal}</p>
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-64 p-5 space-y-4">
-                  <p className="font-serif font-semibold text-center text-base">{(reserveLabels[lang] ?? reserveLabels.sq).title}</p>
+                  <p className="font-menu font-semibold text-center text-base">{(reserveLabels[lang] ?? reserveLabels.sq).title}</p>
                   <a
                     href={`tel:${PHONE}`}
                     className="flex items-center justify-center gap-2 w-full rounded-full py-2.5 bg-primary text-white font-medium text-sm hover:bg-primary/90 transition-colors"

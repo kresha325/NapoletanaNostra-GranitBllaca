@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Crafter Vintage";
+  src: url("./assets/fonts/crafter-vintage.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Playlist Script";
+  src: url("./assets/fonts/playlist-script.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Playlist Caps";
+  src: url("./assets/fonts/playlist-caps.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kanvas Thin";
+  src: url("./assets/fonts/kanvas-thin.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ED Lavonia";
+  src: url("./assets/fonts/ed-lavonia.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -36,6 +76,7 @@
 
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
+  --font-menu: var(--app-font-menu);
   
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -45,19 +86,20 @@
 
 @layer base {
   :root {
-    --background: 40 33% 96%; /* Warm parchment / cream */
+    /* #F5F1E9 — e njëjta krem si menuja e printuar */
+    --background: 40 38% 94%;
     --foreground: 20 20% 15%; /* Deep brownish charcoal */
     
-    --card: 40 33% 96%;
+    --card: 40 38% 94%;
     --card-foreground: 20 20% 15%;
     --card-border: 24 15% 85%;
     
-    --popover: 40 33% 96%;
+    --popover: 40 38% 94%;
     --popover-foreground: 20 20% 15%;
     --popover-border: 24 15% 85%;
     
     --primary: 15 70% 40%; /* Deep terracotta red */
-    --primary-foreground: 40 33% 96%;
+    --primary-foreground: 40 38% 94%;
     
     --secondary: 40 20% 85%; /* Aged olive / taupe undertone */
     --secondary-foreground: 20 20% 15%;
@@ -77,6 +119,10 @@
     
     --app-font-sans: 'Inter', system-ui, sans-serif;
     --app-font-serif: 'Playfair Display', Georgia, serif;
+    /* Oswald: latin-ext (ë, ç…) + madhësi uniforme; Crafter vetëm te titujt e menusë (SVG) */
+    --app-font-menu: 'Oswald', 'Inter', system-ui, sans-serif;
+    --app-font-script: 'ED Lavonia', cursive;
+    --app-font-logo-caps: 'Playlist Caps', sans-serif;
     
     --radius: 0.5rem;
   }
@@ -132,6 +178,49 @@
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+.font-menu-script,
+.font-menu .font-menu-script {
+  font-family: var(--app-font-script);
+  font-weight: 400;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+}
+
+.font-menu-logo-caps,
+.font-menu .font-menu-logo-caps {
+  font-family: var(--app-font-logo-caps);
+  font-weight: 400;
+  -webkit-text-stroke: 0.015em currentColor;
+  paint-order: stroke fill;
+}
+
+.font-menu,
+.font-menu h1,
+.font-menu h2,
+.font-menu h3,
+.font-menu h4,
+.font-menu h5,
+.font-menu h6,
+.font-menu button,
+.font-menu p,
+.font-menu span:not(.font-menu-script):not(.font-menu-logo-caps) {
+  font-family: var(--app-font-menu);
+}
+
+.font-menu h1,
+.font-menu h2,
+.font-menu h3,
+.font-menu h4,
+.font-menu h5,
+.font-menu h6 {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .nn-yt-footer-wrap iframe {

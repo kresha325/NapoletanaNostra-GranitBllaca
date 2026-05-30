@@ -14,6 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { MenuBrandLogo } from "@/components/menu/MenuBrandLogo";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -35,18 +36,19 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
+        <Link
+          href="/"
+          className="mr-6 flex shrink-0 items-center gap-2.5 md:mr-10 md:gap-3"
+        >
           <img
             src={`${import.meta.env.BASE_URL}images/logo.png`}
-            alt="Napoletana Nostra"
-            className="w-10 h-10 rounded-full object-cover shadow-sm"
+            alt=""
+            aria-hidden
+            className="h-9 w-9 shrink-0 rounded-full object-cover shadow-sm md:h-10 md:w-10"
           />
-          <span className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-primary">
-            Napoletana Nostra
-          </span>
+          <MenuBrandLogo variant="food" size="nav" />
         </Link>
 
         {/* Desktop Nav */}

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
+import { MENU_BURGUNDY } from "@/components/menu/menu-theme";
 
 export type InstagramReel = {
   id: string;
@@ -59,7 +60,8 @@ function GalleryVideo({ reel }: { reel: InstagramReel }) {
 
   return (
     <div
-      className="relative min-w-[260px] max-w-[320px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border-0 shadow-lg"
+      className="relative min-w-[260px] max-w-[320px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border shadow-lg"
+      style={{ borderColor: MENU_BURGUNDY }}
       onClick={togglePlay}
       role="button"
       tabIndex={0}
@@ -75,7 +77,7 @@ function GalleryVideo({ reel }: { reel: InstagramReel }) {
         ref={videoRef}
         src={src}
         poster={poster}
-        className="h-96 w-full border-0 object-cover"
+        className="h-96 w-full object-cover"
         playsInline
         muted={!soundOn}
         loop
@@ -113,9 +115,9 @@ export function InstagramReelsCarousel({ reels, heading, subheading }: Instagram
   }
 
   return (
-    <section className="border-b border-border/50 bg-muted/10 py-10 md:py-16">
+    <section className="border-b border-border/50 bg-background py-10 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="mb-8 text-center font-serif text-4xl font-bold md:text-5xl">{heading}</h2>
+        <h2 className="mb-8 text-center font-menu text-4xl font-bold md:text-5xl">{heading}</h2>
         {subheading ? (
           <p className="mx-auto mb-8 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
             {subheading}
