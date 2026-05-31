@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kresha325.github.io/NapoletanaNostra-GranitBllaca/sitemap.xml
+Sitemap: https://napoletananostra.com/sitemap.xml

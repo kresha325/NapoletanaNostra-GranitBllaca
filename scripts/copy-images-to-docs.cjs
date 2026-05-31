@@ -50,8 +50,8 @@ function copyImages() {
     console.warn('Skipping docs/404.html: docs/index.html not found (run vite build first).');
     return;
   }
-  // Must match vite.config.ts base path (no trailing slash in template string below).
-  const repoBase = '/NapoletanaNostra-GranitBllaca';
+  // Root deploy (custom domain napoletananostra.com).
+  const repoBase = "";
   const spa404 = `<!DOCTYPE html>
 <html lang="en">
 <head>

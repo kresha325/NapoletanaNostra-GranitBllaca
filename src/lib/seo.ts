@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 
-/** GitHub Pages — përditëso nëse ndryshon repo ose përdoret domain custom. */
-const GITHUB_PAGES_ORIGIN = "https://kresha325.github.io";
-const REPO_BASE_PATH = "/NapoletanaNostra-GranitBllaca";
+/** Domain zyrtar i faqes. */
+export const SITE_ORIGIN = "https://napoletananostra.com";
 
-export const SITE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "") || REPO_BASE_PATH;
+export const SITE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function getSiteUrl(): string {
   if (typeof window !== "undefined") {
-    return `${window.location.origin}${SITE_PATH}`;
+    return window.location.origin;
   }
-  return `${GITHUB_PAGES_ORIGIN}${SITE_PATH}`;
+  return SITE_ORIGIN;
 }
 
-export const DEFAULT_OG_IMAGE = `${GITHUB_PAGES_ORIGIN}${SITE_PATH}/images/hero-oven.png`;
+export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/images/hero-oven.png`;
 
 export type PageSeo = {
   title: string;

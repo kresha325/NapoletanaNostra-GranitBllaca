@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 
-const isProd = process.env.NODE_ENV === "production";
+
 const port = 4100;
-const basePath = isProd ? "/NapoletanaNostra-GranitBllaca/" : "/";
+const basePath = "/";
 
 export default defineConfig({
   base: basePath,
